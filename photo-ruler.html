@@ -3,451 +3,610 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Фото-Измеритель</title>
+    <title>Фото-Измеритель Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { margin: 0; overflow: hidden; touch-action: none; background-color: #030712; }
         canvas { display: block; width: 100%; height: 100%; outline: none; }
-        
-        ::-webkit-scrollbar { height: 6px; }
-        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
-        
-        .mode-toggle input:checked + div { background-color: #3b82f6; color: white; }
-        .mode-toggle div { transition: all 0.2s; }
-
-        #help-panel.hidden { display: none; }
-        
-        #canvasContainer.drag-over::after {
-            content: ''; position: absolute; inset: 0;
-            background: rgba(59, 130, 246, 0.2); border: 4px dashed #3b82f6;
-            z-index: 10; pointer-events: none;
-        }
+        .mode-toggle input:checked + div { background-color: #3b82f6; color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .mode-toggle div { transition: all 0.2s ease-in-out; }
+        .hidden { display: none !important; }
+        .ui-element { pointer-events: auto; }
+        input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
     </style>
 </head>
 <body class="text-white flex flex-col h-screen font-sans">
 
-    <!-- Верхняя панель (Инструменты) -->
-    <div id="toolbar" class="bg-gray-800 border-b border-gray-700 p-2 flex flex-col gap-2 shadow-lg z-30 select-none">
+    <!-- Интерфейс -->
+    <div id="toolbar" class="bg-gray-800 border-b border-gray-700 p-2 flex flex-col gap-2 shadow-lg z-50 select-none ui-element">
         
         <!-- Первая строка -->
         <div class="flex items-center gap-3 overflow-x-auto whitespace-nowrap pb-1">
-            <button id="btnLoad" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded shadow transition text-sm font-medium flex items-center gap-2">
+            <button id="btnLoad" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded shadow transition text-sm font-medium flex items-center gap-2 shrink-0">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                 Загрузить
             </button>
-            <input type="file" id="fileInput" accept="image/*" class="hidden">
 
-            <div class="flex bg-gray-900 rounded p-1 shadow-inner">
+            <div class="flex bg-gray-900 rounded-lg p-1 shadow-inner shrink-0 border border-gray-700">
                 <label class="mode-toggle cursor-pointer">
                     <input type="radio" name="toolMode" value="distance" class="hidden" checked>
-                    <div class="px-3 py-1 rounded text-xs md:text-sm text-gray-400 font-medium">Расстояние</div>
+                    <div class="px-3 py-1 rounded-md text-xs md:text-sm text-gray-400 font-medium">Расстояние</div>
                 </label>
                 <label class="mode-toggle cursor-pointer">
                     <input type="radio" name="toolMode" value="angle" class="hidden">
-                    <div class="px-3 py-1 rounded text-xs md:text-sm text-gray-400 font-medium">Угол</div>
+                    <div class="px-3 py-1 rounded-md text-xs md:text-sm text-gray-400 font-medium">Угол</div>
                 </label>
             </div>
 
-            <button id="btnFitView" class="text-gray-400 hover:text-white bg-gray-700 hover:bg-gray-600 px-2 py-1.5 rounded text-xs transition border border-gray-600 flex items-center gap-1" title="Центрировать вид">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
-                <span class="hidden md:inline">Сброс вида</span>
-            </button>
-
-            <button id="btnHelpToggle" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center text-sm font-bold transition border border-gray-600 ml-auto md:ml-0">?</button>
-        </div>
-
-        <!-- Вторая строка -->
-        <div class="flex items-center gap-3 overflow-x-auto whitespace-nowrap pt-1 border-t border-gray-700/50">
-            <div class="flex items-center gap-2 bg-gray-900 px-2 py-1.5 rounded border border-gray-700">
-                <span class="text-xs text-gray-400">Эталон:</span>
-                <input type="number" id="calibLength" value="100" class="w-14 bg-transparent outline-none text-white text-xs font-mono text-center">
-                <input type="text" id="calibUnit" value="mm" class="w-8 bg-transparent outline-none text-gray-400 text-xs font-mono" placeholder="ед">
+            <div class="flex items-center gap-1 bg-gray-900 px-2 py-1 rounded-lg border border-gray-700 shrink-0">
+                <span class="text-[9px] text-gray-500 uppercase font-bold">Эталон:</span>
+                <input type="number" id="calibLength" value="100" class="w-10 bg-gray-800 rounded px-1 outline-none text-white text-xs font-mono text-center border border-gray-700">
+                <input type="text" id="calibUnit" value="mm" class="w-8 bg-gray-800 rounded px-1 outline-none text-gray-400 text-[10px] font-mono border border-gray-700" placeholder="ед">
             </div>
 
             <div class="flex items-center gap-2 ml-auto">
-                <button id="btnDelete" class="border border-red-500/50 text-red-400 hover:bg-red-500/20 px-4 py-1.5 rounded text-xs transition font-medium" title="Удалить выделенное или отменить рисование">Удалить</button>
-                <button id="btnClear" class="border border-gray-600 hover:bg-gray-700 px-3 py-1.5 rounded text-xs transition">Очистить все</button>
+                <button id="btnDelete" class="bg-gray-700 hover:bg-red-900/40 text-gray-300 hover:text-red-400 px-4 py-1.5 rounded-lg text-xs transition font-bold border border-gray-600">Удалить</button>
+                <button id="btnClear" class="border border-gray-600 hover:bg-gray-700 px-2 py-1.5 rounded-lg text-xs transition">Очистить</button>
+            </div>
+        </div>
+
+        <!-- Вторая строка -->
+        <div class="flex items-center gap-2 pt-1 border-t border-gray-700/50">
+            <!-- Блок Перспективы -->
+            <div class="flex items-center gap-1 bg-gray-900 p-1 rounded-lg border border-gray-700">
+                <span class="text-[9px] text-gray-500 uppercase font-bold px-1">Перспектива:</span>
+                <label id="modePerspLabel" class="mode-toggle cursor-pointer shrink-0">
+                    <input type="radio" name="toolMode" value="perspective" class="hidden">
+                    <div id="perspBtnText" class="px-3 py-1 rounded-md text-xs text-gray-400 font-bold hover:text-white transition">Коррекция</div>
+                </label>
+                <button id="btnApplyGrid" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1 rounded-md shadow transition text-[10px] font-bold uppercase animate-pulse">Применить</button>
+                <button id="btnRestoreOriginal" class="hidden bg-orange-700 hover:bg-orange-600 text-white px-3 py-1 rounded-md shadow transition text-[10px] font-bold uppercase">Вернуть</button>
+            </div>
+
+            <!-- Служебные кнопки в конце второй строки -->
+            <div class="flex items-center gap-2 ml-auto">
+                <button id="btnFitView" class="text-gray-400 hover:text-white bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded-lg text-xs transition border border-gray-600 flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                    Экран
+                </button>
+                <button id="btnHelpToggle" class="w-8 h-8 rounded-lg bg-gray-700 hover:bg-gray-600 flex items-center justify-center text-sm font-bold transition border border-gray-600">?</button>
             </div>
         </div>
     </div>
 
-    <!-- Основное поле -->
-    <div id="canvasContainer" class="flex-1 relative overflow-hidden">
-        <canvas id="mainCanvas" tabindex="0"></canvas>
-        
-        <!-- Панель помощи (Overlay) -->
-        <div id="help-panel" class="hidden absolute top-0 left-0 w-full bg-blue-900/95 px-4 py-4 text-xs text-blue-100 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 z-20 shadow-2xl border-b border-blue-800 backdrop-blur-sm select-none">
-            <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-400"></span> <b>Линейка:</b> Первые два клика создают эталон.</div>
-            <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-pink-400"></span> <b>Угол:</b> 1-й клик: вершина, 2-й и 3-й: направления.</div>
-            <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-white"></span> <b>Правка:</b> Тяните точку. Тяните пустое место для сдвига.</div>
-            <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-gray-400"></span> <b>ПК:</b> Колесико — зум, Ср. кнопка — панорама.</div>
+    <!-- Модалки и оверлеи -->
+    <div id="help-panel" class="hidden absolute top-[110px] left-0 w-full bg-gray-900/95 p-4 text-xs text-gray-300 z-[100] shadow-2xl border-b border-gray-700 backdrop-blur-md ui-element">
+        <div class="grid grid-cols-2 gap-4">
+            <div><b>Сначала нажми:</b> Выдели размер, чтобы двигать его точки.</div>
+            <div><b>1 палец:</b> Точки / Панорама.</div>
+            <div><b>2 пальца:</b> Масштаб и сдвиг.</div>
+            <div><b>Удалить:</b> Стирает выделенный или последний объект.</div>
         </div>
-
-        <div id="emptyState" class="absolute inset-0 flex flex-col items-center justify-center text-gray-500 pointer-events-none select-none">
-            <svg class="w-12 h-12 mb-3 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-            <p class="text-sm">Загрузите изображение</p>
-        </div>
+        <button id="btnCloseHelp" class="mt-4 w-full py-2 bg-blue-600 rounded-lg font-bold uppercase tracking-widest text-[10px]">Понятно</button>
     </div>
 
-    <!-- Модалки -->
-    <div id="calibModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 backdrop-blur-sm p-4 select-none">
-        <div class="bg-gray-800 p-6 rounded-xl shadow-2xl w-full max-w-xs border border-gray-700">
-            <h3 class="text-lg font-bold mb-2">Калибровка</h3>
-            <p class="text-xs text-gray-400 mb-5">Введите реальный размер линии эталона.</p>
-            <div class="flex gap-2 mb-6">
-                <input type="number" id="modalCalibVal" class="flex-1 bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white outline-none focus:border-blue-500" value="100">
-                <input type="text" id="modalCalibUnit" class="w-16 bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white outline-none focus:border-blue-500" value="mm">
-            </div>
-            <button id="btnSaveCalib" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg transition">Применить</button>
-        </div>
-    </div>
-
-    <div id="clearConfirmModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 backdrop-blur-sm p-4 select-none">
-        <div class="bg-gray-800 p-6 rounded-xl shadow-2xl w-full max-w-xs border border-gray-700 text-center">
-            <h3 class="text-lg font-bold mb-2">Удалить всё?</h3>
-            <p class="text-xs text-gray-400 mb-6">Это действие удалит все измерения и калибровку.</p>
+    <div id="modalRestoreWarning" class="hidden fixed inset-0 bg-black/90 z-[400] flex items-center justify-center p-4 backdrop-blur-sm ui-element">
+        <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl max-w-sm w-full">
+            <h3 class="text-lg font-bold mb-3 text-orange-400 uppercase">Сброс фото?</h3>
+            <p class="text-sm text-gray-400 mb-6">Все нанесенные размеры и исправление перспективы будут удалены. Вы уверены?</p>
             <div class="flex gap-3">
-                <button id="btnCancelClear" class="flex-1 border border-gray-600 hover:bg-gray-700 py-2 rounded-lg transition text-sm">Отмена</button>
-                <button id="btnConfirmClear" class="flex-1 bg-red-600 hover:bg-red-500 py-2 rounded-lg font-bold transition text-sm text-white">Удалить</button>
+                <button id="btnCancelRestore" class="flex-1 bg-gray-700 py-3 rounded-xl font-bold text-xs">ОТМЕНА</button>
+                <button id="btnConfirmRestore" class="flex-1 bg-orange-600 py-3 rounded-xl font-bold text-xs uppercase">ДА, СБРОСИТЬ</button>
             </div>
         </div>
     </div>
+
+    <div id="statusBar" class="bg-blue-900/40 border-b border-blue-800/50 px-3 py-1 text-[10px] text-blue-300 flex justify-between items-center z-30 select-none">
+        <div id="statusMessage">Загрузите фото</div>
+        <div id="cvStatus" class="flex items-center gap-1 opacity-60">
+            <span class="w-1.5 h-1.5 rounded-full bg-yellow-500" id="cvIndicator"></span>
+            <span id="cvText">CV Init</span>
+        </div>
+    </div>
+
+    <div id="canvasContainer" class="flex-1 relative overflow-hidden bg-black">
+        <canvas id="mainCanvas"></canvas>
+        <div id="emptyState" class="absolute inset-0 flex flex-col items-center justify-center text-gray-600 pointer-events-none">
+            <p class="text-xs uppercase tracking-widest font-bold opacity-30">Выберите файл изображения</p>
+        </div>
+        <div id="processingOverlay" class="hidden absolute inset-0 bg-black/80 backdrop-blur flex flex-col items-center justify-center z-[200]">
+            <div class="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+            <p class="text-xs font-bold tracking-widest uppercase">Трансформация...</p>
+        </div>
+    </div>
+
+    <input type="file" id="fileInput" accept="image/*" class="hidden">
+
+    <!-- Скрытые модалки логики (из предыдущей версии) -->
+    <div id="modalPerspWarning" class="hidden fixed inset-0 bg-black/90 z-[300] flex items-center justify-center p-4 ui-element">
+        <div class="bg-gray-800 p-6 rounded-2xl max-w-sm border border-gray-700">
+            <h3 class="font-bold mb-2 uppercase text-emerald-400">Сетка перспективы</h3>
+            <p class="text-sm text-gray-400 mb-6">Отметьте 4 угла прямоугольного объекта. Мы выровняем его для точных измерений.</p>
+            <button id="btnConfirmPerspMode" class="w-full bg-emerald-600 py-3 rounded-xl font-bold">НАЧАТЬ</button>
+        </div>
+    </div>
+
+    <div id="modalDimensions" class="hidden fixed inset-0 bg-black/90 z-[300] flex items-center justify-center p-4 ui-element">
+        <div class="bg-gray-800 p-6 rounded-2xl max-w-sm border border-gray-700">
+            <h3 class="font-bold mb-4">Ввод размеров</h3>
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <input type="number" id="inpTrueW" class="bg-gray-900 border border-gray-700 rounded-lg p-3 text-center" placeholder="Ширина (мм)">
+                <input type="number" id="inpTrueH" class="bg-gray-900 border border-gray-700 rounded-lg p-3 text-center" placeholder="Высота (мм)">
+            </div>
+            <button id="btnFinalApply" class="w-full bg-blue-600 py-3 rounded-xl font-bold uppercase text-xs">Применить</button>
+        </div>
+    </div>
+
+    <script async src="https://docs.opencv.org/4.8.0/opencv.js" onload="cvReady();"></script>
 
     <script>
-        // --- СОСТОЯНИЕ (STATE) ---
         const state = {
             image: null,
+            rawImage: null,
             mode: 'distance',
             transform: { x: 0, y: 0, scale: 1 },
-            objects: [],
+            objects: [], 
             drawingObj: null,
+            perspectivePts: [],
             selectedId: null,
-            currentMouse: { x: 0, y: 0 },
-            touches: [],
-            preventTap: false,
-            dpr: window.devicePixelRatio || 1
+            dpr: window.devicePixelRatio || 1,
+            isCvLoaded: false
         };
-
-        const COLORS = { calib: '#f59e0b', line: '#3b82f6', angle: '#ec4899', selected: '#22c55e', point: '#ffffff' };
-        const POINT_RADIUS = 6;
-        const HIT_RADIUS = 24; 
-
-        let interact = { startX: 0, startY: 0, isPanning: false, isDraggingPoint: false, draggedPoint: null, moved: false, lastScreen: { x: 0, y: 0 } };
 
         const canvas = document.getElementById('mainCanvas');
-        const ctx = canvas.getContext('2d', { alpha: false });
-        const calibLengthInput = document.getElementById('calibLength');
-        const calibUnitInput = document.getElementById('calibUnit');
-        const container = document.getElementById('canvasContainer');
+        const ctx = canvas.getContext('2d', {alpha: false});
+        const COLORS = { calib: '#f59e0b', line: '#3b82f6', angle: '#ec4899', persp: '#10b981', selected: '#22c55e', point: '#ffffff' };
+        
+        // Предотвращение всплытия событий на элементах интерфейса
+        ['toolbar', 'help-panel', 'modalPerspWarning', 'modalDimensions', 'modalRestoreWarning'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('pointerdown', (e) => e.stopPropagation());
+        });
 
-        const resizeObserver = new ResizeObserver(entries => {
-            for (let entry of entries) {
-                const rect = entry.contentRect;
-                canvas.width = rect.width * state.dpr;
-                canvas.height = rect.height * state.dpr;
-                ctx.scale(state.dpr, state.dpr);
+        function cvReady() {
+            state.isCvLoaded = true;
+            document.getElementById('cvIndicator').className = 'w-1.5 h-1.5 rounded-full bg-emerald-500';
+            document.getElementById('cvText').innerText = 'CV Ready';
+        }
+
+        const resize = () => {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width * state.dpr;
+            canvas.height = rect.height * state.dpr;
+            ctx.scale(state.dpr, state.dpr);
+            requestDraw();
+        };
+        new ResizeObserver(resize).observe(canvas.parentElement);
+
+        function updateStatus() {
+            const el = document.getElementById('statusMessage');
+            if (!state.image) return;
+            
+            if (state.mode === 'perspective') {
+                el.innerText = `Разметка: ${state.perspectivePts.length}/4 точек`;
+                document.getElementById('btnApplyGrid').classList.toggle('hidden', state.perspectivePts.length !== 4);
+                document.getElementById('perspBtnText').classList.toggle('text-emerald-400', true);
+            } else {
+                el.innerText = state.selectedId ? "Объект выбран. Тяните за точки." : "Выберите инструмент или объект.";
+                document.getElementById('btnApplyGrid').classList.add('hidden');
+                document.getElementById('perspBtnText').classList.remove('text-emerald-400');
+            }
+        }
+
+        // --- УПРАВЛЕНИЕ ПАНЕЛЬЮ ПЕРСПЕКТИВЫ ---
+        document.querySelectorAll('input[name="toolMode"]').forEach(input => {
+            input.onchange = (e) => {
+                state.mode = e.target.value;
+                state.drawingObj = null;
+                if (state.mode === 'perspective') {
+                    if (state.perspectivePts.length === 0) document.getElementById('modalPerspWarning').classList.remove('hidden');
+                }
+                updateStatus();
+                requestDraw();
+            };
+        });
+
+        document.getElementById('btnConfirmPerspMode').onclick = () => document.getElementById('modalPerspWarning').classList.add('hidden');
+        document.getElementById('btnRestoreOriginal').onclick = () => document.getElementById('modalRestoreWarning').classList.remove('hidden');
+        document.getElementById('btnCancelRestore').onclick = () => document.getElementById('modalRestoreWarning').classList.add('hidden');
+        document.getElementById('btnConfirmRestore').onclick = () => {
+            state.image = state.rawImage;
+            state.objects = [];
+            state.perspectivePts = [];
+            state.selectedId = null;
+            document.getElementById('modalRestoreWarning').classList.add('hidden');
+            document.getElementById('btnRestoreOriginal').classList.add('hidden');
+            fitView();
+            updateStatus();
+        };
+
+        // --- ЛОГИКА ВЗАИМОДЕЙСТВИЯ ---
+        let interact = { active: false, type: null, moved: false, startX:0, startY:0, lastX:0, lastY:0, lastDist:0, lastMid:null, target:null };
+
+        const toW = (p) => ({ x: (p.x - state.transform.x) / state.transform.scale, y: (p.y - state.transform.y) / state.transform.scale });
+        const toS = (p) => ({ x: p.x * state.transform.scale + state.transform.x, y: p.y * state.transform.scale + state.transform.y });
+        const getDist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+
+        function hitTest(sX, sY) {
+            const wP = toW({x:sX, y:sY});
+            const r = 25 / state.transform.scale;
+
+            // Если есть выделенный объект, проверяем его точки первыми
+            if (state.selectedId) {
+                const sel = state.objects.find(o => o.id === state.selectedId);
+                if (sel) {
+                    for (let i=0; i<sel.pts.length; i++) {
+                        if (getDist(wP, sel.pts[i]) < r) return {type:'pt', obj:sel, idx:i};
+                    }
+                }
+            }
+
+            // Точки перспективы (всегда доступны в режиме перспективы)
+            if (state.mode === 'perspective') {
+                for (let i=0; i<state.perspectivePts.length; i++) {
+                    if (getDist(wP, state.perspectivePts[i]) < r) return {type:'persp', idx:i};
+                }
+            }
+
+            // Тело объектов (выбор)
+            for (let obj of state.objects) {
+                if (obj.pts.length < 2) continue;
+                if (distToSegment(wP, obj.pts[0], obj.pts[obj.pts.length-1]) < r) return {type:'obj', obj};
+            }
+            return null;
+        }
+
+        function distToSegment(p, v, w) {
+            const l2 = getDist(v, w)**2;
+            if (l2 === 0) return getDist(p, v);
+            let t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
+            t = Math.max(0, Math.min(1, t));
+            return getDist(p, { x: v.x + t * (w.x - v.x), y: v.y + t * (w.y - v.y) });
+        }
+
+        canvas.addEventListener('pointerdown', e => {
+            const rect = canvas.getBoundingClientRect();
+            const sX = e.clientX - rect.left, sY = e.clientY - rect.top;
+            
+            interact.active = true;
+            interact.moved = false;
+            interact.startX = sX; interact.startY = sY;
+            interact.lastX = sX; interact.lastY = sY;
+
+            const hit = hitTest(sX, sY);
+            if (hit && (hit.type === 'pt' || hit.type === 'persp')) {
+                interact.type = 'drag';
+                interact.target = hit;
+            } else {
+                interact.type = 'maybe_pan';
+            }
+        });
+
+        window.addEventListener('pointermove', e => {
+            if (!interact.active) return;
+            const rect = canvas.getBoundingClientRect();
+            const sX = e.clientX - rect.left, sY = e.clientY - rect.top;
+            
+            if (Math.hypot(sX - interact.startX, sY - interact.startY) > 5) interact.moved = true;
+
+            if (interact.type === 'maybe_pan' && interact.moved) interact.type = 'pan';
+
+            if (interact.type === 'pan') {
+                state.transform.x += sX - interact.lastX;
+                state.transform.y += sY - interact.lastY;
+            } else if (interact.type === 'drag') {
+                const wP = toW({x:sX, y:sY});
+                if (interact.target.type === 'pt') interact.target.obj.pts[interact.target.idx] = wP;
+                else state.perspectivePts[interact.target.idx] = wP;
+            }
+            interact.lastX = sX; interact.lastY = sY;
+            requestDraw();
+        });
+
+        window.addEventListener('pointerup', () => {
+            if (interact.active && !interact.moved) {
+                handleTap(interact.startX, interact.startY);
+            }
+            interact.active = false; interact.type = null;
+            requestDraw();
+        });
+
+        // Двухпальцевый зум
+        canvas.addEventListener('touchstart', e => {
+            if (e.touches.length === 2) {
+                interact.type = 'zoom';
+                interact.lastDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+                interact.lastMid = { x: (e.touches[0].clientX + e.touches[1].clientX)/2, y: (e.touches[0].clientY + e.touches[1].clientY)/2 };
+            }
+        }, {passive: false});
+
+        canvas.addEventListener('touchmove', e => {
+            if (e.touches.length === 2 && interact.type === 'zoom') {
+                const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+                const mid = { x: (e.touches[0].clientX + e.touches[1].clientX)/2, y: (e.touches[0].clientY + e.touches[1].clientY)/2 };
+                
+                const factor = d / interact.lastDist;
+                const wP = toW(mid);
+                state.transform.scale *= factor;
+                state.transform.x = mid.x - wP.x * state.transform.scale;
+                state.transform.y = mid.y - wP.y * state.transform.scale;
+                
+                state.transform.x += mid.x - interact.lastMid.x;
+                state.transform.y += mid.y - interact.lastMid.y;
+
+                interact.lastDist = d; interact.lastMid = mid;
                 requestDraw();
             }
-        });
-        resizeObserver.observe(container);
+        }, {passive: false});
 
-        // --- ЛОГИКА ИНТЕРФЕЙСА ---
-        document.getElementById('btnLoad').onclick = (e) => { e.stopPropagation(); document.getElementById('fileInput').click(); };
-        document.getElementById('btnHelpToggle').onclick = (e) => { e.stopPropagation(); document.getElementById('help-panel').classList.toggle('hidden'); };
-        document.getElementById('btnFitView').onclick = (e) => { e.stopPropagation(); fitImageToScreen(); };
-
-        document.querySelectorAll('input[name="toolMode"]').forEach(radio => {
-            radio.onchange = (e) => { state.mode = e.target.value; state.drawingObj = null; requestDraw(); };
-        });
-
-        const clearModal = document.getElementById('clearConfirmModal');
-        document.getElementById('btnClear').onclick = (e) => { e.stopPropagation(); clearModal.classList.remove('hidden'); };
-        document.getElementById('btnCancelClear').onclick = () => clearModal.classList.add('hidden');
-        document.getElementById('btnConfirmClear').onclick = () => {
-            state.objects = []; state.drawingObj = null; state.selectedId = null; 
-            clearModal.classList.add('hidden'); requestDraw();
-        };
-
-        document.getElementById('btnDelete').onclick = (e) => {
-            e.stopPropagation();
-            if (state.drawingObj) { state.drawingObj = null; requestDraw(); return; }
-            if (state.selectedId) {
-                state.objects = state.objects.filter(o => o.id !== state.selectedId);
-                state.selectedId = null; requestDraw();
+        function handleTap(sX, sY) {
+            const hit = hitTest(sX, sY);
+            if (hit && hit.type === 'obj') {
+                state.selectedId = hit.obj.id;
+                updateStatus();
+                return;
             }
-        };
+            
+            // Если нажали в пустое место — снимаем выделение или рисуем
+            if (state.selectedId) {
+                state.selectedId = null;
+                updateStatus();
+                return;
+            }
 
-        // --- ЗАГРУЗКА ---
-        function fitImageToScreen() {
+            const wP = toW({x:sX, y:sY});
+            if (state.mode === 'perspective') {
+                if (state.perspectivePts.length < 4) state.perspectivePts.push(wP);
+            } else if (state.mode === 'distance') {
+                if (!state.drawingObj) {
+                    const hasCalib = state.objects.some(o => o.type === 'calib');
+                    state.drawingObj = { id: Date.now(), type: hasCalib ? 'line' : 'calib', pts: [wP] };
+                } else {
+                    state.drawingObj.pts.push(wP);
+                    state.objects.push(state.drawingObj);
+                    state.selectedId = state.drawingObj.id;
+                    state.drawingObj = null;
+                }
+            } else if (state.mode === 'angle') {
+                if (!state.drawingObj) state.drawingObj = { id: Date.now(), type: 'angle', pts: [wP] };
+                else {
+                    state.drawingObj.pts.push(wP);
+                    if (state.drawingObj.pts.length === 3) {
+                        state.objects.push(state.drawingObj);
+                        state.selectedId = state.drawingObj.id;
+                        state.drawingObj = null;
+                    }
+                }
+            }
+            updateStatus();
+        }
+
+        // --- ОТРИСОВКА ---
+        function requestDraw() { if (!fId) fId = requestAnimationFrame(draw); }
+        let fId = null;
+
+        function draw() {
+            fId = null;
+            ctx.fillStyle = '#030712';
+            ctx.fillRect(0,0, canvas.width/state.dpr, canvas.height/state.dpr);
             if (!state.image) return;
-            const rect = container.getBoundingClientRect();
-            const scaleX = rect.width / state.image.width;
-            const scaleY = rect.height / state.image.height;
-            state.transform.scale = Math.min(scaleX, scaleY) * 0.9 || 1; 
+
+            ctx.save();
+            ctx.translate(state.transform.x, state.transform.y);
+            ctx.scale(state.transform.scale, state.transform.scale);
+            ctx.drawImage(state.image, 0, 0);
+            ctx.restore();
+
+            state.objects.forEach(o => drawObj(o));
+            if (state.drawingObj) drawObj(state.drawingObj, true);
+            if (state.mode === 'perspective' || state.perspectivePts.length > 0) drawPerspGrid();
+        }
+
+        function drawChamferedRect(x, y, w, h, c, color) {
+            ctx.beginPath();
+            ctx.moveTo(x + c, y);
+            ctx.lineTo(x + w - c, y);
+            ctx.lineTo(x + w, y + c);
+            ctx.lineTo(x + w, y + h - c);
+            ctx.lineTo(x + w - c, y + h);
+            ctx.lineTo(x + c, y + h);
+            ctx.lineTo(x, y + h - c);
+            ctx.lineTo(x, y + c);
+            ctx.closePath();
+            ctx.fillStyle = "rgba(0,0,0,0.85)";
+            ctx.fill();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+
+        function drawObj(obj, isDrawing=false) {
+            const isSelected = obj.id === state.selectedId;
+            const color = isSelected ? COLORS.selected : (COLORS[obj.type] || COLORS.line);
+            const pts = obj.pts.map(toS);
+            
+            ctx.lineWidth = 2; ctx.strokeStyle = color;
+            if (isDrawing) ctx.setLineDash([5, 5]);
+            
+            ctx.beginPath();
+            if (obj.type === 'angle') {
+                if (pts.length > 1) { ctx.moveTo(pts[1].x, pts[1].y); ctx.lineTo(pts[0].x, pts[0].y); }
+                if (pts.length > 2) {
+                    ctx.lineTo(pts[2].x, pts[2].y);
+                    // Рисуем дугу угла
+                    const a1 = Math.atan2(pts[1].y - pts[0].y, pts[1].x - pts[0].x);
+                    const a2 = Math.atan2(pts[2].y - pts[0].y, pts[2].x - pts[0].x);
+                    ctx.save();
+                    ctx.setLineDash([]);
+                    ctx.globalAlpha = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(pts[0].x, pts[0].y);
+                    ctx.arc(pts[0].x, pts[0].y, 30, a1, a2, Math.abs(a2-a1) > Math.PI);
+                    ctx.closePath();
+                    ctx.fillStyle = color; ctx.fill();
+                    ctx.restore();
+                }
+            } else if (pts.length > 1) {
+                ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[1].x, pts[1].y);
+            }
+            ctx.stroke(); ctx.setLineDash([]);
+
+            // Текст и метки
+            if (pts.length > 1) {
+                let txt = "";
+                let lx, ly;
+                const ratio = getCalibRatio();
+
+                if (obj.type === 'angle' && pts.length === 3) {
+                    const a = Math.abs(Math.atan2(pts[1].y-pts[0].y, pts[1].x-pts[0].x) - Math.atan2(pts[2].y-pts[0].y, pts[2].x-pts[0].x)) * 180 / Math.PI;
+                    txt = (a > 180 ? 360 - a : a).toFixed(1) + "°";
+                    // Метка ближе к вершине
+                    const midA = (Math.atan2(pts[1].y-pts[0].y, pts[1].x-pts[0].x) + Math.atan2(pts[2].y-pts[0].y, pts[2].x-pts[0].x)) / 2;
+                    lx = pts[0].x + Math.cos(midA) * 45;
+                    ly = pts[0].y + Math.sin(midA) * 45;
+                } else if (obj.type !== 'angle') {
+                    txt = (getDist(obj.pts[0], obj.pts[obj.pts.length-1]) * ratio).toFixed(1) + " " + document.getElementById('calibUnit').value;
+                    lx = (pts[0].x + pts[1].x)/2;
+                    ly = (pts[0].y + pts[1].y)/2 - 15;
+                }
+
+                if (txt) {
+                    ctx.font = "bold 11px font-mono";
+                    const tw = ctx.measureText(txt).width + 12;
+                    drawChamferedRect(lx - tw/2, ly - 10, tw, 18, 4, color);
+                    ctx.fillStyle = "#fff"; ctx.textAlign = "center";
+                    ctx.fillText(txt, lx, ly + 3);
+                }
+            }
+
+            // Точки рисуем только если объект выделен или в процессе
+            if (isSelected || isDrawing) {
+                pts.forEach(p => {
+                    ctx.beginPath(); ctx.arc(p.x, p.y, 6, 0, Math.PI*2);
+                    ctx.fillStyle = color; ctx.fill();
+                    ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.stroke();
+                });
+            }
+        }
+
+        function drawPerspGrid() {
+            const pts = state.perspectivePts.map(toS);
+            ctx.strokeStyle = COLORS.persp; ctx.lineWidth = 2;
+            ctx.beginPath();
+            pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+            if (pts.length === 4) { ctx.closePath(); ctx.fillStyle = COLORS.persp + '22'; ctx.fill(); }
+            ctx.stroke();
+            pts.forEach((p, i) => {
+                ctx.beginPath(); ctx.arc(p.x, p.y, 8, 0, Math.PI*2);
+                ctx.fillStyle = COLORS.persp; ctx.fill();
+                ctx.fillStyle = "#000"; ctx.font = "bold 10px Arial"; ctx.textAlign="center"; ctx.fillText(i+1, p.x, p.y+4);
+            });
+        }
+
+        function getCalibRatio() {
+            const c = state.objects.find(o => o.type === 'calib');
+            if (c && c.pts.length >= 2) return parseFloat(document.getElementById('calibLength').value) / getDist(c.pts[0], c.pts[c.pts.length-1]);
+            return 1;
+        }
+
+        function fitView() {
+            if (!state.image) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            state.transform.scale = Math.min(rect.width/state.image.width, rect.height/state.image.height) * 0.85;
             state.transform.x = (rect.width - state.image.width * state.transform.scale) / 2;
             state.transform.y = (rect.height - state.image.height * state.transform.scale) / 2;
             requestDraw();
         }
 
-        function handleFile(file) {
-            if (!file || !file.type.startsWith('image/')) return;
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = new Image();
-                img.onload = () => {
-                    state.image = img;
-                    document.getElementById('emptyState').style.display = 'none';
-                    state.objects = []; state.drawingObj = null;
-                    fitImageToScreen();
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        document.getElementById('fileInput').onchange = (e) => { if(e.target.files[0]) handleFile(e.target.files[0]); e.target.value = ''; };
-        window.addEventListener('paste', e => {
-            const item = Array.from(e.clipboardData.items).find(i => i.type.startsWith('image/'));
-            if (item) handleFile(item.getAsFile());
-        });
-
-        container.addEventListener('dragover', e => { e.preventDefault(); container.classList.add('drag-over'); });
-        container.addEventListener('dragleave', e => { e.preventDefault(); container.classList.remove('drag-over'); });
-        container.addEventListener('drop', e => {
-            e.preventDefault(); container.classList.remove('drag-over');
-            if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
-        });
-
-        // --- МАТЕМАТИКА ---
-        const worldToScreen = (p) => ({ x: p.x * state.transform.scale + state.transform.x, y: p.y * state.transform.scale + state.transform.y });
-        const screenToWorld = (x, y) => ({ x: (x - state.transform.x) / state.transform.scale, y: (y - state.transform.y) / state.transform.scale });
-        const dist = (p1, p2) => Math.hypot(p2.x - p1.x, p2.y - p1.y);
-
-        function distToSegment(p, v, w) {
-            const l2 = (w.x - v.x) ** 2 + (w.y - v.y) ** 2;
-            if (l2 === 0) return dist(p, v);
-            let t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
-            t = Math.max(0, Math.min(1, t));
-            return dist(p, { x: v.x + t * (w.x - v.x), y: v.y + t * (w.y - v.y) });
-        }
-
-        function hitTest(screenX, screenY) {
-            if(!state.image) return null;
-            for (let i = state.objects.length - 1; i >= 0; i--) {
-                const obj = state.objects[i];
-                for (let j = 0; j < obj.pts.length; j++) {
-                    if (dist({x: screenX, y: screenY}, worldToScreen(obj.pts[j])) <= HIT_RADIUS) return { type: 'point', obj, ptIdx: j };
-                }
-            }
-            for (let i = state.objects.length - 1; i >= 0; i--) {
-                const obj = state.objects[i];
-                if (obj.labelRect && screenX >= obj.labelRect.x1 && screenX <= obj.labelRect.x2 && screenY >= obj.labelRect.y1 && screenY <= obj.labelRect.y2) return { type: 'line', obj };
-            }
-            for (let i = state.objects.length - 1; i >= 0; i--) {
-                const obj = state.objects[i];
-                if (obj.pts.length >= 2) {
-                    if (distToSegment({x: screenX, y: screenY}, worldToScreen(obj.pts[0]), worldToScreen(obj.pts[1])) <= HIT_RADIUS) return { type: 'line', obj };
-                    if (obj.type === 'angle' && obj.pts.length === 3) {
-                        if (distToSegment({x: screenX, y: screenY}, worldToScreen(obj.pts[0]), worldToScreen(obj.pts[2])) <= HIT_RADIUS) return { type: 'line', obj };
-                    }
-                }
-            }
-            return null;
-        }
-
-        // --- ВЗАИМОДЕЙСТВИЕ ---
-        function startInteract(x, y, isTouch, isMiddle) {
-            if (!state.image) return;
-            interact.startX = x; interact.startY = y; interact.lastScreen = { x, y }; interact.moved = false;
-            
-            const hit = hitTest(x, y);
-            if (isMiddle) { 
-                interact.isPanning = true; 
-            } else if (hit && hit.type === 'point') { 
-                interact.isDraggingPoint = true; interact.draggedPoint = hit; state.selectedId = hit.obj.id; 
-            } else {
-                // Всегда разрешаем панорамирование на пустом месте (даже левой кнопкой)
-                interact.isPanning = true; 
-            }
-            requestDraw();
-        }
-
-        function moveInteract(x, y) {
-            if (!state.image) return;
-            if (Math.hypot(x - interact.startX, y - interact.startY) > 5) interact.moved = true;
-
-            if (interact.isPanning) {
-                state.transform.x += x - interact.lastScreen.x;
-                state.transform.y += y - interact.lastScreen.y;
-            } else if (interact.isDraggingPoint) {
-                interact.draggedPoint.obj.pts[interact.draggedPoint.ptIdx] = screenToWorld(x, y);
-            }
-            state.currentMouse = screenToWorld(x, y);
-            interact.lastScreen = { x, y };
-            requestDraw();
-        }
-
-        function endInteract(x, y, isLeftOrTouch) {
-            if (!state.image) return;
-            const wasPanning = interact.isPanning;
-            interact.isPanning = false; interact.isDraggingPoint = false;
-
-            // ЕСЛИ НЕ БЫЛО ДВИЖЕНИЯ — это тап (ставим точку)
-            if (!interact.moved && isLeftOrTouch && !state.preventTap) {
-                handleTap(x, y);
-            }
-            
-            setTimeout(() => { state.preventTap = false; }, 100);
-            requestDraw();
-        }
-
-        function handleTap(screenX, screenY) {
-            const hit = hitTest(screenX, screenY);
-            if (hit && !state.drawingObj) { state.selectedId = hit.obj.id; return; }
-            const wPos = screenToWorld(screenX, screenY);
-            state.selectedId = null;
-
-            if (state.mode === 'distance') {
-                const hasCalib = state.objects.some(o => o.type === 'calib');
-                if (!state.drawingObj) {
-                    state.drawingObj = { id: Date.now(), type: hasCalib ? 'line' : 'calib', pts: [wPos] };
-                } else {
-                    if(dist(state.drawingObj.pts[0], wPos) * state.transform.scale < 5) return; 
-                    state.drawingObj.pts.push(wPos);
-                    state.objects.push(state.drawingObj);
-                    const completed = state.drawingObj; state.drawingObj = null;
-                    if (completed.type === 'calib') showCalibModal();
-                }
-            } else {
-                if (!state.drawingObj) {
-                    state.drawingObj = { id: Date.now(), type: 'angle', pts: [wPos] };
-                } else {
-                    if(dist(state.drawingObj.pts[state.drawingObj.pts.length-1], wPos) * state.transform.scale < 5) return;
-                    state.drawingObj.pts.push(wPos);
-                    if (state.drawingObj.pts.length === 3) { state.objects.push(state.drawingObj); state.drawingObj = null; }
-                }
-            }
-        }
-
-        function showCalibModal() { document.getElementById('modalCalibVal').value = calibLengthInput.value; document.getElementById('calibModal').classList.remove('hidden'); }
-        document.getElementById('btnSaveCalib').onclick = () => {
-            calibLengthInput.value = document.getElementById('modalCalibVal').value;
-            calibUnitInput.value = document.getElementById('modalCalibUnit').value;
-            document.getElementById('calibModal').classList.add('hidden'); requestDraw();
+        // --- ПЕРСПЕКТИВА (OpenCV) ---
+        document.getElementById('btnApplyGrid').onclick = () => document.getElementById('modalDimensions').classList.remove('hidden');
+        document.getElementById('btnFinalApply').onclick = () => {
+            document.getElementById('modalDimensions').classList.add('hidden');
+            document.getElementById('processingOverlay').classList.remove('hidden');
+            setTimeout(processPerspective, 50);
         };
 
-        // --- СОБЫТИЯ ---
-        canvas.addEventListener('mousedown', e => { 
-            const rect = canvas.getBoundingClientRect(); 
-            startInteract(e.clientX - rect.left, e.clientY - rect.top, false, e.button === 1); 
-        });
-        window.addEventListener('mousemove', e => { 
-            const rect = canvas.getBoundingClientRect(); 
-            moveInteract(e.clientX - rect.left, e.clientY - rect.top); 
-            // Обновляем курсор
-            const hit = hitTest(e.clientX - rect.left, e.clientY - rect.top);
-            if (interact.isPanning) canvas.style.cursor = 'grabbing';
-            else if (hit && hit.type === 'point') canvas.style.cursor = 'move';
-            else if (hit && hit.type === 'line') canvas.style.cursor = 'pointer';
-            else canvas.style.cursor = 'crosshair';
-        });
-        window.addEventListener('mouseup', e => { 
-            const rect = canvas.getBoundingClientRect(); 
-            endInteract(e.clientX - rect.left, e.clientY - rect.top, e.button === 0); 
-        });
+        function processPerspective() {
+            try {
+                let pts = [...state.perspectivePts].sort((a,b)=>a.y-b.y);
+                let top = pts.slice(0,2).sort((a,b)=>a.x-b.x);
+                let bot = pts.slice(2,4).sort((a,b)=>a.x-b.x);
+                let srcCoords = cv.matFromArray(4, 1, cv.CV_32FC2, [top[0].x, top[0].y, top[1].x, top[1].y, bot[1].x, bot[1].y, bot[0].x, bot[0].y]);
 
-        canvas.addEventListener('wheel', e => {
-            e.preventDefault(); if (!state.image) return;
-            const zoom = e.deltaY < 0 ? 1.15 : 0.85;
-            const rect = canvas.getBoundingClientRect();
-            const wPos = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
-            state.transform.scale = Math.max(0.01, Math.min(state.transform.scale * zoom, 150));
-            state.transform.x = (e.clientX - rect.left) - wPos.x * state.transform.scale;
-            state.transform.y = (e.clientY - rect.top) - wPos.y * state.transform.scale;
-            requestDraw();
-        }, { passive: false });
+                const trueW = parseFloat(document.getElementById('inpTrueW').value) || getDist(top[0], top[1]);
+                const trueH = parseFloat(document.getElementById('inpTrueH').value) || getDist(top[0], bot[0]);
+                
+                const margin = 1.5; 
+                const outW = trueW * margin; const outH = trueH * margin;
+                const offX = (outW - trueW)/2; const offY = (outH - trueH)/2;
 
-        canvas.addEventListener('touchstart', e => {
-            e.preventDefault(); const rect = canvas.getBoundingClientRect();
-            if (e.touches.length === 1) startInteract(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top, true, false);
-            else if (e.touches.length === 2) { state.preventTap = true; state.touches = [e.touches[0], e.touches[1]]; }
-        }, { passive: false });
+                let dstCoords = cv.matFromArray(4, 1, cv.CV_32FC2, [offX, offY, offX+trueW, offY, offX+trueW, offY+trueH, offX, offY+trueH]);
 
-        canvas.addEventListener('touchmove', e => {
-            e.preventDefault(); const rect = canvas.getBoundingClientRect();
-            if (e.touches.length === 1) moveInteract(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
-            else if (e.touches.length === 2) {
-                const t1 = e.touches[0], t2 = e.touches[1], pt1 = state.touches[0], pt2 = state.touches[1];
-                const curD = Math.hypot(t1.clientX-t2.clientX, t1.clientY-t2.clientY), preD = Math.hypot(pt1.clientX-pt2.clientX, pt1.clientY-pt2.clientY);
-                const curCX = (t1.clientX+t2.clientX)/2 - rect.left, curCY = (t1.clientY+t2.clientY)/2 - rect.top;
-                const zoom = curD / preD; const wPos = screenToWorld(curCX, curCY);
-                state.transform.scale *= zoom;
-                state.transform.x = curCX - wPos.x * state.transform.scale;
-                state.transform.y = curCY - wPos.y * state.transform.scale;
-                state.touches = [t1, t2]; requestDraw();
+                const tempC = document.createElement('canvas');
+                tempC.width = state.image.width; tempC.height = state.image.height;
+                tempC.getContext('2d').drawImage(state.image, 0, 0);
+
+                let src = cv.imread(tempC);
+                let dst = new cv.Mat();
+                let M = cv.getPerspectiveTransform(srcCoords, dstCoords);
+                cv.warpPerspective(src, dst, M, new cv.Size(outW, outH));
+
+                const outCanvas = document.createElement('canvas');
+                cv.imshow(outCanvas, dst);
+                const newImg = new Image();
+                newImg.onload = () => {
+                    state.image = newImg;
+                    state.objects = []; 
+                    state.perspectivePts = [];
+                    document.getElementById('processingOverlay').classList.add('hidden');
+                    document.getElementById('btnRestoreOriginal').classList.remove('hidden');
+                    fitView();
+                    updateStatus();
+                };
+                newImg.src = outCanvas.toDataURL();
+                src.delete(); dst.delete(); M.delete(); srcCoords.delete(); dstCoords.delete();
+            } catch(e) {
+                console.error(e);
+                document.getElementById('processingOverlay').classList.add('hidden');
             }
-        }, { passive: false });
-
-        canvas.addEventListener('touchend', e => {
-            if (e.touches.length === 0 && e.changedTouches.length === 1) {
-                const rect = canvas.getBoundingClientRect();
-                endInteract(e.changedTouches[0].clientX - rect.left, e.changedTouches[0].clientY - rect.top, true);
-            }
-        });
-
-        // --- РЕНДЕР ---
-        function drawLabel(obj, txt, x, y, color) {
-            ctx.save(); ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'center';
-            const m = ctx.measureText(txt); const w = m.width + 16; const h = 20;
-            ctx.fillStyle = 'rgba(10, 10, 20, 0.9)'; ctx.strokeStyle = color; ctx.lineWidth = 1.5;
-            ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x-w/2, y-h/2, w, h, 4); else ctx.rect(x-w/2, y-h/2, w, h);
-            ctx.fill(); ctx.stroke(); ctx.fillStyle = '#fff'; ctx.fillText(txt, x, y+4);
-            obj.labelRect = { x1: x-w/2 - 5, y1: y-h/2 - 5, x2: x+w/2 + 5, y2: y+h/2 + 5 };
-            ctx.restore();
         }
 
-        function drawShape(obj, isDrawing) {
-            const color = (obj.id === state.selectedId) ? COLORS.selected : (COLORS[obj.type] || COLORS.line);
-            const sp = obj.pts.map(worldToScreen);
-            if (isDrawing) sp.push(worldToScreen(state.currentMouse));
-            ctx.lineWidth = 2.5; ctx.strokeStyle = color; ctx.setLineDash(isDrawing ? [5, 5] : []);
-            ctx.beginPath();
-            if (obj.type === 'angle') {
-                if (sp.length >= 2) { ctx.moveTo(sp[1].x, sp[1].y); ctx.lineTo(sp[0].x, sp[0].y); }
-                if (sp.length >= 3) { ctx.lineTo(sp[2].x, sp[2].y); }
-            } else if (sp.length >= 2) { ctx.moveTo(sp[0].x, sp[0].y); ctx.lineTo(sp[1].x, sp[1].y); }
-            ctx.stroke(); ctx.setLineDash([]);
-
-            if (obj.type === 'angle' && sp.length === 3) {
-                let a1 = Math.atan2(sp[1].y-sp[0].y, sp[1].x-sp[0].x), a2 = Math.atan2(sp[2].y-sp[0].y, sp[2].x-sp[0].x);
-                let diff = a2 - a1; while (diff < -Math.PI) diff += Math.PI*2; while (diff > Math.PI) diff -= Math.PI*2;
-                ctx.beginPath(); ctx.fillStyle = color+'30'; ctx.moveTo(sp[0].x, sp[0].y);
-                ctx.arc(sp[0].x, sp[0].y, 30, a1, a1+diff, diff < 0); ctx.fill(); ctx.stroke();
-                const midAngle = a1 + diff/2; const txtDist = 45;
-                drawLabel(obj, `${(Math.abs(diff)*180/Math.PI).toFixed(1)}°`, sp[0].x + Math.cos(midAngle)*txtDist, sp[0].y + Math.sin(midAngle)*txtDist, color);
-            } else if (sp.length >= 2) {
-                const ratio = (function(){
-                    const c = state.objects.find(o => o.type === 'calib');
-                    if (c && c.pts.length === 2) return (parseFloat(calibLengthInput.value) || 100) / dist(c.pts[0], c.pts[1]);
-                    return 1;
-                })();
-                const d = dist(obj.pts[0], isDrawing ? state.currentMouse : obj.pts[1]);
-                const val = obj.type === 'calib' ? calibLengthInput.value : (d * ratio).toFixed(2);
-                drawLabel(obj, `${val} ${calibUnitInput.value}`, (sp[0].x+sp[sp.length-1].x)/2, (sp[0].y+sp[sp.length-1].y)/2, color);
+        // --- ОСТАЛЬНОЕ ---
+        document.getElementById('btnDelete').onclick = () => {
+            if (state.selectedId) {
+                state.objects = state.objects.filter(o => o.id !== state.selectedId);
+                state.selectedId = null;
+            } else if (state.objects.length > 0) {
+                state.objects.pop();
+            } else if (state.perspectivePts.length > 0) {
+                state.perspectivePts.pop();
             }
-            sp.forEach((p, i) => { if (isDrawing && i === sp.length-1) return; ctx.beginPath(); ctx.arc(p.x, p.y, POINT_RADIUS, 0, 7); ctx.fillStyle = COLORS.point; ctx.fill(); ctx.stroke(); });
-        }
+            requestDraw(); updateStatus();
+        };
 
-        let fId = null;
-        function requestDraw() { if (!fId) fId = requestAnimationFrame(() => {
-            fId = null; ctx.fillStyle = '#030712'; ctx.fillRect(0,0,canvas.width/state.dpr, canvas.height/state.dpr);
-            if (!state.image) return;
-            ctx.save(); ctx.translate(state.transform.x, state.transform.y); ctx.scale(state.transform.scale, state.transform.scale);
-            ctx.drawImage(state.image, 0, 0); ctx.restore();
-            state.objects.forEach(o => drawShape(o, false));
-            if (state.drawingObj) drawShape(state.drawingObj, true);
-        }); }
-        requestDraw();
+        document.getElementById('btnClear').onclick = () => {
+            state.objects = []; state.perspectivePts = []; state.selectedId = null;
+            requestDraw(); updateStatus();
+        };
+
+        document.getElementById('btnFitView').onclick = fitView;
+        document.getElementById('btnHelpToggle').onclick = () => document.getElementById('help-panel').classList.remove('hidden');
+        document.getElementById('btnCloseHelp').onclick = () => document.getElementById('help-panel').classList.add('hidden');
+
+        document.getElementById('btnLoad').onclick = () => document.getElementById('fileInput').click();
+        document.getElementById('fileInput').onchange = (e) => {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                const img = new Image();
+                img.onload = () => {
+                    state.image = img; state.rawImage = img;
+                    document.getElementById('emptyState').classList.add('hidden');
+                    fitView(); updateStatus();
+                };
+                img.src = ev.target.result;
+            };
+            if (e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+        };
     </script>
 </body>
 </html>
