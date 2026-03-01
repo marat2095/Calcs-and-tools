@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Набор веб-инструментов</title>
+    <style>
+        :root {
+            --bg-color: #1e1e1e;
+            --card-bg: #2a2a2a;
+            --text-main: #ffffff;
+            --text-muted: #aaaaaa;
+            --accent: #007acc;
+            --accent-hover: #005f9e;
+            --success: #28a745;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(180deg, #151515 0%, #1e1e1e 100%);
+            border-bottom: 1px solid #333;
+        }
+
+        .header-icon {
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .tool-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-top: 4px solid var(--accent);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .tool-icon {
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .tool-card h2 {
+            margin: 0 0 15px 0;
+            font-size: 1.4rem;
+        }
+
+        .tool-card p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Стиль для будущих инструментов */
+        .tool-card.coming-soon {
+            border-top: 4px dashed #555;
+            background-color: transparent;
+            border: 2px dashed #333;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+
+        .tool-card.coming-soon:hover {
+            transform: none;
+        }
+
+        .tool-card.coming-soon .tool-icon {
+            color: #666;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-icon">
+            <!-- Иконка коллекции (коробка/набор) -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+        </div>
+        <h1>Набор веб-инструментов</h1>
+        <p class="subtitle">Коллекция быстрых утилит, работающих прямо в вашем браузере. Данные не отправляются на сервер.</p>
+    </header>
+
+    <div class="container">
+        <div class="tools-grid">
+            
+            <!-- Карточка 1: Фото-линейка -->
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.3 15.3l-8.6 8.6c-.78.78-2.05.78-2.83 0l-7.07-7.07c-.78-.78-.78-2.05 0-2.83l8.6-8.6c.78-.78 2.05-.78 2.83 0l7.07 7.07c.78.78.78 2.05 0 2.83z"></path>
+                        <path d="M14.5 4.5l5 5"></path>
+                        <path d="M12 7l1.5 1.5"></path>
+                        <path d="M9.5 9.5l1.5 1.5"></path>
+                        <path d="M7 12l1.5 1.5"></path>
+                        <path d="M4.5 14.5l1.5 1.5"></path>
+                    </svg>
+                </div>
+                <h2>Измерение по фото</h2>
+                <p>Умная CAD-линейка для вычисления реальных размеров объектов на фотографиях и чертежах. Поддерживает вставку по Ctrl+V, динамическую калибровку эталона в миллиметрах, а также панорамирование и зум.</p>
+                <a href="photo-ruler.html" class="btn">Открыть инструмент</a>
+            </div>
+
+            <!-- Карточка 2: Заглушка для будущего инструмента -->
+            <div class="tool-card coming-soon">
+                <div class="tool-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 8 12 12 16 14"></polyline>
+                    </svg>
+                </div>
+                <h2>В разработке...</h2>
+                <p>Здесь скоро появится новый полезный инструмент. Страница подготовлена для легкого добавления новых карточек.</p>
+                <a href="#" class="btn" style="background-color: #444; cursor: not-allowed;" onclick="return false;">Ожидается</a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Набор инструментов. Все вычисления происходят локально.</p>
+    </footer>
+
+</body>
+</html>
+
+

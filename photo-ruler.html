@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продвинутый инструмент измерения</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e1e;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #toolbar {
+            background-color: #333;
+            padding: 12px 15px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            z-index: 10;
+            flex-wrap: wrap;
+        }
+        button {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s, transform 0.1s;
+        }
+        button:hover { background-color: #005f9e; }
+        button:active { transform: scale(0.97); }
+        button.active { background-color: #28a745; box-shadow: 0 0 8px #28a745; }
+        
+        #btn-upload-ui { background-color: #e67e22; }
+        #btn-upload-ui:hover { background-color: #d35400; }
+        #btn-edit-calib { background-color: #6f42c1; }
+        #btn-edit-calib:hover { background-color: #5a32a3; }
+        #btn-clear { background-color: #dc3545; margin-left: auto; }
+        #btn-clear:hover { background-color: #c82333; }
+        
+        #status-bar {
+            background-color: #252526;
+            padding: 5px 15px;
+            font-size: 13px;
+            color: #aaa;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #333;
+        }
+        
+        #canvas-container {
+            flex-grow: 1;
+            position: relative;
+            background-color: #2a2a2a;
+            background-image: radial-gradient(#3a3a3a 1px, transparent 1px);
+            background-size: 20px 20px;
+            cursor: crosshair;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0; left: 0;
+        }
+        .instruction {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #888;
+            font-size: 20px;
+            pointer-events: none;
+            text-align: center;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="toolbar">
+        <input type="file" id="file-upload" accept="image/*" style="display: none;">
+        <button id="btn-upload-ui">Загрузить фото</button>
+        <div style="width: 2px; height: 20px; background: #555; margin: 0 5px;"></div>
+        
+        <button id="btn-calibrate" class="active">1. Нарисовать эталон</button>
+        <button id="btn-edit-calib">Изменить эталон</button>
+        <button id="btn-measure">2. Измерение</button>
+        <button id="btn-clear">Удалить всё</button>
+    </div>
+    
+    <div id="status-bar">
+        <span id="status-left">Ожидание изображения...</span>
+        <span id="status-right">ЛКМ (2 клика) - рисовать | ЛКМ - выбрать | СКМ - двигать | Колесико - масштаб | Del - удалить</span>
+    </div>
+
+    <div id="canvas-container">
+        <div id="instruction" class="instruction">
+            Вставьте изображение (Ctrl + V)<br>
+            <span style="font-size: 14px;">или нажмите "Загрузить фото"</span>
+        </div>
+        <canvas id="myCanvas"></canvas>
+    </div>
+
+    <script>
+        const container = document.getElementById('canvas-container');
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        const btnCalibrate = document.getElementById('btn-calibrate');
+        const btnMeasure = document.getElementById('btn-measure');
+        const btnClear = document.getElementById('btn-clear');
+        const btnEditCalib = document.getElementById('btn-edit-calib');
+        const btnUploadUI = document.getElementById('btn-upload-ui');
+        const fileUpload = document.getElementById('file-upload');
+        const statusLeft = document.getElementById('status-left');
+        const instruction = document.getElementById('instruction');
+
+        let imageObj = null;
+        let mode = 'calibrate'; 
+        
+        // Камера (Зум и Панорама)
+        let scale = 1;
+        let offsetX = 0;
+        let offsetY = 0;
+        
+        // Измерения
+        let pixelsPerUnit = 0;
+        let calibRealValue = 0;
+        const unitName = 'мм';
+        let lines = []; // {x1, y1, x2, y2, pxLen, type}
+        
+        // Состояния мыши
+        let isDrawing = false;
+        let isPanning = false;
+        let isSpacePressed = false;
+        let selectedLineIndex = -1;
+        
+        let startX, startY, currentX, currentY; // Координаты рисования в мире (на фото)
+        let panStartX, panStartY; // Координаты для панорамирования
+
+        // --- ИНИЦИАЛИЗАЦИЯ И РАЗМЕРЫ ---
+        function resizeCanvas() {
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            redraw();
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // --- УПРАВЛЕНИЕ ИНТЕРФЕЙСОМ ---
+        btnCalibrate.onclick = () => setMode('calibrate');
+        btnMeasure.onclick = () => {
+            if (pixelsPerUnit === 0) {
+                alert('Сначала нарисуйте линию эталона!');
+                return;
+            }
+            setMode('measure');
+        };
+
+        btnEditCalib.onclick = () => {
+            const calibLine = lines.find(l => l.type === 'calib');
+            if (!calibLine) {
+                alert('Сначала нарисуйте линию эталона!');
+                return;
+            }
+            const input = prompt("Введите новое значение эталона (в мм):", calibRealValue);
+            if (input && !isNaN(input.replace(',','.'))) {
+                calibRealValue = parseFloat(input.replace(',','.'));
+                pixelsPerUnit = calibLine.pxLen / calibRealValue;
+                redraw(); 
+                setMode('measure');
+            }
+        };
+
+        btnClear.onclick = () => {
+            if(confirm("Удалить все линии?")) {
+                lines = [];
+                resetCalibration();
+                redraw();
+            }
+        };
+
+        function resetCalibration() {
+            pixelsPerUnit = 0;
+            calibRealValue = 0;
+            selectedLineIndex = -1;
+            setMode('calibrate');
+        }
+
+        function setMode(newMode) {
+            mode = newMode;
+            if (mode === 'calibrate') {
+                btnCalibrate.classList.add('active');
+                btnMeasure.classList.remove('active');
+                statusLeft.innerText = "Режим: Установка эталона. Нарисуйте линию известной длины.";
+            } else {
+                btnMeasure.classList.add('active');
+                btnCalibrate.classList.remove('active');
+                statusLeft.innerText = `Режим: Измерение. Масштаб: ${calibRealValue} ${unitName}`;
+            }
+        }
+
+        // --- ЗАГРУЗКА ИЗОБРАЖЕНИЯ ---
+        btnUploadUI.onclick = () => fileUpload.click();
+        
+        fileUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) handleImageFile(file);
+        });
+
+        window.addEventListener('paste', e => {
+            const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+            for (let index in items) {
+                const item = items[index];
+                if (item.kind === 'file' && item.type.includes('image/')) {
+                    handleImageFile(item.getAsFile());
+                }
+            }
+        });
+
+        function handleImageFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    imageObj = img;
+                    instruction.style.display = 'none';
+                    lines = []; 
+                    resetCalibration();
+                    
+                    // Подгоняем картинку под экран
+                    const padding = 40;
+                    const scaleX = (canvas.width - padding) / img.width;
+                    const scaleY = (canvas.height - padding) / img.height;
+                    scale = Math.min(scaleX, scaleY);
+                    if (scale > 1) scale = 1; // Не растягиваем маленькие фото
+                    
+                    offsetX = (canvas.width - img.width * scale) / 2;
+                    offsetY = (canvas.height - img.height * scale) / 2;
+                    
+                    redraw();
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // --- КООРДИНАТНЫЕ ПРЕОБРАЗОВАНИЯ ---
+        function screenToWorld(x, y) {
+            return { x: (x - offsetX) / scale, y: (y - offsetY) / scale };
+        }
+        function worldToScreen(x, y) {
+            return { x: x * scale + offsetX, y: y * scale + offsetY };
+        }
+
+        // --- ЛОГИКА КАМЕРЫ И МЫШИ ---
+        
+        // Зум колесиком
+        canvas.addEventListener('wheel', (e) => {
+            if (!imageObj) return;
+            e.preventDefault();
+            
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            const zoomIntensity = 0.1;
+            const delta = e.deltaY < 0 ? 1 + zoomIntensity : 1 - zoomIntensity;
+
+            // Запоминаем мир под курсором до зума
+            const worldPos = screenToWorld(mouseX, mouseY);
+
+            scale *= delta;
+            scale = Math.max(0.05, Math.min(scale, 100)); // Ограничения зума
+
+            // Корректируем смещение, чтобы курсор остался над той же точкой фото
+            offsetX = mouseX - worldPos.x * scale;
+            offsetY = mouseY - worldPos.y * scale;
+
+            redraw();
+        }, { passive: false });
+
+        // Пробел для панорамы
+        window.addEventListener('keydown', e => { 
+            if (e.code === 'Space') { isSpacePressed = true; container.style.cursor = 'grab'; }
+            if (e.code === 'Escape' && isDrawing) { isDrawing = false; redraw(); } // Отмена текущего рисования
+            
+            // Удаление по Delete
+            if (e.code === 'Delete' && selectedLineIndex !== -1) {
+                const deleted = lines.splice(selectedLineIndex, 1)[0];
+                selectedLineIndex = -1;
+                if (deleted.type === 'calib') resetCalibration();
+                redraw();
+            }
+        });
+        window.addEventListener('keyup', e => { 
+            if (e.code === 'Space') { isSpacePressed = false; container.style.cursor = 'crosshair'; }
+        });
+
+        canvas.addEventListener('mousedown', function(e) {
+            if (!imageObj) return;
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            // Средняя кнопка мыши ИЛИ Пробел + ЛКМ = Панорамирование
+            if (e.button === 1 || (e.button === 0 && isSpacePressed)) {
+                e.preventDefault();
+                isPanning = true;
+                panStartX = mouseX - offsetX;
+                panStartY = mouseY - offsetY;
+                container.style.cursor = 'grabbing';
+                return;
+            }
+
+            // Левая кнопка = Рисование или Выделение
+            if (e.button === 0) {
+                const worldPos = screenToWorld(mouseX, mouseY);
+
+                // Если мы уже в процессе рисования (Клик 2: Завершение линии)
+                if (isDrawing) {
+                    isDrawing = false;
+                    currentX = worldPos.x;
+                    currentY = worldPos.y;
+                    
+                    const pxLength = Math.sqrt(Math.pow(currentX - startX, 2) + Math.pow(currentY - startY, 2));
+                    const screenPxLength = pxLength * scale;
+                    
+                    // Защита от случайных двойных кликов
+                    if (screenPxLength > 5) {
+                        if (mode === 'calibrate') {
+                            const input = prompt("Введите длину этой линии (в мм):", "100");
+                            if (input && !isNaN(input.replace(',','.'))) {
+                                calibRealValue = parseFloat(input.replace(',','.'));
+                                pixelsPerUnit = pxLength / calibRealValue;
+                                
+                                lines = lines.filter(line => line.type !== 'calib');
+                                lines.push({x1: startX, y1: startY, x2: currentX, y2: currentY, pxLen: pxLength, type: 'calib'});
+                                setMode('measure');
+                            }
+                        } else if (mode === 'measure') {
+                            lines.push({x1: startX, y1: startY, x2: currentX, y2: currentY, pxLen: pxLength, type: 'meas'});
+                        }
+                    }
+                    redraw();
+                    return;
+                }
+
+                // Попытка выделить линию (Клик 1: старт или выбор)
+                const clickedIdx = findLineNear(mouseX, mouseY);
+                if (clickedIdx !== -1) {
+                    selectedLineIndex = clickedIdx;
+                    redraw();
+                    return; // Не начинаем рисовать
+                }
+
+                // Сброс выделения и начало рисования (Клик 1)
+                selectedLineIndex = -1;
+                isDrawing = true;
+                startX = worldPos.x;
+                startY = worldPos.y;
+                currentX = worldPos.x;
+                currentY = worldPos.y;
+                redraw();
+            }
+        });
+
+        canvas.addEventListener('mousemove', function(e) {
+            if (!imageObj) return;
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            if (isPanning) {
+                offsetX = mouseX - panStartX;
+                offsetY = mouseY - panStartY;
+                redraw();
+                return;
+            }
+
+            if (isDrawing) {
+                const worldPos = screenToWorld(mouseX, mouseY);
+                currentX = worldPos.x;
+                currentY = worldPos.y;
+                redraw();
+            }
+        });
+
+        window.addEventListener('mouseup', function(e) {
+            if (isPanning) {
+                isPanning = false;
+                container.style.cursor = isSpacePressed ? 'grab' : 'crosshair';
+                return;
+            }
+        });
+
+        // --- МАТЕМАТИКА ВЫДЕЛЕНИЯ ---
+        function findLineNear(scrX, scrY) {
+            const threshold = 10; // Зона клика в экранных пикселях
+            let closestIdx = -1;
+            let minDist = threshold + 1;
+
+            for (let i = lines.length - 1; i >= 0; i--) {
+                const line = lines[i];
+                const p1 = worldToScreen(line.x1, line.y1);
+                const p2 = worldToScreen(line.x2, line.y2);
+                
+                const dist = pointLineDistance(scrX, scrY, p1.x, p1.y, p2.x, p2.y);
+                if (dist < minDist) {
+                    minDist = dist;
+                    closestIdx = i;
+                }
+            }
+            return closestIdx;
+        }
+
+        function pointLineDistance(px, py, x1, y1, x2, y2) {
+            const l2 = Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2);
+            if (l2 === 0) return Math.sqrt(Math.pow(px - x1, 2) + Math.pow(py - y1, 2));
+            let t = ((px - x1) * (x2 - x1) + (py - y1) * (y2 - y1)) / l2;
+            t = Math.max(0, Math.min(1, t));
+            return Math.sqrt(Math.pow(px - (x1 + t * (x2 - x1)), 2) + Math.pow(py - (y1 + t * (y2 - y1)), 2));
+        }
+
+        // --- ОТРИСОВКА ---
+        function redraw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (!imageObj) return;
+
+            // 1. Рисуем картинку (с учетом зума и панорамы)
+            ctx.save();
+            ctx.translate(offsetX, offsetY);
+            ctx.scale(scale, scale);
+            ctx.drawImage(imageObj, 0, 0);
+            ctx.restore();
+
+            // 2. Рисуем линии. Делаем это поверх всего в экранных координатах,
+            // чтобы толщина линий и текст не менялись при зуме картинки!
+            lines.forEach((line, idx) => {
+                const isSelected = (idx === selectedLineIndex);
+                const color = line.type === 'calib' ? '#28a745' : '#00a8ff';
+                const p1 = worldToScreen(line.x1, line.y1);
+                const p2 = worldToScreen(line.x2, line.y2);
+                
+                drawLineScreen(p1.x, p1.y, p2.x, p2.y, color, isSelected);
+                
+                let textValue = "";
+                if (line.type === 'calib') {
+                    textValue = calibRealValue.toFixed(1) + ' ' + unitName;
+                } else if (pixelsPerUnit > 0) {
+                    textValue = (line.pxLen / pixelsPerUnit).toFixed(1) + ' ' + unitName;
+                }
+                if (textValue) drawTextScreen(p1.x, p1.y, p2.x, p2.y, textValue, color, isSelected);
+            });
+
+            // 3. Рисуем текущую линию в процессе
+            if (isDrawing) {
+                const p1 = worldToScreen(startX, startY);
+                const p2 = worldToScreen(currentX, currentY);
+                const color = mode === 'calibrate' ? '#ffc107' : '#ffc107'; // Желтый в процессе
+                drawLineScreen(p1.x, p1.y, p2.x, p2.y, color, false);
+                
+                // Показ размера "на лету"
+                if (mode === 'measure' && pixelsPerUnit > 0) {
+                    const currentPxLen = Math.sqrt(Math.pow(currentX - startX, 2) + Math.pow(currentY - startY, 2));
+                    const val = (currentPxLen / pixelsPerUnit).toFixed(1) + ' ' + unitName;
+                    drawTextScreen(p1.x, p1.y, p2.x, p2.y, val, color, false);
+                }
+            }
+        }
+
+        function drawLineScreen(x1, y1, x2, y2, color, isSelected) {
+            if (isSelected) {
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+                ctx.lineWidth = 7;
+                ctx.stroke();
+            }
+
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Точки
+            ctx.fillStyle = color;
+            ctx.beginPath(); ctx.arc(x1, y1, 5, 0, Math.PI * 2); ctx.fill();
+            ctx.beginPath(); ctx.arc(x2, y2, 5, 0, Math.PI * 2); ctx.fill();
+            
+            if (isSelected) {
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(x1, y1, 5, 0, Math.PI * 2); ctx.stroke();
+                ctx.beginPath(); ctx.arc(x2, y2, 5, 0, Math.PI * 2); ctx.stroke();
+            }
+        }
+
+        function drawTextScreen(x1, y1, x2, y2, text, color, isSelected) {
+            const midX = (x1 + x2) / 2;
+            const midY = (y1 + y2) / 2;
+            ctx.font = isSelected ? "bold 20px Arial" : "bold 16px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "bottom";
+            
+            // Фон для текста
+            const textWidth = ctx.measureText(text).width;
+            ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+            ctx.fillRect(midX - textWidth/2 - 5, midY - 25, textWidth + 10, 24);
+
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 3;
+            ctx.strokeText(text, midX, midY - 5);
+            
+            ctx.fillStyle = isSelected ? "#fff" : color;
+            ctx.fillText(text, midX, midY - 5);
+        }
+    </script>
+</body>
+</html>
+
+
+
