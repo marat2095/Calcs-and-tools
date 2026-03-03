@@ -12,138 +12,238 @@
         .mode-toggle div { transition: all 0.2s ease-in-out; }
         .hidden { display: none !important; }
         .ui-element { pointer-events: auto; }
-        input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
+        #toolbar, #help-panel, .modal { pointer-events: auto; }
+        #processingOverlay { pointer-events: all; }
+        
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
     </style>
 </head>
 <body class="text-white flex flex-col h-screen font-sans">
 
-    <!-- Интерфейс -->
+    <!-- Верхняя панель управления -->
     <div id="toolbar" class="bg-gray-800 border-b border-gray-700 p-2 flex flex-col gap-2 shadow-lg z-50 select-none ui-element">
         
-        <!-- Первая строка -->
         <div class="flex items-center gap-3 overflow-x-auto whitespace-nowrap pb-1">
             <button id="btnLoad" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded shadow transition text-sm font-medium flex items-center gap-2 shrink-0">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                Загрузить
+                <span data-i18n="loadBtn">Открыть фото</span>
             </button>
 
             <div class="flex bg-gray-900 rounded-lg p-1 shadow-inner shrink-0 border border-gray-700">
                 <label class="mode-toggle cursor-pointer">
                     <input type="radio" name="toolMode" value="distance" class="hidden" checked>
-                    <div class="px-3 py-1 rounded-md text-xs md:text-sm text-gray-400 font-medium">Расстояние</div>
+                    <div class="px-3 py-1 rounded-md text-xs md:text-sm text-gray-400 font-medium" data-i18n="modeDist">Линейка</div>
                 </label>
                 <label class="mode-toggle cursor-pointer">
                     <input type="radio" name="toolMode" value="angle" class="hidden">
-                    <div class="px-3 py-1 rounded-md text-xs md:text-sm text-gray-400 font-medium">Угол</div>
+                    <div class="px-3 py-1 rounded-md text-xs md:text-sm text-gray-400 font-medium" data-i18n="modeAngle">Угол</div>
                 </label>
             </div>
 
             <div class="flex items-center gap-1 bg-gray-900 px-2 py-1 rounded-lg border border-gray-700 shrink-0">
-                <span class="text-[9px] text-gray-500 uppercase font-bold">Эталон:</span>
+                <span class="text-[9px] text-gray-500 uppercase font-bold" data-i18n="calibLabel">Масштаб:</span>
                 <input type="number" id="calibLength" value="100" class="w-10 bg-gray-800 rounded px-1 outline-none text-white text-xs font-mono text-center border border-gray-700">
-                <input type="text" id="calibUnit" value="mm" class="w-8 bg-gray-800 rounded px-1 outline-none text-gray-400 text-[10px] font-mono border border-gray-700" placeholder="ед">
+                <input type="text" id="calibUnit" value="мм" class="w-8 bg-gray-800 rounded px-1 outline-none text-gray-400 text-[10px] font-mono border border-gray-700" placeholder="ед">
             </div>
 
-            <div class="flex items-center gap-2 ml-auto">
-                <button id="btnDelete" class="bg-gray-700 hover:bg-red-900/40 text-gray-300 hover:text-red-400 px-4 py-1.5 rounded-lg text-xs transition font-bold border border-gray-600">Удалить</button>
-                <button id="btnClear" class="border border-gray-600 hover:bg-gray-700 px-2 py-1.5 rounded-lg text-xs transition">Очистить</button>
-            </div>
-        </div>
-
-        <!-- Вторая строка -->
-        <div class="flex items-center gap-2 pt-1 border-t border-gray-700/50">
-            <!-- Блок Перспективы -->
-            <div class="flex items-center gap-1 bg-gray-900 p-1 rounded-lg border border-gray-700">
-                <span class="text-[9px] text-gray-500 uppercase font-bold px-1">Перспектива:</span>
-                <label id="modePerspLabel" class="mode-toggle cursor-pointer shrink-0">
-                    <input type="radio" name="toolMode" value="perspective" class="hidden">
-                    <div id="perspBtnText" class="px-3 py-1 rounded-md text-xs text-gray-400 font-bold hover:text-white transition">Коррекция</div>
-                </label>
-                <button id="btnApplyGrid" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1 rounded-md shadow transition text-[10px] font-bold uppercase animate-pulse">Применить</button>
-                <button id="btnRestoreOriginal" class="hidden bg-orange-700 hover:bg-orange-600 text-white px-3 py-1 rounded-md shadow transition text-[10px] font-bold uppercase">Вернуть</button>
-            </div>
-
-            <!-- Служебные кнопки в конце второй строки -->
-            <div class="flex items-center gap-2 ml-auto">
-                <button id="btnFitView" class="text-gray-400 hover:text-white bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded-lg text-xs transition border border-gray-600 flex items-center gap-1">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
-                    Экран
+            <div class="flex items-center gap-2 ml-auto shrink-0">
+                <button id="btnFitView" class="w-8 h-8 rounded-lg bg-gray-700 hover:bg-gray-600 flex items-center justify-center text-gray-400 hover:text-white transition border border-gray-600" title="По размеру экрана">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l5-5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
                 </button>
                 <button id="btnHelpToggle" class="w-8 h-8 rounded-lg bg-gray-700 hover:bg-gray-600 flex items-center justify-center text-sm font-bold transition border border-gray-600">?</button>
+                <button id="btnLangToggle" class="w-8 h-8 rounded-lg bg-gray-700 hover:bg-gray-600 flex items-center justify-center text-xs font-bold transition border border-gray-600 text-blue-400">EN</button>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2 pt-1 border-t border-gray-700/50">
+            <div class="flex items-center gap-1 bg-gray-900 p-1 rounded-lg border border-gray-700">
+                <span class="text-[9px] text-gray-500 uppercase font-bold px-1" data-i18n="perspLabel">Форма:</span>
+                <button id="btnTogglePerspective" class="px-3 py-1 rounded-md text-xs font-bold transition border border-transparent bg-blue-600 text-white hover:bg-blue-500 shadow" data-i18n="btnTogglePerspective">Выровнять</button>
+                <button id="btnApplyGrid" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1 rounded-md shadow transition text-[10px] font-bold uppercase animate-pulse" data-i18n="btnApplyGrid">Готово</button>
+                <button id="btnRestoreOriginal" class="hidden bg-orange-700 hover:bg-orange-600 text-white px-3 py-1 rounded-md shadow transition text-[10px] font-bold uppercase" data-i18n="btnRestoreOriginal">Сбросить фото</button>
+            </div>
+            
+            <div class="flex items-center gap-2 ml-auto">
+                <button id="btnDelete" class="bg-red-700 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-[10px] transition font-bold uppercase border border-red-900/50" data-i18n="btnDelete">Удалить</button>
+                <button id="btnClear" class="bg-red-900/40 hover:bg-red-800 text-red-200 px-3 py-1.5 rounded-lg text-[10px] transition font-bold uppercase border border-red-800/50" data-i18n="btnClear">Очистить всё</button>
             </div>
         </div>
     </div>
 
-    <!-- Модалки и оверлеи -->
+    <!-- Инструкция -->
     <div id="help-panel" class="hidden absolute top-[110px] left-0 w-full bg-gray-900/95 p-4 text-xs text-gray-300 z-[100] shadow-2xl border-b border-gray-700 backdrop-blur-md ui-element">
         <div class="grid grid-cols-2 gap-4">
-            <div><b>Сначала нажми:</b> Выдели размер, чтобы двигать его точки.</div>
-            <div><b>1 палец:</b> Точки / Панорама.</div>
-            <div><b>2 пальца:</b> Масштаб и сдвиг.</div>
-            <div><b>Удалить:</b> Стирает выделенный или последний объект.</div>
+            <div><b data-i18n="helpTitle1">Выделение:</b> <span data-i18n="helpDesc1">Нажмите на линию, чтобы подправить её.</span></div>
+            <div><b data-i18n="helpTitle2">Движение:</b> <span data-i18n="helpDesc2">1 палец (или левая кнопка) — двигать фото.</span></div>
+            <div><b data-i18n="helpTitle3">Масштаб:</b> <span data-i18n="helpDesc3">2 пальца (или колесико) — зум.</span></div>
+            <div><b data-i18n="helpTitle4">Вставка:</b> <span data-i18n="helpDesc4">Ctrl + V — вставить фото из буфера.</span></div>
         </div>
-        <button id="btnCloseHelp" class="mt-4 w-full py-2 bg-blue-600 rounded-lg font-bold uppercase tracking-widest text-[10px]">Понятно</button>
+        <button id="btnCloseHelp" class="mt-4 w-full py-2 bg-blue-600 rounded-lg font-bold uppercase tracking-widest text-[10px]" data-i18n="btnCloseHelp">Понятно</button>
     </div>
 
+    <!-- Окна подтверждения -->
     <div id="modalRestoreWarning" class="hidden fixed inset-0 bg-black/90 z-[400] flex items-center justify-center p-4 backdrop-blur-sm ui-element">
         <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl max-w-sm w-full">
-            <h3 class="text-lg font-bold mb-3 text-orange-400 uppercase">Сброс фото?</h3>
-            <p class="text-sm text-gray-400 mb-6">Все нанесенные размеры и исправление перспективы будут удалены. Вы уверены?</p>
+            <h3 class="text-lg font-bold mb-3 text-orange-400 uppercase" data-i18n="restoreTitle">Вернуть оригинал?</h3>
+            <p class="text-sm text-gray-400 mb-6" data-i18n="restoreDesc">Выравнивание объекта и все измерения будут удалены. Вернуть исходное фото?</p>
             <div class="flex gap-3">
-                <button id="btnCancelRestore" class="flex-1 bg-gray-700 py-3 rounded-xl font-bold text-xs">ОТМЕНА</button>
-                <button id="btnConfirmRestore" class="flex-1 bg-orange-600 py-3 rounded-xl font-bold text-xs uppercase">ДА, СБРОСИТЬ</button>
+                <button id="btnCancelRestore" class="flex-1 bg-gray-700 py-3 rounded-xl font-bold text-xs" data-i18n="btnCancelRestore">ОТМЕНА</button>
+                <button id="btnConfirmRestore" class="flex-1 bg-orange-600 py-3 rounded-xl font-bold text-xs uppercase" data-i18n="btnConfirmRestore">ДА, ВЕРНУТЬ</button>
             </div>
         </div>
     </div>
 
+    <div id="modalClearWarning" class="hidden fixed inset-0 bg-black/90 z-[400] flex items-center justify-center p-4 backdrop-blur-sm ui-element">
+        <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl max-w-sm w-full shadow-2xl">
+            <h3 class="text-lg font-bold mb-3 text-red-500 uppercase" data-i18n="clearTitle">Удалить всё?</h3>
+            <p class="text-sm text-gray-400 mb-6" data-i18n="clearDesc">Все нанесенные линии, углы и настройки масштаба исчезнут. Это нельзя будет отменить.</p>
+            <div class="flex gap-3">
+                <button id="btnCancelClear" class="flex-1 bg-gray-700 py-3 rounded-xl font-bold text-xs" data-i18n="btnCancelClear">ОТМЕНА</button>
+                <button id="btnConfirmClear" class="flex-1 bg-red-600 py-3 rounded-xl font-bold text-xs uppercase" data-i18n="btnConfirmClear">ДА, ОЧИСТИТЬ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Статус-бар -->
     <div id="statusBar" class="bg-blue-900/40 border-b border-blue-800/50 px-3 py-1 text-[10px] text-blue-300 flex justify-between items-center z-30 select-none">
-        <div id="statusMessage">Загрузите фото</div>
+        <div id="statusMessage" data-i18n="statusEmpty">Добавьте фото для начала работы (или Ctrl+V)</div>
         <div id="cvStatus" class="flex items-center gap-1 opacity-60">
             <span class="w-1.5 h-1.5 rounded-full bg-yellow-500" id="cvIndicator"></span>
-            <span id="cvText">CV Init</span>
+            <span id="cvText">Запуск системы</span>
         </div>
     </div>
 
     <div id="canvasContainer" class="flex-1 relative overflow-hidden bg-black">
         <canvas id="mainCanvas"></canvas>
-        <div id="emptyState" class="absolute inset-0 flex flex-col items-center justify-center text-gray-600 pointer-events-none">
-            <p class="text-xs uppercase tracking-widest font-bold opacity-30">Выберите файл изображения</p>
+        <div id="emptyState" class="absolute inset-0 flex flex-col items-center justify-center text-gray-400 pointer-events-none p-8 text-center">
+            <svg class="w-12 h-12 mb-4 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <p class="text-sm uppercase tracking-widest font-bold" data-i18n="emptyState">Нажмите «Открыть фото» или вставьте его из буфера (Ctrl+V)</p>
         </div>
         <div id="processingOverlay" class="hidden absolute inset-0 bg-black/80 backdrop-blur flex flex-col items-center justify-center z-[200]">
             <div class="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-            <p class="text-xs font-bold tracking-widest uppercase">Трансформация...</p>
+            <p class="text-xs font-bold tracking-widest uppercase" data-i18n="processingOverlay">Магия выравнивания...</p>
         </div>
     </div>
 
     <input type="file" id="fileInput" accept="image/*" class="hidden">
 
-    <!-- Скрытые модалки логики (из предыдущей версии) -->
+    <!-- Окно выравнивания -->
     <div id="modalPerspWarning" class="hidden fixed inset-0 bg-black/90 z-[300] flex items-center justify-center p-4 ui-element">
         <div class="bg-gray-800 p-6 rounded-2xl max-w-sm border border-gray-700">
-            <h3 class="font-bold mb-2 uppercase text-emerald-400">Сетка перспективы</h3>
-            <p class="text-sm text-gray-400 mb-6">Отметьте 4 угла прямоугольного объекта. Мы выровняем его для точных измерений.</p>
-            <button id="btnConfirmPerspMode" class="w-full bg-emerald-600 py-3 rounded-xl font-bold">НАЧАТЬ</button>
+            <h3 class="font-bold mb-2 uppercase text-emerald-400" data-i18n="perspWarnTitle">Выровнять объект</h3>
+            <p class="text-sm text-gray-400 mb-6" data-i18n="perspWarnDesc">Поставьте 4 точки по углам прямоугольного предмета (например, двери или окна). Мы развернем его прямо к вам.</p>
+            <button id="btnConfirmPerspMode" class="w-full bg-emerald-600 py-3 rounded-xl font-bold" data-i18n="btnConfirmPerspMode">НАЧАТЬ</button>
         </div>
     </div>
 
+    <!-- Ввод размеров после выравнивания -->
     <div id="modalDimensions" class="hidden fixed inset-0 bg-black/90 z-[300] flex items-center justify-center p-4 ui-element">
         <div class="bg-gray-800 p-6 rounded-2xl max-w-sm border border-gray-700">
-            <h3 class="font-bold mb-4">Ввод размеров</h3>
+            <h3 class="font-bold mb-1" data-i18n="dimTitle">Настоящие размеры</h3>
+            <p class="text-[10px] text-gray-400 mb-4 italic leading-tight" data-i18n="dimHint">Введите реальные размеры объекта или оставьте поля пустыми — мы сохраним пропорции автоматически.</p>
+            
             <div class="grid grid-cols-2 gap-3 mb-6">
-                <input type="number" id="inpTrueW" class="bg-gray-900 border border-gray-700 rounded-lg p-3 text-center" placeholder="Ширина (мм)">
-                <input type="number" id="inpTrueH" class="bg-gray-900 border border-gray-700 rounded-lg p-3 text-center" placeholder="Высота (мм)">
+                <div class="flex flex-col gap-1">
+                    <label class="text-[9px] uppercase font-bold text-gray-500 ml-1" data-i18n="dimWLabel">Ширина объекта</label>
+                    <input type="number" id="inpTrueW" class="bg-gray-900 border border-gray-700 rounded-lg p-3 text-center text-white" placeholder="например, 800" data-i18n-placeholder="dimW">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-[9px] uppercase font-bold text-gray-500 ml-1" data-i18n="dimHLabel">Высота объекта</label>
+                    <input type="number" id="inpTrueH" class="bg-gray-900 border border-gray-700 rounded-lg p-3 text-center text-white" placeholder="например, 2000" data-i18n-placeholder="dimH">
+                </div>
             </div>
-            <button id="btnFinalApply" class="w-full bg-blue-600 py-3 rounded-xl font-bold uppercase text-xs">Применить</button>
+            <button id="btnFinalApply" class="w-full bg-blue-600 py-3 rounded-xl font-bold uppercase text-xs" data-i18n="dimApply">Выровнять и применить</button>
+        </div>
+    </div>
+
+    <!-- Ввод длины образца (Масштаб) -->
+    <div id="modalCalibInput" class="hidden fixed inset-0 bg-black/90 z-[300] flex items-center justify-center p-4 ui-element">
+        <div class="bg-gray-800 p-6 rounded-2xl max-w-sm border border-gray-700 shadow-2xl">
+            <h3 class="font-bold mb-2 uppercase text-blue-400" data-i18n="calibModalTitle">Известный размер</h3>
+            <p class="text-xs text-gray-400 mb-4" data-i18n="calibModalDesc">Укажите настоящую длину этого отрезка, чтобы настроить масштаб.</p>
+            <div class="flex gap-2 mb-6">
+                <input type="number" id="inpCalibVal" class="flex-1 bg-gray-900 border border-gray-700 rounded-lg p-4 text-xl font-mono text-center text-white outline-none focus:border-blue-500" placeholder="0">
+                <div class="bg-gray-700 flex items-center px-4 rounded-lg text-gray-400 font-bold" id="calibUnitDisplay">мм</div>
+            </div>
+            <button id="btnSaveCalib" class="w-full bg-blue-600 py-4 rounded-xl font-bold uppercase text-sm tracking-widest" data-i18n="calibSave">Сохранить</button>
         </div>
     </div>
 
     <script async src="https://docs.opencv.org/4.8.0/opencv.js" onload="cvReady();"></script>
 
     <script>
+        const i18n = {
+            ru: {
+                loadBtn: "Открыть фото", modeDist: "Линейка", modeAngle: "Угол",
+                calibLabel: "Масштаб:", btnDelete: "Удалить", btnClear: "Очистить всё",
+                perspLabel: "Форма:", btnTogglePerspective: "Выровнять",
+                btnApplyGrid: "Готово", btnRestoreOriginal: "Сбросить фото",
+                statusEmpty: "Добавьте фото для начала работы (или Ctrl+V)",
+                statusPersp: "Отметьте углы: {n} из 4",
+                statusSelected: "Объект выбран. Тяните за кружки.",
+                statusIdle: "Выберите «Линейку» или «Угол» сверху.",
+                emptyState: "Нажмите «Открыть фото» или вставьте его из буфера (Ctrl+V)",
+                processingOverlay: "Магия выравнивания...",
+                helpTitle1: "Выделение:", helpDesc1: "Нажмите на линию, чтобы подправить её.",
+                helpTitle2: "Движение:", helpDesc2: "1 палец (или левая кнопка) — двигать фото.",
+                helpTitle3: "Масштаб:", helpDesc3: "2 пальца (или колесико) — зум.",
+                helpTitle4: "Вставка:", helpDesc4: "Ctrl + V — вставить фото из буфера.",
+                btnCloseHelp: "Понятно",
+                restoreTitle: "Вернуть оригинал?", restoreDesc: "Выравнивание объекта и все измерения будут удалены. Вернуть исходное фото?",
+                btnCancelRestore: "ОТМЕНА", btnConfirmRestore: "ДА, ВЕРНУТЬ",
+                perspWarnTitle: "Выровнять объект", perspWarnDesc: "Поставьте 4 точки по углам прямоугольного плоского объекта. Мы развернем его прямо к вам.",
+                btnConfirmPerspMode: "НАЧАТЬ",
+                dimTitle: "Настоящие размеры", dimW: "например, 800", dimH: "например, 2000", dimWLabel: "Ширина объекта", dimHLabel: "Высота объекта",
+                dimHint: "Введите реальные размеры объекта или оставьте поля пустыми — мы сохраним пропорции автоматически.",
+                dimApply: "Выровнять и применить",
+                calibModalTitle: "Известный размер", calibModalDesc: "Укажите настоящую длину этого отрезка, чтобы мы настроили масштаб.",
+                calibSave: "Сохранить",
+                clearTitle: "Удалить всё?", clearDesc: "Все нанесенные линии, углы и настройки масштаба исчезнут. Это нельзя будет отменить.",
+                btnCancelClear: "ОТМЕНА", btnConfirmClear: "ДА, ОЧИСТИТЬ"
+            },
+            en: {
+                loadBtn: "Open photo", modeDist: "Ruler", modeAngle: "Angle",
+                calibLabel: "Scale:", btnDelete: "Delete", btnClear: "Clear all",
+                perspLabel: "Shape:", btnTogglePerspective: "Align",
+                btnApplyGrid: "Done", btnRestoreOriginal: "Reset photo",
+                statusEmpty: "Add a photo to start (or Ctrl+V)",
+                statusPersp: "Mark corners: {n} of 4",
+                statusSelected: "Object selected. Drag the circles.",
+                statusIdle: "Select «Ruler» or «Angle» above.",
+                emptyState: "Click «Open photo» or paste from clipboard (Ctrl+V)",
+                processingOverlay: "Alignment magic...",
+                helpTitle1: "Selection:", helpDesc1: "Click on a line to adjust it.",
+                helpTitle2: "Movement:", helpDesc2: "1 finger (or left click) — pan photo.",
+                helpTitle3: "Zoom:", helpDesc3: "2 fingers (or wheel) — zoom.",
+                helpTitle4: "Paste:", helpDesc4: "Ctrl + V — paste photo from buffer.",
+                btnCloseHelp: "Got it",
+                restoreTitle: "Reset photo?", restoreDesc: "Alignment and all measurements will be deleted. Restore the original photo?",
+                btnCancelRestore: "CANCEL", btnConfirmRestore: "YES, RESET",
+                perspWarnTitle: "Align Object", perspWarnDesc: "Mark 4 corners of a rectangular object (like a door or window). We will straighten it for you.",
+                btnConfirmPerspMode: "START",
+                dimTitle: "Real Dimensions", dimW: "e.g., 800", dimH: "e.g., 2000", dimWLabel: "Width", dimHLabel: "Height",
+                dimHint: "Enter real dimensions or leave blank — we will keep proportions automatically.",
+                dimApply: "Align and Apply",
+                calibModalTitle: "Known Size", calibModalDesc: "Enter the real length of this segment to set the scale.",
+                calibSave: "Save",
+                clearTitle: "Clear all?", clearDesc: "All lines, angles and scale settings will be permanently removed.",
+                btnCancelClear: "CANCEL", btnConfirmClear: "YES, CLEAR"
+            }
+        };
+
         const state = {
+            lang: 'ru',
             image: null,
-            rawImage: null,
+            rawImage: null, 
             mode: 'distance',
+            isPerspectiveMode: false, 
             transform: { x: 0, y: 0, scale: 1 },
             objects: [], 
             drawingObj: null,
@@ -156,17 +256,68 @@
         const canvas = document.getElementById('mainCanvas');
         const ctx = canvas.getContext('2d', {alpha: false});
         const COLORS = { calib: '#f59e0b', line: '#3b82f6', angle: '#ec4899', persp: '#10b981', selected: '#22c55e', point: '#ffffff' };
+        const HIT_RADIUS = 25;
         
-        // Предотвращение всплытия событий на элементах интерфейса
-        ['toolbar', 'help-panel', 'modalPerspWarning', 'modalDimensions', 'modalRestoreWarning'].forEach(id => {
+        ['toolbar', 'help-panel', 'modalPerspWarning', 'modalDimensions', 'modalRestoreWarning', 'modalCalibInput', 'modalClearWarning'].forEach(id => {
             const el = document.getElementById(id);
-            if (el) el.addEventListener('pointerdown', (e) => e.stopPropagation());
+            if (el) {
+                const stop = (e) => e.stopPropagation();
+                el.addEventListener('mousedown', stop);
+                el.addEventListener('touchstart', stop);
+                el.addEventListener('pointerdown', stop);
+                el.addEventListener('wheel', stop);
+            }
+        });
+
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[state.lang][key]) el.innerHTML = i18n[state.lang][key];
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (i18n[state.lang][key]) el.placeholder = i18n[state.lang][key];
+            });
+            document.getElementById('btnLangToggle').innerText = state.lang === 'ru' ? 'EN' : 'RU';
+            document.getElementById('calibUnitDisplay').innerText = document.getElementById('calibUnit').value;
+            updateStatus();
+        }
+
+        document.getElementById('btnLangToggle').onclick = () => {
+            state.lang = state.lang === 'ru' ? 'en' : 'ru';
+            applyTranslations();
+        };
+
+        window.addEventListener('paste', e => {
+            const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+            for (const item of items) {
+                if (item.type.indexOf('image') !== -1) {
+                    const blob = item.getAsFile();
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            state.image = img;
+                            state.rawImage = img;
+                            state.objects = [];
+                            state.drawingObj = null;
+                            state.perspectivePts = [];
+                            document.getElementById('emptyState').classList.add('hidden');
+                            document.getElementById('btnRestoreOriginal').classList.add('hidden');
+                            fitView();
+                            updateStatus();
+                        };
+                        img.src = event.target.result;
+                    };
+                    reader.readAsDataURL(blob);
+                }
+            }
         });
 
         function cvReady() {
             state.isCvLoaded = true;
             document.getElementById('cvIndicator').className = 'w-1.5 h-1.5 rounded-full bg-emerald-500';
-            document.getElementById('cvText').innerText = 'CV Ready';
+            document.getElementById('cvText').innerText = state.lang === 'ru' ? 'Система готова' : 'CV Ready';
         }
 
         const resize = () => {
@@ -180,38 +331,56 @@
 
         function updateStatus() {
             const el = document.getElementById('statusMessage');
-            if (!state.image) return;
+            if (!state.image) {
+                el.innerText = i18n[state.lang].statusEmpty;
+                return;
+            }
             
-            if (state.mode === 'perspective') {
-                el.innerText = `Разметка: ${state.perspectivePts.length}/4 точек`;
+            const btnPersp = document.getElementById('btnTogglePerspective');
+            if (state.isPerspectiveMode) {
+                el.innerText = i18n[state.lang].statusPersp.replace('{n}', state.perspectivePts.length);
                 document.getElementById('btnApplyGrid').classList.toggle('hidden', state.perspectivePts.length !== 4);
-                document.getElementById('perspBtnText').classList.toggle('text-emerald-400', true);
+                btnPersp.classList.add('bg-blue-400', 'ring-2', 'ring-blue-300');
+                btnPersp.classList.remove('bg-blue-600');
             } else {
-                el.innerText = state.selectedId ? "Объект выбран. Тяните за точки." : "Выберите инструмент или объект.";
+                el.innerText = state.selectedId ? i18n[state.lang].statusSelected : i18n[state.lang].statusIdle;
                 document.getElementById('btnApplyGrid').classList.add('hidden');
-                document.getElementById('perspBtnText').classList.remove('text-emerald-400');
+                btnPersp.classList.remove('bg-blue-400', 'ring-2', 'ring-blue-300');
+                btnPersp.classList.add('bg-blue-600');
             }
         }
 
-        // --- УПРАВЛЕНИЕ ПАНЕЛЬЮ ПЕРСПЕКТИВЫ ---
         document.querySelectorAll('input[name="toolMode"]').forEach(input => {
             input.onchange = (e) => {
                 state.mode = e.target.value;
                 state.drawingObj = null;
-                if (state.mode === 'perspective') {
-                    if (state.perspectivePts.length === 0) document.getElementById('modalPerspWarning').classList.remove('hidden');
-                }
+                state.isPerspectiveMode = false;
                 updateStatus();
                 requestDraw();
             };
         });
 
+        document.getElementById('btnTogglePerspective').onclick = () => {
+            if (!state.image) return;
+            state.isPerspectiveMode = !state.isPerspectiveMode;
+            if (state.isPerspectiveMode) {
+                state.selectedId = null;
+                state.drawingObj = null;
+                if (state.perspectivePts.length === 0) {
+                    document.getElementById('modalPerspWarning').classList.remove('hidden');
+                }
+            }
+            updateStatus();
+            requestDraw();
+        };
+
         document.getElementById('btnConfirmPerspMode').onclick = () => document.getElementById('modalPerspWarning').classList.add('hidden');
         document.getElementById('btnRestoreOriginal').onclick = () => document.getElementById('modalRestoreWarning').classList.remove('hidden');
         document.getElementById('btnCancelRestore').onclick = () => document.getElementById('modalRestoreWarning').classList.add('hidden');
         document.getElementById('btnConfirmRestore').onclick = () => {
-            state.image = state.rawImage;
+            if (state.rawImage) state.image = state.rawImage;
             state.objects = [];
+            state.drawingObj = null;
             state.perspectivePts = [];
             state.selectedId = null;
             document.getElementById('modalRestoreWarning').classList.add('hidden');
@@ -220,7 +389,6 @@
             updateStatus();
         };
 
-        // --- ЛОГИКА ВЗАИМОДЕЙСТВИЯ ---
         let interact = { active: false, type: null, moved: false, startX:0, startY:0, lastX:0, lastY:0, lastDist:0, lastMid:null, target:null };
 
         const toW = (p) => ({ x: (p.x - state.transform.x) / state.transform.scale, y: (p.y - state.transform.y) / state.transform.scale });
@@ -228,10 +396,17 @@
         const getDist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
 
         function hitTest(sX, sY) {
+            if (!state.image) return null;
             const wP = toW({x:sX, y:sY});
-            const r = 25 / state.transform.scale;
+            const r = HIT_RADIUS / state.transform.scale;
+            
+            if (state.isPerspectiveMode) {
+                for (let i=0; i<state.perspectivePts.length; i++) {
+                    if (getDist(wP, state.perspectivePts[i]) < r) return {type:'persp', idx:i};
+                }
+                return null;
+            }
 
-            // Если есть выделенный объект, проверяем его точки первыми
             if (state.selectedId) {
                 const sel = state.objects.find(o => o.id === state.selectedId);
                 if (sel) {
@@ -240,18 +415,14 @@
                     }
                 }
             }
-
-            // Точки перспективы (всегда доступны в режиме перспективы)
-            if (state.mode === 'perspective') {
-                for (let i=0; i<state.perspectivePts.length; i++) {
-                    if (getDist(wP, state.perspectivePts[i]) < r) return {type:'persp', idx:i};
-                }
-            }
-
-            // Тело объектов (выбор)
             for (let obj of state.objects) {
                 if (obj.pts.length < 2) continue;
-                if (distToSegment(wP, obj.pts[0], obj.pts[obj.pts.length-1]) < r) return {type:'obj', obj};
+                if (obj.type === 'angle') {
+                    if (distToSegment(wP, obj.pts[0], obj.pts[1]) < r) return {type:'obj', obj};
+                    if (obj.pts.length > 2 && distToSegment(wP, obj.pts[0], obj.pts[2]) < r) return {type:'obj', obj};
+                } else {
+                    if (distToSegment(wP, obj.pts[0], obj.pts[1]) < r) return {type:'obj', obj};
+                }
             }
             return null;
         }
@@ -265,14 +436,12 @@
         }
 
         canvas.addEventListener('pointerdown', e => {
+            if (!state.image || !e.isPrimary) return;
             const rect = canvas.getBoundingClientRect();
             const sX = e.clientX - rect.left, sY = e.clientY - rect.top;
-            
-            interact.active = true;
-            interact.moved = false;
+            interact.active = true; interact.moved = false;
             interact.startX = sX; interact.startY = sY;
             interact.lastX = sX; interact.lastY = sY;
-
             const hit = hitTest(sX, sY);
             if (hit && (hit.type === 'pt' || hit.type === 'persp')) {
                 interact.type = 'drag';
@@ -283,14 +452,11 @@
         });
 
         window.addEventListener('pointermove', e => {
-            if (!interact.active) return;
+            if (!state.image || !interact.active || interact.type === 'zoom' || !e.isPrimary) return;
             const rect = canvas.getBoundingClientRect();
             const sX = e.clientX - rect.left, sY = e.clientY - rect.top;
-            
             if (Math.hypot(sX - interact.startX, sY - interact.startY) > 5) interact.moved = true;
-
             if (interact.type === 'maybe_pan' && interact.moved) interact.type = 'pan';
-
             if (interact.type === 'pan') {
                 state.transform.x += sX - interact.lastX;
                 state.transform.y += sY - interact.lastY;
@@ -303,61 +469,81 @@
             requestDraw();
         });
 
-        window.addEventListener('pointerup', () => {
-            if (interact.active && !interact.moved) {
-                handleTap(interact.startX, interact.startY);
+        window.addEventListener('pointerup', e => {
+            if (!state.image || !e.isPrimary) return;
+            if (interact.type === 'zoom') {
+                interact.active = false; interact.type = null;
+                return;
             }
+            if (interact.active && !interact.moved) handleTap(interact.startX, interact.startY);
             interact.active = false; interact.type = null;
             requestDraw();
         });
 
-        // Двухпальцевый зум
         canvas.addEventListener('touchstart', e => {
+            if (!state.image) return;
             if (e.touches.length === 2) {
+                e.preventDefault();
                 interact.type = 'zoom';
-                interact.lastDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-                interact.lastMid = { x: (e.touches[0].clientX + e.touches[1].clientX)/2, y: (e.touches[0].clientY + e.touches[1].clientY)/2 };
+                interact.active = true;
+                const rect = canvas.getBoundingClientRect();
+                const x1 = e.touches[0].clientX - rect.left, y1 = e.touches[0].clientY - rect.top;
+                const x2 = e.touches[1].clientX - rect.left, y2 = e.touches[1].clientY - rect.top;
+                interact.lastDist = Math.hypot(x2 - x1, y2 - y1);
+                interact.lastMid = { x: (x1 + x2)/2, y: (y1 + y2)/2 };
             }
         }, {passive: false});
 
         canvas.addEventListener('touchmove', e => {
+            if (!state.image) return;
             if (e.touches.length === 2 && interact.type === 'zoom') {
-                const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-                const mid = { x: (e.touches[0].clientX + e.touches[1].clientX)/2, y: (e.touches[0].clientY + e.touches[1].clientY)/2 };
-                
-                const factor = d / interact.lastDist;
-                const wP = toW(mid);
-                state.transform.scale *= factor;
-                state.transform.x = mid.x - wP.x * state.transform.scale;
-                state.transform.y = mid.y - wP.y * state.transform.scale;
-                
-                state.transform.x += mid.x - interact.lastMid.x;
-                state.transform.y += mid.y - interact.lastMid.y;
-
-                interact.lastDist = d; interact.lastMid = mid;
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                const x1 = e.touches[0].clientX - rect.left, y1 = e.touches[0].clientY - rect.top;
+                const x2 = e.touches[1].clientX - rect.left, y2 = e.touches[1].clientY - rect.top;
+                const d = Math.hypot(x2 - x1, y2 - y1);
+                const mid = { x: (x1 + x2)/2, y: (y1 + y2)/2 };
+                if (interact.lastDist > 0) {
+                    const factor = d / interact.lastDist;
+                    const wP = toW(interact.lastMid);
+                    state.transform.scale *= factor;
+                    state.transform.x = mid.x - wP.x * state.transform.scale;
+                    state.transform.y = mid.y - wP.y * state.transform.scale;
+                }
+                interact.lastDist = d; 
+                interact.lastMid = mid;
                 requestDraw();
             }
         }, {passive: false});
 
+        canvas.addEventListener('wheel', e => {
+            if (!state.image) return;
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const wP = toW({x: e.clientX - rect.left, y: e.clientY - rect.top});
+            const factor = e.deltaY > 0 ? 0.9 : 1.1;
+            state.transform.scale *= factor;
+            state.transform.x = (e.clientX - rect.left) - wP.x * state.transform.scale;
+            state.transform.y = (e.clientY - rect.top) - wP.y * state.transform.scale;
+            requestDraw();
+        }, {passive:false});
+
         function handleTap(sX, sY) {
-            const hit = hitTest(sX, sY);
-            if (hit && hit.type === 'obj') {
-                state.selectedId = hit.obj.id;
-                updateStatus();
-                return;
-            }
+            if (!state.image) return;
             
-            // Если нажали в пустое место — снимаем выделение или рисуем
-            if (state.selectedId) {
-                state.selectedId = null;
+            const hit = hitTest(sX, sY);
+            const wP = toW({x:sX, y:sY});
+
+            if (state.isPerspectiveMode) {
+                if (!hit && state.perspectivePts.length < 4) state.perspectivePts.push(wP);
                 updateStatus();
                 return;
             }
 
-            const wP = toW({x:sX, y:sY});
-            if (state.mode === 'perspective') {
-                if (state.perspectivePts.length < 4) state.perspectivePts.push(wP);
-            } else if (state.mode === 'distance') {
+            if (hit && hit.type === 'obj') { state.selectedId = hit.obj.id; updateStatus(); return; }
+            if (state.selectedId) { state.selectedId = null; updateStatus(); return; }
+            
+            if (state.mode === 'distance') {
                 if (!state.drawingObj) {
                     const hasCalib = state.objects.some(o => o.type === 'calib');
                     state.drawingObj = { id: Date.now(), type: hasCalib ? 'line' : 'calib', pts: [wP] };
@@ -365,6 +551,7 @@
                     state.drawingObj.pts.push(wP);
                     state.objects.push(state.drawingObj);
                     state.selectedId = state.drawingObj.id;
+                    if (state.drawingObj.type === 'calib') showCalibModal();
                     state.drawingObj = null;
                 }
             } else if (state.mode === 'angle') {
@@ -381,7 +568,23 @@
             updateStatus();
         }
 
-        // --- ОТРИСОВКА ---
+        function showCalibModal() {
+            const currentVal = document.getElementById('calibLength').value;
+            document.getElementById('inpCalibVal').value = currentVal;
+            document.getElementById('calibUnitDisplay').innerText = document.getElementById('calibUnit').value;
+            document.getElementById('modalCalibInput').classList.remove('hidden');
+            setTimeout(() => document.getElementById('inpCalibVal').select(), 100);
+        }
+
+        document.getElementById('btnSaveCalib').onclick = () => {
+            const newVal = document.getElementById('inpCalibVal').value;
+            if (newVal) {
+                document.getElementById('calibLength').value = newVal;
+            }
+            document.getElementById('modalCalibInput').classList.add('hidden');
+            requestDraw();
+        };
+
         function requestDraw() { if (!fId) fId = requestAnimationFrame(draw); }
         let fId = null;
 
@@ -390,34 +593,25 @@
             ctx.fillStyle = '#030712';
             ctx.fillRect(0,0, canvas.width/state.dpr, canvas.height/state.dpr);
             if (!state.image) return;
-
             ctx.save();
             ctx.translate(state.transform.x, state.transform.y);
             ctx.scale(state.transform.scale, state.transform.scale);
             ctx.drawImage(state.image, 0, 0);
             ctx.restore();
-
             state.objects.forEach(o => drawObj(o));
             if (state.drawingObj) drawObj(state.drawingObj, true);
-            if (state.mode === 'perspective' || state.perspectivePts.length > 0) drawPerspGrid();
+            if (state.isPerspectiveMode && state.perspectivePts.length > 0) drawPerspGrid();
         }
 
         function drawChamferedRect(x, y, w, h, c, color) {
             ctx.beginPath();
-            ctx.moveTo(x + c, y);
-            ctx.lineTo(x + w - c, y);
-            ctx.lineTo(x + w, y + c);
-            ctx.lineTo(x + w, y + h - c);
-            ctx.lineTo(x + w - c, y + h);
-            ctx.lineTo(x + c, y + h);
-            ctx.lineTo(x, y + h - c);
-            ctx.lineTo(x, y + c);
+            ctx.moveTo(x + c, y); ctx.lineTo(x + w - c, y); ctx.lineTo(x + w, y + c);
+            ctx.lineTo(x + w, y + h - c); ctx.lineTo(x + w - c, y + h);
+            ctx.lineTo(x + c, y + h); ctx.lineTo(x, y + h - c); ctx.lineTo(x, y + c);
             ctx.closePath();
-            ctx.fillStyle = "rgba(0,0,0,0.85)";
+            ctx.fillStyle = "rgba(15, 23, 42, 0.85)"; 
             ctx.fill();
-            ctx.strokeStyle = color;
-            ctx.lineWidth = 1;
-            ctx.stroke();
+            ctx.strokeStyle = color; ctx.lineWidth = 1.5; ctx.stroke(); 
         }
 
         function drawObj(obj, isDrawing=false) {
@@ -425,68 +619,69 @@
             const color = isSelected ? COLORS.selected : (COLORS[obj.type] || COLORS.line);
             const pts = obj.pts.map(toS);
             
-            ctx.lineWidth = 2; ctx.strokeStyle = color;
+            ctx.lineWidth = 2; 
+            ctx.strokeStyle = color;
             if (isDrawing) ctx.setLineDash([5, 5]);
+            else ctx.setLineDash([]);
             
             ctx.beginPath();
             if (obj.type === 'angle') {
-                if (pts.length > 1) { ctx.moveTo(pts[1].x, pts[1].y); ctx.lineTo(pts[0].x, pts[0].y); }
-                if (pts.length > 2) {
-                    ctx.lineTo(pts[2].x, pts[2].y);
-                    // Рисуем дугу угла
-                    const a1 = Math.atan2(pts[1].y - pts[0].y, pts[1].x - pts[0].x);
-                    const a2 = Math.atan2(pts[2].y - pts[0].y, pts[2].x - pts[0].x);
-                    ctx.save();
-                    ctx.setLineDash([]);
-                    ctx.globalAlpha = 0.5;
-                    ctx.beginPath();
-                    ctx.moveTo(pts[0].x, pts[0].y);
-                    ctx.arc(pts[0].x, pts[0].y, 30, a1, a2, Math.abs(a2-a1) > Math.PI);
-                    ctx.closePath();
-                    ctx.fillStyle = color; ctx.fill();
-                    ctx.restore();
-                }
+                if (pts.length > 1) { ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[1].x, pts[1].y); }
+                if (pts.length > 2) { ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[2].x, pts[2].y); }
             } else if (pts.length > 1) {
                 ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[1].x, pts[1].y);
             }
-            ctx.stroke(); ctx.setLineDash([]);
+            ctx.stroke(); 
+            ctx.setLineDash([]);
 
-            // Текст и метки
+            if (obj.type === 'angle' && pts.length > 2) {
+                const a1 = Math.atan2(pts[1].y - pts[0].y, pts[1].x - pts[0].x);
+                const a2 = Math.atan2(pts[2].y - pts[0].y, pts[2].x - pts[0].x);
+                let diff = a2 - a1;
+                while (diff < -Math.PI) diff += Math.PI * 2;
+                while (diff > Math.PI) diff -= Math.PI * 2;
+                ctx.save(); 
+                ctx.globalAlpha = 0.4;
+                ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
+                ctx.arc(pts[0].x, pts[0].y, 35, a1, a1 + diff, diff < 0);
+                ctx.closePath(); ctx.fillStyle = color; ctx.fill(); ctx.restore();
+            }
+
             if (pts.length > 1) {
-                let txt = "";
-                let lx, ly;
+                let txt = "", lx, ly;
                 const ratio = getCalibRatio();
-
                 if (obj.type === 'angle' && pts.length === 3) {
-                    const a = Math.abs(Math.atan2(pts[1].y-pts[0].y, pts[1].x-pts[0].x) - Math.atan2(pts[2].y-pts[0].y, pts[2].x-pts[0].x)) * 180 / Math.PI;
-                    txt = (a > 180 ? 360 - a : a).toFixed(1) + "°";
-                    // Метка ближе к вершине
-                    const midA = (Math.atan2(pts[1].y-pts[0].y, pts[1].x-pts[0].x) + Math.atan2(pts[2].y-pts[0].y, pts[2].x-pts[0].x)) / 2;
-                    lx = pts[0].x + Math.cos(midA) * 45;
-                    ly = pts[0].y + Math.sin(midA) * 45;
+                    const a1 = Math.atan2(pts[1].y - pts[0].y, pts[1].x - pts[0].x);
+                    const a2 = Math.atan2(pts[2].y - pts[0].y, pts[2].x - pts[0].x);
+                    let diff = a2 - a1;
+                    while (diff < -Math.PI) diff += Math.PI * 2;
+                    while (diff > Math.PI) diff -= Math.PI * 2;
+                    txt = Math.abs(diff * 180 / Math.PI).toFixed(1) + "°";
+                    const midA = a1 + diff / 2;
+                    lx = pts[0].x + Math.cos(midA) * 35;
+                    ly = pts[0].y + Math.sin(midA) * 35;
                 } else if (obj.type !== 'angle') {
-                    txt = (getDist(obj.pts[0], obj.pts[obj.pts.length-1]) * ratio).toFixed(1) + " " + document.getElementById('calibUnit').value;
-                    lx = (pts[0].x + pts[1].x)/2;
-                    ly = (pts[0].y + pts[1].y)/2 - 15;
+                    txt = (getDist(obj.pts[0], obj.pts[1]) * ratio).toFixed(1) + " " + document.getElementById('calibUnit').value;
+                    lx = (pts[0].x + pts[1].x)/2; ly = (pts[0].y + pts[1].y)/2 - 15;
                 }
-
                 if (txt) {
-                    ctx.font = "bold 11px font-mono";
-                    const tw = ctx.measureText(txt).width + 12;
-                    drawChamferedRect(lx - tw/2, ly - 10, tw, 18, 4, color);
-                    ctx.fillStyle = "#fff"; ctx.textAlign = "center";
-                    ctx.fillText(txt, lx, ly + 3);
+                    ctx.font = "600 12px system-ui, -apple-system, sans-serif";
+                    const tw = ctx.measureText(txt).width + 16;
+                    drawChamferedRect(lx - tw/2, ly - 12, tw, 24, 5, color);
+                    ctx.fillStyle = "#ffffff"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+                    ctx.fillText(txt, lx, ly);
                 }
             }
 
-            // Точки рисуем только если объект выделен или в процессе
-            if (isSelected || isDrawing) {
-                pts.forEach(p => {
-                    ctx.beginPath(); ctx.arc(p.x, p.y, 6, 0, Math.PI*2);
-                    ctx.fillStyle = color; ctx.fill();
-                    ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.stroke();
-                });
-            }
+            pts.forEach(p => {
+                ctx.beginPath();
+                const r = isSelected ? 7 : 5;
+                ctx.arc(p.x, p.y, r, 0, Math.PI*2);
+                ctx.fillStyle = isSelected ? color : "#ffffff";
+                ctx.fill();
+                if (isSelected) { ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.stroke(); }
+                else { ctx.strokeStyle = "rgba(0,0,0,0.5)"; ctx.lineWidth = 1; ctx.stroke(); }
+            });
         }
 
         function drawPerspGrid() {
@@ -505,7 +700,7 @@
 
         function getCalibRatio() {
             const c = state.objects.find(o => o.type === 'calib');
-            if (c && c.pts.length >= 2) return parseFloat(document.getElementById('calibLength').value) / getDist(c.pts[0], c.pts[c.pts.length-1]);
+            if (c && c.pts.length >= 2) return parseFloat(document.getElementById('calibLength').value) / getDist(c.pts[0], c.pts[1]);
             return 1;
         }
 
@@ -518,7 +713,6 @@
             requestDraw();
         }
 
-        // --- ПЕРСПЕКТИВА (OpenCV) ---
         document.getElementById('btnApplyGrid').onclick = () => document.getElementById('modalDimensions').classList.remove('hidden');
         document.getElementById('btnFinalApply').onclick = () => {
             document.getElementById('modalDimensions').classList.add('hidden');
@@ -532,82 +726,104 @@
                 let top = pts.slice(0,2).sort((a,b)=>a.x-b.x);
                 let bot = pts.slice(2,4).sort((a,b)=>a.x-b.x);
                 let srcCoords = cv.matFromArray(4, 1, cv.CV_32FC2, [top[0].x, top[0].y, top[1].x, top[1].y, bot[1].x, bot[1].y, bot[0].x, bot[0].y]);
-
-                const trueW = parseFloat(document.getElementById('inpTrueW').value) || getDist(top[0], top[1]);
-                const trueH = parseFloat(document.getElementById('inpTrueH').value) || getDist(top[0], bot[0]);
-                
-                const margin = 1.5; 
-                const outW = trueW * margin; const outH = trueH * margin;
-                const offX = (outW - trueW)/2; const offY = (outH - trueH)/2;
-
-                let dstCoords = cv.matFromArray(4, 1, cv.CV_32FC2, [offX, offY, offX+trueW, offY, offX+trueW, offY+trueH, offX, offY+trueH]);
-
+                const userW = parseFloat(document.getElementById('inpTrueW').value);
+                const userH = parseFloat(document.getElementById('inpTrueH').value);
+                const pxW = getDist(top[0], top[1]);
+                const pxH = getDist(top[0], bot[0]);
+                let dstPxW = pxW;
+                let dstPxH = pxH;
+                if (userW && userH) dstPxH = dstPxW * (userH / userW);
+                const margin = 3.0; 
+                const outW = Math.round(dstPxW * margin); 
+                const outH = Math.round(dstPxH * margin);
+                const offX = Math.round((outW - dstPxW) / 2); 
+                const offY = Math.round((outH - dstPxH) / 2); 
+                let dstCoords = cv.matFromArray(4, 1, cv.CV_32FC2, [offX, offY, offX + dstPxW, offY, offX + dstPxW, offY + dstPxH, offX, offY + dstPxH]);
                 const tempC = document.createElement('canvas');
                 tempC.width = state.image.width; tempC.height = state.image.height;
                 tempC.getContext('2d').drawImage(state.image, 0, 0);
-
                 let src = cv.imread(tempC);
                 let dst = new cv.Mat();
                 let M = cv.getPerspectiveTransform(srcCoords, dstCoords);
                 cv.warpPerspective(src, dst, M, new cv.Size(outW, outH));
-
                 const outCanvas = document.createElement('canvas');
                 cv.imshow(outCanvas, dst);
                 const newImg = new Image();
                 newImg.onload = () => {
-                    state.image = newImg;
+                    state.image = newImg; 
                     state.objects = []; 
+                    state.drawingObj = null;
                     state.perspectivePts = [];
+                    state.isPerspectiveMode = false;
                     document.getElementById('processingOverlay').classList.add('hidden');
                     document.getElementById('btnRestoreOriginal').classList.remove('hidden');
-                    fitView();
-                    updateStatus();
+                    fitView(); updateStatus();
                 };
                 newImg.src = outCanvas.toDataURL();
                 src.delete(); dst.delete(); M.delete(); srcCoords.delete(); dstCoords.delete();
-            } catch(e) {
+            } catch(e) { 
                 console.error(e);
-                document.getElementById('processingOverlay').classList.add('hidden');
+                document.getElementById('processingOverlay').classList.add('hidden'); 
             }
         }
 
-        // --- ОСТАЛЬНОЕ ---
         document.getElementById('btnDelete').onclick = () => {
-            if (state.selectedId) {
-                state.objects = state.objects.filter(o => o.id !== state.selectedId);
-                state.selectedId = null;
-            } else if (state.objects.length > 0) {
-                state.objects.pop();
-            } else if (state.perspectivePts.length > 0) {
-                state.perspectivePts.pop();
+            if (!state.image) return;
+            if (state.isPerspectiveMode) {
+                if (state.perspectivePts.length > 0) state.perspectivePts.pop();
+            } else {
+                if (state.selectedId) {
+                    state.objects = state.objects.filter(o => o.id !== state.selectedId);
+                    state.selectedId = null;
+                } else if (state.objects.length > 0) {
+                    state.objects.pop();
+                }
             }
             requestDraw(); updateStatus();
         };
-
+        
         document.getElementById('btnClear').onclick = () => {
-            state.objects = []; state.perspectivePts = []; state.selectedId = null;
-            requestDraw(); updateStatus();
+            if (!state.image) return;
+            document.getElementById('modalClearWarning').classList.remove('hidden');
         };
 
+        document.getElementById('btnCancelClear').onclick = () => {
+            document.getElementById('modalClearWarning').classList.add('hidden');
+        };
+
+        document.getElementById('btnConfirmClear').onclick = () => {
+            state.objects = []; 
+            state.perspectivePts = []; 
+            state.selectedId = null; 
+            state.drawingObj = null;
+            document.getElementById('modalClearWarning').classList.add('hidden');
+            requestDraw(); 
+            updateStatus();
+        };
+        
         document.getElementById('btnFitView').onclick = fitView;
         document.getElementById('btnHelpToggle').onclick = () => document.getElementById('help-panel').classList.remove('hidden');
         document.getElementById('btnCloseHelp').onclick = () => document.getElementById('help-panel').classList.add('hidden');
-
         document.getElementById('btnLoad').onclick = () => document.getElementById('fileInput').click();
         document.getElementById('fileInput').onchange = (e) => {
+            if (!e.target.files[0]) return;
             const reader = new FileReader();
             reader.onload = (ev) => {
                 const img = new Image();
                 img.onload = () => {
                     state.image = img; state.rawImage = img;
+                    state.objects = []; state.perspectivePts = []; state.selectedId = null; state.drawingObj = null;
                     document.getElementById('emptyState').classList.add('hidden');
+                    document.getElementById('btnRestoreOriginal').classList.add('hidden');
                     fitView(); updateStatus();
+                    applyTranslations();
                 };
                 img.src = ev.target.result;
             };
-            if (e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+            reader.readAsDataURL(e.target.files[0]);
         };
+        
+        applyTranslations();
     </script>
 </body>
 </html>
-
