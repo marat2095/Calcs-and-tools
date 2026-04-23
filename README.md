@@ -17,7 +17,7 @@ https://marat2095.github.io/Calcs-and-tools/
 1. Установите зависимости:
    `pip install ezdxf shapely`
 2. Запустите скрипт через терминал:
-   `python DXF_Engrave.py "путь/к/файлу.dxf" --step 0.5`
+   `python dxf_engrave.py "путь/к/файлу.dxf" --step 0.5`
 
 **Параметры:**
 - `input`: Путь к вашему чертежу.
