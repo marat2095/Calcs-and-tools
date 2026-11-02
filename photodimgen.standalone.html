@@ -1,0 +1,4906 @@
+<!DOCTYPE html>
+<!-- PhotoDimGen Standalone Bundle | Generated: 2026-11-02 13:57:30 -->
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PhotoDimGen v2.1.5</title>
+
+    <!-- Иконки и Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAAAIADmAgAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAq1JREFUeJxVU0tPFEEQ/qp6ZpaZZeXlygpqAAWREEQTY8BHOBlN9IjRkydPGqIHTj4IGr158HExXvwBxpsSboYEOBnDK0JMhAQNhmcEdnZmd7rb9LILbiV9qer66quvqggDA4zBQYWBkRaOJ7ohc05MKRICJSYBRJq1JDunpD+OB+dmTS6ZID8du4WY+5qJE5HSQFYCUpciCAIcAYsJSqk0ssF99ajrHeH5SAtrZ4Ysx5JpX7plgi43V+n2pIekZ8NUWPFzmF7NYPjHBqUzkRaeK7TMaQXZwaysi+y4lvZ92VmfEB97W7krVS62Qymmln0xueyLrVCKs7We+NB7nM8c3idUEETsuMSaehgaplttmL+60ohjNWVY3AwxtxZgZsXH9IqP2bUMFv9mcaQihrdXmwACaUCDSFimPW1cghFJhXvDC2iujOF6Ww2q3HwYG0GEqT9p3Bmax5OeQxAWG4nItGftiqSNh/B9NYNP35aBGMPgFoJAVqHmgAcGma+7xnsARmRCZyoOWAW36cs8YxbjdCoO1+YSAAvFOgSYEfZ31eHGiWqsBxLbOZn/nHAEqssspBJ2Aa/AvwigC2gGoG/4JywNnKqLY79n5/1z6xlMLqWxGkq8v3YUTJRfk1INANhMyEmNiV9b+Pp7a2+ZzBIpjfqkB1vQbsFdDciQ0Bqh1GisjBkqe70XtYgUmipjyCqdn3k+Z4eBUgbDLHXf0DxeXGrAzbYaLG3nsGlWGjsaHIzbSJbbuPt53gBqJpCCVoRno60MMUPCZhkEkW0x9TRUoKPW/W+VI0wt+/iysIkwjCC8MqGVgtLyZOGYxm/DcV8yk2va1sVjKs7LSC4I5DAEkSEQIOv3q4fdb2jvnEfb2YufhwwdixTZXHrPSkmEmjUsO6eC9BgeX5gwuf8AiGE1E9WlLg8AAAAASUVORK5CYII=">
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAGtElEQVR4nMWXbYxdRRnHfzNnzrn37r37vu52Kdus4JYYMVCIFRG2iyaGiB+U0DVRlGhITIxIQmICikBTUl8+6BeNMaJGDcF0v/ihEhIT61pKpCYWKzHVtdBC1+4L+3rfz8uMmTn37t5LuyyLMT43k3PuzJzneeb/vA600sGjHv9rOtouQ7UJn5pMePx4j8x1HjSYceJ40K0ZI96RMCGMe3rekpDyeb26MMXkxxc3ZAEp48aEd2j6LpPp/BFBdgSjcaOxpY3vFvLMVrNCgvAgrMyLev2B5PFbpxwSk5OJ2BB++IU7TZD9LcZIonqcyklFCQHS/RNoDFqDNmZTol0TAk+CRGDsHru8oZF7MahAoXxEvTyZPHrrlJUtHLxP/KFb+rmzKH+IOIxbTeNJQZRoCJ1U8AT4kpzvkbHvQJgYKlECkYbEpNr6El9JEvvNhh4mQfkSrYsavZdv3LKgrJ3kkycn6egaorwaI8SmXwBRJSKfD5h4Ty8fHe1m33Ce0e4MfTlFhy/dnmqsWanGnF+r89JcmePn1/n9+TXWiyEyqxyOTg0hPOIoptDbJUsr92nEd50wg3eHMNo4rFtsbKe+dmCEx8avphCkzlusJ8yXI2aWq1TsiYGcknRnFTcM5Rnf08VX9w9TjzXfOjnLkROzWG+zrFMshCCJrXUmgFQBjO53pjDOzEgLezXm8MdGefS23fzyb4s8c+YN/rFcZbESU4k1OmkxshAIKcj7kv6cYm9vlnve188TB0YY6PB54Ng5/IwisfsdHNp+0Wu/boO7afO4GvPIxAiPfPgqN/fszCrPzayA9YVmYLwpFCzvUhVKxZALy1WCQPLFGwf5ygd2uXWnRFa1+wRXUCBV0DDSncETgpcXK/z67jGeuXuM05fKnF2q8vp6yGotbjNBT9bj6q6A6/pz7NuVR0nBmfkK1w/mGOvLbhWjXKZAk2qJDTi49zf/okdJvnDTEBOjXXxmeIC3oovrIUf/vsQvXlrgzBtVZh+8mbo1FztUQDSGRWH6nytMv7IGgWSo4LOrEDhbNx2zHCYsV2PmyhFzpRBTT5yprhrMuYh8K1K8DfKyiiDjUU8088WI+bUwzQktichJkgLhCTJ5nzje+tQ7UsATwmW92Eap/a9soMhmxG5QGhDGPa2jaW2cQ//XCqzWYowxzqliWx6av9T/NqmRuGUjJdtIt2bZjuR2G+55bx+B71Ethq5ExJG2ecSd0sa1G/Y9Nm7N7qkVQ1d/7r0+ddjNmrADBEQj0I98ZA9funmIn51e4E+zJS6s1VmuxS79WrM4JlK4UOzNKvZ0BewfLvD5Gwe5rj/r3MQitnMFRPp86HcX+OTeXg5NjLStWwVsurWU8Wxxagfzz7Ml7j/2Cj++691OwR0roBu4HZtZ4fvHX2Nsd4H9uwvsG8pzbV+WwbxPZyMMS2HiUvS5lZorRqdmS5y9VKLQGfDUJ65xAbNjBZrUk1HIjMfMUo2ZuTJPmwY8thRvVC2ncTrsnC8RgUdvbvsoV9ttsE5m+WYCiWnA7Oxq0pCjoY9tSDaBNoRR6pzvWAHTyDM2rCxZXq6abbG31dWbJrc5pAnOjhXIKNtcQTFM3NM6ki1SjXxzmV87mQ2r2L1aGNbqsfvfbFyuRPKy01g+UnBuuepardtGOp3gailKc0BiY39TaBN2h1CS5oJaOUJHmjtGu50zv7xQcSYybweBRBtUTvG96YsEnnRe/Ln3D/DUX+Y5PV/h36XQoRJbLZrYSuFOXcgohgs+N7yrg/v2DXLntT1854VZHn72Vfy8f0WfUOlRxEraw7vzbyjx7RMXWapEPDY+wq8+NZYiZGCxErFeT1wusJRVkq6Mx0CHcna3tFCOePC5V/nBqTnHy9aGFogtm7UNBYQQf0R4k62tvWXt+ZKfvHiJn/91kQ/t7uTAaBc37cpzTW/WCbPDkm1MrMAXZ0ucniszfWGNk68XCauxa0rby4YxtqIJwYn0uBjBkVN9UpsZPNVDHGrXvba2aNb5wiRtuVMvQypJ0NKWa4uGLcGm2bp7+F6KZquFXTnVpq49vZeHb7koOTgl+foHl4Q296N8gfI9jIkwrplNEm0SCYmfUUmQ9xM/5yeekq4G1WLthn23c36usSejEivbfuuEWl7GxEjPI+iQJMmXrfD0YmKpcTuSh5//NEHHDwly/SQx7gq0RRp/8/SWoZ4mE5A+hNV1ovJD+pu3/3TzakaDmhfGJ6eHpcp/1mgzLnQyYFvorW+D25G7Fxoj1bKQ8qSulp/m0O2vtV5O2+n/cD3/D00SQGk3iS/TAAAAAElFTkSuQmCC">
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+
+    <!-- Open Graph / Мета-теги -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marat2095.github.io/Calcs-and-tools/photodimgen.standalone.html">
+    <meta property="og:title" content="PhotoDimGen v2.1.5">
+    <meta property="og:description" content="CAD-генератор размеров и оцифровки 2D-чертежей по фотографиям.">
+    <meta property="og:image" content="https://marat2095.github.io/Calcs-and-tools/preview.png">
+
+    <!-- Стили Blender 4.x Solid CAD Theme + Day/Light Mode + Photoshop Levels -->
+    <style>
+/* === Embedded css/style.css === */
+/* ==========================================================================
+   PhotoDimGen - Blender 4.x Solid CAD Design System
+   Scalable CAD UI with Dark Graphite & Light Day Mode
+   ========================================================================== */
+
+:root {
+    /* Шрифты */
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace;
+
+    /* Поверхности (Мягкий темно-графитовый режим — комфортный для глаз) */
+    --bl-bg-root: #1e2026;          /* Мягкий графитовый фон холста */
+    --bl-bg-panel: #272a33;         /* Приподнятые панели и карточки */
+    --bl-bg-subpanel: #21232b;      /* Вложенные блоки и выпадающие панели */
+    --bl-bg-widget: #333742;        /* Второстепенные кнопки и виджеты */
+    --bl-bg-widget-hover: #404552;  /* Ховер кнопок */
+    --bl-bg-widget-active: #2a2d36; /* Нажатая кнопка */
+    --bl-bg-inset: #1a1c22;         /* Заглубленные поля ввода */
+
+    /* Служебные поверхности */
+    --bg-header: #242730;           /* Верхняя шапка */
+    --bg-viewport: #18191f;         /* Рабочий фон вьюпорта */
+
+    /* Границы, фаски и тени */
+    --bl-border: #3d424f;           /* Четкая 1px рамка */
+    --bl-border-light: #505666;     /* Светлая фаска */
+    --bl-border-focus: #f57921;     /* Янтарный фокус ввода */
+    --bl-shadow-card: 0 4px 20px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.35);
+    --bl-shadow-bevel: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    /* Фирменный янтарный акцент Blender */
+    --bl-accent: #f57921;           /* Blender Amber */
+    --bl-accent-hover: #fb8c00;     /* Яркий ховер акцента */
+    --bl-accent-fill: rgba(245, 121, 33, 0.22);
+
+    /* Типографика */
+    --bl-text: #f3f4f6;             /* Контрастный основной текст */
+    --bl-text-muted: #9ca3af;       /* Лейблы свойств и подписи */
+    --bl-text-subtle: #6b7280;      /* Второстепенный текст */
+
+    /* Семантика */
+    --bl-success: #10b981;          /* Зеленый статус / OK */
+    --bl-danger: #ef4444;           /* Красный статус / Ошибка */
+    --bl-danger-bg: #371818;        /* Фон ошибок */
+    --bl-danger-border: #632626;    /* Рамка ошибок */
+
+    /* Геометрия */
+    --bl-radius: 5px;               /* Стандартный радиус */
+    --bl-radius-sm: 4px;            /* Радиус чипов, бейджей и пилюль */
+}
+
+/* ==========================================================================
+   Дневной режим (Light / Day CAD Mode)
+   ========================================================================== */
+html[data-theme="light"],
+body.theme-light {
+    --bl-bg-root: #eef2f6;          /* Светлый инженерный фон */
+    --bl-bg-panel: #ffffff;         /* Белые панели и карточки */
+    --bl-bg-subpanel: #f8fafc;      /* Светлые вложенные блоки */
+    --bl-bg-widget: #e2e8f0;        /* Кнопки и виджеты */
+    --bl-bg-widget-hover: #cbd5e1;  /* Ховер кнопок */
+    --bl-bg-widget-active: #94a3b8; /* Нажатая кнопка */
+    --bl-bg-inset: #f1f5f9;         /* Светлые поля ввода */
+
+    --bg-header: #ffffff;           /* Белая шапка */
+    --bg-viewport: #e2e8f0;         /* Светлый чертежный фон вьюпорта */
+
+    --bl-border: #cbd5e1;           /* Серая четкая рамка */
+    --bl-border-light: #94a3b8;
+    --bl-border-focus: #ea580c;
+    --bl-shadow-card: 0 4px 20px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+    --bl-shadow-bevel: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+    --bl-accent: #f97316;           /* Яркий чистый оранжевый */
+    --bl-accent-hover: #ea580c;
+    --bl-accent-fill: rgba(249, 115, 22, 0.18);
+
+    --bl-text: #0f172a;             /* Глубокий темно-синий/черный текст */
+    --bl-text-muted: #475569;       /* Мягкий контрастный серый */
+    --bl-text-subtle: #64748b;
+
+    --bl-danger: #dc2626;
+    --bl-danger-bg: #fee2e2;
+    --bl-danger-border: #fca5a5;
+}
+
+/* ==========================================================================
+   Базовый ресет и гибкая компоновка (Flex Column Layout)
+   ========================================================================== */
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: 100vw;
+    max-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--bl-bg-root);
+    color: var(--bl-text);
+    font-family: var(--font-sans);
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: none;
+    box-sizing: border-box;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.ui-element {
+    pointer-events: auto;
+}
+
+/* ==========================================================================
+   Верхняя панель (Header / Toolbar) — Увеличенный масштаб (+30%)
+   ========================================================================== */
+#toolbar {
+    flex: 0 0 auto;
+    width: 100%;
+    background: var(--bg-header);
+    border-bottom: 1px solid var(--bl-border);
+    padding: 6px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    z-index: 50;
+    box-sizing: border-box;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.toolbar-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.row-main {
+    justify-content: flex-start;
+    gap: 6px;
+}
+
+.row-tools {
+    justify-content: flex-start;
+    gap: 6px;
+    padding-top: 3px;
+    border-top: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+.toolbar-utils {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+/* Бренд */
+.brand-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    margin-right: 4px;
+}
+.brand-badge {
+    width: 32px;
+    height: 32px;
+    background: var(--bl-bg-widget);
+    border: 1px solid var(--bl-border);
+    border-radius: var(--bl-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bl-accent);
+}
+.brand-name {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.2px;
+    color: var(--bl-text);
+}
+.brand-chip {
+    font-size: 10px;
+    font-weight: 700;
+    color: #ffffff;
+    background: var(--bl-accent);
+    padding: 2px 6px;
+    border-radius: var(--bl-radius-sm);
+    letter-spacing: 0.5px;
+    font-family: var(--font-mono);
+}
+
+/* ==========================================================================
+   Кнопка «Коррекция» (Яркость, Контраст, Уровни)
+   ========================================================================== */
+#btnOpenAdjustments.active {
+    background: var(--bl-accent);
+    color: #111827;
+    border-color: var(--bl-accent);
+}
+#btnOpenAdjustments.active .svg-icon {
+    color: #111827 !important;
+}
+
+/* ==========================================================================
+   Блок эталона масштаба (.calib-block)
+   ========================================================================== */
+.calib-block {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bl-bg-subpanel);
+    border: 1px solid var(--bl-border);
+    border-radius: var(--bl-radius);
+    padding: 2px 8px;
+    height: 34px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.calib-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--bl-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    cursor: default;
+}
+
+.calib-stepper {
+    width: 88px !important;
+    height: 30px !important;
+    border: 1px solid var(--bl-border);
+    background: var(--bl-bg-inset);
+    border-radius: var(--bl-radius-sm);
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+.calib-stepper input {
+    width: 100% !important;
+    height: 100% !important;
+    font-size: 14.5px !important;
+    font-weight: 700 !important;
+    padding: 0 20px 0 8px !important;
+    text-align: left !important;
+    font-family: var(--font-mono);
+    color: var(--bl-text) !important;
+    background: transparent;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    margin: 0;
+}
+.calib-stepper input::-webkit-outer-spin-button,
+.calib-stepper input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.calib-stepper .stepper-arrows {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 18px !important;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--bl-border);
+    background: var(--bl-bg-widget);
+    border-top-right-radius: var(--bl-radius-sm);
+    border-bottom-right-radius: var(--bl-radius-sm);
+    overflow: hidden;
+}
+.calib-stepper .stepper-btn {
+    flex: 1;
+    height: 15px !important;
+    font-size: 8px !important;
+    background: transparent;
+    border: none;
+    color: var(--bl-text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+.calib-stepper .stepper-btn:hover {
+    background: var(--bl-bg-widget-hover);
+    color: var(--bl-text);
+}
+.calib-stepper .stepper-btn.down {
+    border-top: 1px solid var(--bl-border);
+}
+
+/* ==========================================================================
+   Кнопки Blender Solid (+30% масштабирование)
+   ========================================================================== */
+.btn-main {
+    background: var(--bl-accent);
+    border: 1px solid #d96312;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 13.5px;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: var(--bl-radius);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: var(--bl-shadow-bevel);
+    transition: all 0.12s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+.btn-main:hover {
+    background: var(--bl-accent-hover);
+    color: #ffffff;
+}
+.btn-main:active {
+    background: #c8570c;
+    transform: translateY(1px);
+}
+
+.btn-widget {
+    background: var(--bl-bg-widget);
+    border: 1px solid var(--bl-border);
+    color: var(--bl-text);
+    font-weight: 600;
+    font-size: 13px;
+    height: 34px;
+    padding: 0 10px;
+    border-radius: var(--bl-radius);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: var(--bl-shadow-bevel);
+    transition: all 0.12s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+.btn-widget:hover {
+    background: var(--bl-bg-widget-hover);
+    border-color: var(--bl-border-light);
+    color: var(--bl-text);
+}
+.btn-widget:active {
+    background: var(--bl-bg-widget-active);
+    transform: translateY(1px);
+}
+.btn-widget.active {
+    background: var(--bl-bg-subpanel);
+    border-color: var(--bl-accent);
+    color: var(--bl-accent);
+}
+
+.btn-icon {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.btn-danger {
+    background: var(--bl-danger-bg);
+    border-color: var(--bl-danger-border);
+    color: #fca5a5;
+}
+html[data-theme="light"] .btn-danger,
+body.theme-light .btn-danger {
+    color: #b91c1c;
+}
+.btn-danger:hover {
+    background: #4f1e1e;
+    border-color: #8b3232;
+    color: #ffffff;
+}
+html[data-theme="light"] .btn-danger:hover,
+body.theme-light .btn-danger:hover {
+    background: #fecaca;
+    color: #991b1b;
+}
+
+.btn-lang {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--bl-accent);
+    padding: 0 7px;
+}
+
+/* ==========================================================================
+   Табы переключения режимов (.view-mode-tabs + .vtab)
+   ========================================================================== */
+.view-mode-tabs {
+    display: flex;
+    align-items: center;
+    background: var(--bl-bg-inset);
+    border: 1px solid var(--bl-border);
+    border-radius: var(--bl-radius);
+    padding: 2px;
+    gap: 3px;
+    flex-shrink: 0;
+    height: 34px;
+    box-sizing: border-box;
+}
+.vtab {
+    background: transparent;
+    border: none;
+    color: var(--bl-text-muted);
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: var(--bl-radius-sm);
+    cursor: pointer;
+    transition: all 0.12s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 28px;
+}
+.vtab:hover {
+    color: var(--bl-text);
+}
+.vtab.active {
+    background: var(--bl-bg-widget);
+    color: var(--bl-accent);
+    font-weight: 700;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   Поле со степпером (.stepper-wrap)
+   ========================================================================== */
+.stepper-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--bl-bg-inset);
+    border: 1px solid var(--bl-border);
+    border-radius: var(--bl-radius);
+    height: 34px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+.stepper-wrap:hover {
+    border-color: var(--bl-border-light);
+}
+.stepper-wrap:focus-within {
+    border-color: var(--bl-accent);
+    box-shadow: 0 0 0 1px var(--bl-accent);
+}
+.stepper-wrap input[type=number],
+.stepper-wrap input[type=text] {
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: var(--bl-text);
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 0 20px 0 8px;
+    outline: none;
+    -moz-appearance: textfield;
+}
+.stepper-wrap input::-webkit-outer-spin-button,
+.stepper-wrap input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* ==========================================================================
+   Статус-бар
+   ========================================================================== */
+#statusBar {
+    flex: 0 0 auto;
+    width: 100%;
+    background: var(--bl-bg-inset);
+    border-bottom: 1px solid var(--bl-border);
+    padding: 4px 12px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--bl-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 30;
+    box-sizing: border-box;
+}
+#statusMessage {
+    color: var(--bl-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.cv-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: var(--bl-radius-sm);
+    background: var(--bl-bg-widget);
+    border: 1px solid var(--bl-border);
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Основной холст (#canvasContainer)
+   ========================================================================== */
+#canvasContainer {
+    flex: 1 1 0;
+    min-height: 0;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-viewport);
+    transition: background 0.2s;
+}
+
+/* ==========================================================================
+   Нижняя панель карточек-вкладок (#bottomDock)
+   ========================================================================== */
+#bottomDock {
+    flex: 0 0 auto;
+    position: relative;
+    width: 100%;
+    height: 78px;
+    background: var(--bg-header);
+    border-top: 1px solid var(--bl-border);
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 40;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+}
+#bottomDock.dock-collapsed {
+    height: 0;
+    padding: 0;
+    border-top: none;
+    overflow: hidden;
+}
+
+#dockToggleWrap {
+    position: absolute;
+    bottom: 84px;
+    left: 12px;
+    z-index: 45;
+    transition: bottom 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+body:has(#bottomDock.dock-collapsed) #dockToggleWrap {
+    bottom: 12px;
+}
+
+.dock-strip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    flex: 1;
+}
+.dock-strip::-webkit-scrollbar {
+    height: 4px;
+}
+.dock-strip::-webkit-scrollbar-thumb {
+    background: var(--bl-border);
+    border-radius: 2px;
+}
+
+.dock-tile {
+    position: relative;
+    width: 74px;
+    height: 62px;
+    background: var(--bl-bg-inset);
+    border: 1px solid var(--bl-border);
+    border-radius: var(--bl-radius);
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dock-tile:hover {
+    border-color: var(--bl-border-light);
+}
+.dock-tile.active {
+    border: 2.5px solid var(--bl-accent);
+    box-shadow: 0 0 10px rgba(245, 121, 33, 0.4);
+}
+.dock-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+.dock-close {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 18px;
+    height: 18px;
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 10px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: all 0.1s;
+}
+.dock-close:hover {
+    opacity: 1;
+    background: var(--bl-danger);
+    border-color: var(--bl-danger);
+}
+.dock-count {
+    position: absolute;
+    bottom: 3px;
+    left: 3px;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid #444;
+    color: var(--bl-accent);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 0 4px;
+    border-radius: 2px;
+}
+
+.dock-add-tile {
+    width: 62px;
+    height: 62px;
+    background: var(--bl-bg-widget);
+    border: 1px dashed var(--bl-border);
+    border-radius: var(--bl-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--bl-text-muted);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s;
+    font-size: 11px;
+    font-weight: 600;
+    gap: 2px;
+}
+.dock-add-tile:hover {
+    border-color: var(--bl-accent);
+    color: var(--bl-text);
+    background: var(--bl-bg-widget-hover);
+}
+
+/* ==========================================================================
+   Выпадающее окно настройки экспозиции (Яркость/Контраст для мобильных)
+   ========================================================================== */
+#exposurePopover {
+    position: absolute;
+    top: 80px;
+    left: 12px;
+    width: 270px;
+    background: var(--bl-bg-panel);
+    border: 1px solid var(--bl-border);
+    border-radius: var(--bl-radius);
+    box-shadow: var(--bl-shadow-card);
+    padding: 12px 14px;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.exp-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--bl-text-muted);
+}
+.exp-row input[type=range] {
+    flex: 1;
+    accent-color: var(--bl-accent);
+    height: 5px;
+    cursor: pointer;
+}
+.exp-val {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--bl-text);
+    width: 38px;
+    text-align: right;
+}
+
+/* ==========================================================================
+   Всплывающие уведомления (Toast)
+   ========================================================================== */
+#toastContainer {
+    position: fixed;
+    top: 84px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 500;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.toast {
+    background: var(--bl-bg-panel);
+    border: 1px solid var(--bl-accent);
+    color: var(--bl-text);
+    padding: 8px 16px;
+    border-radius: var(--bl-radius);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast.toast-show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   Модальные окна Blender Solid (+30% размер)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(4px);
+    z-index: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+.modal-box {
+    background: var(--bl-bg-panel);
+    border: 1px solid var(--bl-border);
+    border-radius: var(--bl-radius);
+    padding: 20px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: var(--bl-shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.modal-header {
+    font-size: 15.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--bl-text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.modal-desc {
+    font-size: 13px;
+    color: var(--bl-text-muted);
+    line-height: 1.5;
+}
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+/* Дисклеймер точности выравнивания */
+.persp-disclaimer {
+    background: rgba(245, 121, 33, 0.12);
+    border: 1px solid rgba(245, 121, 33, 0.45);
+    border-radius: var(--bl-radius);
+    padding: 10px 12px;
+    display: flex;
+    gap: 10px;
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--bl-text);
+}
+
+/* ==========================================================================
+   Окно «Уровни (Levels)» в оригинальном стиле Photoshop
+   ========================================================================== */
+.ps-levels-window {
+    position: fixed;
+    top: 56px;
+    right: 16px;
+    width: 410px;
+    max-width: calc(100vw - 20px);
+    background: #383838;
+    color: #e0e0e0;
+    border: 1px solid #242424;
+    border-radius: 6px;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+    z-index: 350;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    user-select: none;
+    overflow: hidden;
+}
+html[data-theme="light"] .ps-levels-window {
+    background: #f0f0f0;
+    color: #1f2937;
+    border-color: #cbd5e1;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
+}
+.ps-levels-window.hidden {
+    display: none !important;
+}
+.ps-levels-window.collapsed .ps-window-content {
+    display: none !important;
+}
+
+.ps-window-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 12px;
+    background: #2e2e2e;
+    border-bottom: 1px solid #202020;
+    cursor: grab;
+}
+html[data-theme="light"] .ps-window-header {
+    background: #e2e8f0;
+    border-bottom-color: #cbd5e1;
+}
+.ps-window-header:active {
+    cursor: grabbing;
+}
+.ps-window-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+}
+html[data-theme="light"] .ps-window-title {
+    color: #0f172a;
+}
+.ps-win-btn {
+    background: transparent;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+.ps-win-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.ps-window-content {
+    display: grid;
+    grid-template-columns: 256px 1fr;
+    gap: 16px;
+    padding: 12px 14px 14px 14px;
+    box-sizing: border-box;
+}
+
+.ps-left-col {
+    display: flex;
+    flex-direction: column;
+    width: 256px;
+}
+.ps-right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 2px;
+}
+
+.ps-pane {
+    display: flex;
+    flex-direction: column;
+}
+.ps-pane.hidden {
+    display: none !important;
+}
+
+.ps-channel-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+.ps-label {
+    font-size: 11.5px;
+    color: #cccccc;
+}
+html[data-theme="light"] .ps-label {
+    color: #475569;
+}
+.ps-channel-badge {
+    background: #222222;
+    color: #ffffff;
+    border: 1px solid #444444;
+    border-radius: 3px;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 1px 7px;
+}
+html[data-theme="light"] .ps-channel-badge {
+    background: #ffffff;
+    color: #0f172a;
+    border-color: #cbd5e1;
+}
+
+.ps-btn {
+    background: #4a4a4a;
+    color: #ffffff;
+    border: 1px solid #5d5d5d;
+    border-radius: 3px;
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 4px 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.1s, border-color 0.1s;
+}
+.ps-btn:hover {
+    background: #585858;
+    border-color: #777777;
+}
+.ps-btn:active {
+    background: #383838;
+}
+html[data-theme="light"] .ps-btn {
+    background: #e2e8f0;
+    color: #1e293b;
+    border-color: #cbd5e1;
+}
+html[data-theme="light"] .ps-btn:hover {
+    background: #cbd5e1;
+}
+.ps-btn-ok {
+    font-weight: 700;
+}
+.ps-btn-auto {
+    padding: 2px 10px;
+    font-size: 11px;
+}
+
+.ps-preview-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    color: #dddddd;
+    margin-top: 4px;
+    cursor: pointer;
+}
+html[data-theme="light"] .ps-preview-check {
+    color: #334155;
+}
+.ps-preview-check input {
+    accent-color: var(--bl-accent);
+    cursor: pointer;
+}
+
+.ps-hist-container {
+    width: 256px;
+    height: 96px;
+    background: #cccccc;
+    border: 1px solid #222222;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+html[data-theme="light"] .ps-hist-container {
+    background: #e2e8f0;
+    border-color: #94a3b8;
+}
+#levelsHistCanvas {
+    width: 256px;
+    height: 96px;
+    display: block;
+}
+
+.ps-track-wrap {
+    position: relative;
+    width: 256px;
+    height: 18px;
+    margin-top: 1px;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: ew-resize;
+}
+.ps-track-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #222222;
+    pointer-events: none;
+}
+html[data-theme="light"] .ps-track-line {
+    background: #94a3b8;
+}
+
+.ps-marker {
+    position: absolute;
+    top: 1px;
+    width: 12px;
+    height: 14px;
+    cursor: ew-resize;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    z-index: 5;
+}
+.ps-marker::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+    cursor: ew-resize;
+}
+.ps-marker:active, .ps-marker.dragging {
+    z-index: 10;
+}
+.ps-marker svg {
+    display: block;
+    width: 12px;
+    height: 14px;
+    pointer-events: none;
+}
+
+.ps-num-row {
+    width: 256px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3px;
+    box-sizing: border-box;
+}
+.ps-num-input {
+    width: 44px;
+    height: 22px;
+    background: #242424;
+    color: #ffffff;
+    border: 1px solid #444444;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+    box-sizing: border-box;
+    -moz-appearance: textfield;
+}
+.ps-num-input::-webkit-outer-spin-button,
+.ps-num-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.ps-num-input:focus {
+    border-color: var(--bl-accent);
+}
+html[data-theme="light"] .ps-num-input {
+    background: #ffffff;
+    color: #0f172a;
+    border-color: #cbd5e1;
+}
+
+.ps-output-section {
+    margin-top: 8px;
+}
+.ps-gradient-bar {
+    width: 256px;
+    height: 12px;
+    border: 1px solid #222222;
+    background: linear-gradient(to right, #000000 0%, #ffffff 100%);
+    box-sizing: border-box;
+}
+html[data-theme="light"] .ps-gradient-bar {
+    border-color: #94a3b8;
+}
+
+.ps-pipettes-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 256px;
+    margin-top: 10px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(128, 128, 128, 0.2);
+}
+.ps-pipette-swatch {
+    background: #2a2a2a;
+    border: 1px solid #444444;
+    border-radius: 2px;
+    padding: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 22px;
+    box-sizing: border-box;
+    transition: all 0.15s;
+}
+html[data-theme="light"] .ps-pipette-swatch {
+    background: #e2e8f0;
+    border-color: #cbd5e1;
+}
+.ps-pipette-swatch:hover {
+    border-color: #888888;
+}
+.ps-pipette-swatch.active {
+    border-color: var(--bl-accent);
+    box-shadow: 0 0 0 2px var(--bl-accent-glow);
+}
+.ps-swatch-box {
+    width: 14px;
+    height: 12px;
+    display: block;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+    border-radius: 1px;
+}
+
+.ps-exp-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* ==========================================================================
+   Анимация спиннера
+   ========================================================================== */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   SVG-иконки (+30% масштабирование)
+   ========================================================================== */
+.svg-icon {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+.svg-icon-fill {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Адаптивность (PC vs Мобильные)
+   ========================================================================== */
+@media (min-width: 880px) {
+    .mobile-only-btn {
+        display: none !important;
+    }
+}
+
+/* На планшетах и смартфонах < 880px */
+@media (max-width: 879px) {
+    .mobile-only-btn {
+        display: inline-flex !important;
+    }
+    .floating-window {
+        top: 50px !important;
+        left: 8px !important;
+        right: 8px !important;
+        width: auto !important;
+        max-width: calc(100vw - 16px) !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .brand-name {
+        display: none;
+    }
+    .btn-main, .btn-widget {
+        font-size: 12px;
+        padding: 0 8px;
+    }
+    .btn-del-text {
+        display: none;
+    }
+    .calib-label {
+        font-size: 10.5px;
+    }
+    .calib-stepper {
+        width: 76px !important;
+        height: 28px !important;
+    }
+    .calib-stepper input {
+        font-size: 13.5px !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .vtab span {
+        display: none; /* на сверх-узких экранах иконка */
+    }
+    #btnTogglePerspective span {
+        display: none;
+    }
+}
+
+</style>
+</head>
+<body>
+
+    <!-- Верхняя панель управления (Toolbar / Header) -->
+    <header id="toolbar" class="ui-element">
+        <!-- Верхняя строка: Бренд + Открыть/Копировать + Экспозиция и Уровни ПК + Утилиты -->
+        <div class="toolbar-row row-main">
+            <!-- Бренд PhotoDimGen -->
+            <div class="brand-wrap">
+                <div class="brand-badge" title="PhotoDimGen CAD v2.1.5">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21.3 8.7l-6-6a2 2 0 0 0-2.8 0L3.7 11.5a2 2 0 0 0 0 2.8l6 6a2 2 0 0 0 2.8 0l8.8-8.8a2 2 0 0 0 0-2.8zM14.5 4.5L19.5 9.5M8.5 10.5l2 2M11.5 7.5l2 2M5.5 13.5l2 2"/></svg>
+                </div>
+                <span class="brand-name">PhotoDimGen</span>
+                <span class="brand-chip" title="PhotoDimGen CAD v2.1.5">v2.1.5</span>
+            </div>
+
+            <!-- Кнопка «Открыть» -->
+            <button id="btnLoad" class="btn-widget" data-i18n-title="loadBtn">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                <span data-i18n="loadBtn">Открыть</span>
+            </button>
+
+            <!-- Кнопка «Копировать чертеж с размерами» (Главная янтарная кнопка) -->
+            <button id="btnCopy" class="btn-main" title="Копировать чертеж в буфер обмена (Ctrl+C)">
+                <svg class="svg-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span data-i18n="copyBtn">Копировать</span>
+            </button>
+
+            <!-- Кнопка вызова плавающего окна «Коррекция и уровни» (Ctrl+L) -->
+            <button id="btnOpenAdjustments" class="btn-widget" style="font-weight: 600; gap: 6px;" title="Коррекция изображения: яркость, контраст, уровни (Ctrl+L)" data-i18n-title="btnAdjustmentsTitle">
+                <svg class="svg-icon" style="color: var(--bl-accent);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                <span data-i18n="btnAdjustments">Коррекция</span>
+            </button>
+
+            <!-- Блок утилит справа -->
+            <div class="toolbar-utils">
+                <!-- Переключатель Дневного / Тёмного режима -->
+                <button id="btnThemeToggle" class="btn-widget btn-icon" title="Сменить тему: Дневная / Тёмная" data-i18n-title="themeToggle">
+                    <svg class="svg-icon" id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <!-- На мобильных экранах кнопка вызова попапа экспозиции -->
+                <button id="btnExposure" class="btn-widget btn-icon mobile-only-btn" title="Настройка яркости, контраста и уровней">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                </button>
+                <button id="btnUndo" class="btn-widget btn-icon" title="Отмена последнего действия (Ctrl+Z)">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 7v6h6M3 13L9 7c6-6 12 0 12 6a9 9 0 0 1-9 9 9 9 0 0 1-6.7-3"/></svg>
+                </button>
+                <button id="btnFitView" class="btn-widget btn-icon" title="По размеру экрана">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                </button>
+                <button id="btnHelpToggle" class="btn-widget btn-icon" title="Справка">?</button>
+                <button id="btnLangToggle" class="btn-widget btn-lang" title="RU / EN">EN</button>
+            </div>
+        </div>
+
+        <!-- Нижняя строка: Режимы (Линейка / Цепь / Угол) + Масштаб + Выравнивание + Удаление -->
+        <div class="toolbar-row row-tools">
+            <!-- Переключатель режима: Линейка / Ступенчатая цепь / Угол -->
+            <div class="view-mode-tabs">
+                <button type="button" class="vtab active" data-mode="distance" id="modeDistTab" title="Одиночный линейный размер">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 20L20 4M4 14l2 2M8 10l2 2M12 6l2 2"/></svg>
+                    <span data-i18n="modeDist">Линейка</span>
+                </button>
+                <button type="button" class="vtab" data-mode="chain" id="modeChainTab" title="Ступенчатая линейка / цепь размеров (считает каждый отрезок и суммарную длину цепи)">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 19h5v-6h6V7h5"/><circle cx="4" cy="19" r="2"/><circle cx="9" cy="13" r="2"/><circle cx="15" cy="7" r="2"/><circle cx="20" cy="7" r="2"/></svg>
+                    <span data-i18n="modeChain">Цепь</span>
+                </button>
+                <button type="button" class="vtab" data-mode="angle" id="modeAngleTab" title="Угловой размер (3 точки)">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 20h16M4 20L16 4M10 20a6 6 0 0 0-2-4.2"/></svg>
+                    <span data-i18n="modeAngle">Угол</span>
+                </button>
+            </div>
+
+            <!-- Блок эталона масштаба (без "мм" — чистый CAD-стандарт) -->
+            <div class="calib-block" title="Эталон масштаба (длина известного отрезка на фото)">
+                <span class="calib-label" data-i18n="calibLabel">Масштаб:</span>
+                <div class="stepper-wrap calib-stepper">
+                    <input type="number" id="calibLength" value="100" min="0.001" step="any" inputmode="decimal" placeholder="100">
+                    <div class="stepper-arrows">
+                        <button type="button" class="stepper-btn up" id="stepCalibUp" tabindex="-1">▲</button>
+                        <button type="button" class="stepper-btn down" id="stepCalibDown" tabindex="-1">▼</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Выравнивание ракурса / перспективы -->
+            <div style="display: flex; align-items: center; gap: 4px;">
+                <button id="btnTogglePerspective" class="btn-widget" data-i18n-title="btnTogglePerspectiveTitle" title="Исправление ракурса и выравнивание фото по 4 углам объекта">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="3 17 6 7 18 4 21 17 3 17"/></svg>
+                    <span data-i18n="btnTogglePerspective">Выровнять ракурс</span>
+                </button>
+                <button id="btnApplyGrid" class="btn-main hidden" style="background: var(--bl-success); border-color: #059669;" data-i18n="btnApplyGrid">Готово</button>
+                <button id="btnRestoreOriginal" class="btn-widget hidden" style="color: #fb923c; border-color: #9a3412;" data-i18n="btnRestoreOriginal">Сбросить</button>
+            </div>
+
+            <!-- Действия удаления / очистки -->
+            <div style="margin-left: auto; display: flex; align-items: center; gap: 4px;">
+                <button id="btnDelete" class="btn-widget btn-danger" title="Удалить выбранный замер (Delete)">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    <span class="btn-del-text" data-i18n="btnDelete">Удалить</span>
+                </button>
+                <button id="btnClear" class="btn-widget btn-icon" title="Очистить все замеры">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m5 5v6m4-6v6"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Статус-бар -->
+    <div id="statusBar">
+        <div id="statusMessage" data-i18n="statusEmpty">Откройте фото (кнопка «Открыть») или вставьте из буфера (Ctrl+V)</div>
+        <div class="cv-badge">
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: #eab308;" id="cvIndicator"></span>
+            <span id="cvText" data-i18n="cvStarting">Запуск CV</span>
+        </div>
+    </div>
+
+    <!-- Рабочая область с Canvas (100% оставшейся высоты) -->
+    <main id="canvasContainer">
+        <canvas id="mainCanvas"></canvas>
+
+        <!-- Пустой экран (Информационный, без перехвата клика) -->
+        <div id="emptyState" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--bl-text-subtle); pointer-events: none; text-align: center; padding: 24px; user-select: none;">
+            <svg style="width: 60px; height: 60px; opacity: 0.35; margin-bottom: 14px; color: var(--bl-accent);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <p style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;" data-i18n="emptyState">Нажмите кнопку «Открыть» в панели или вставьте фото (Ctrl+V)</p>
+        </div>
+
+        <!-- Оверлей выравнивания -->
+        <div id="processingOverlay" class="hidden" style="position: absolute; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(4px); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 200;">
+            <div style="width: 44px; height: 44px; border: 3.5px solid var(--bl-accent); border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 14px;"></div>
+            <p style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #ffffff;" data-i18n="processingOverlay">Магия выравнивания...</p>
+        </div>
+    </main>
+
+    <!-- Скрытый инпут для выбора файлов -->
+    <input type="file" id="fileInput" accept="image/*" class="hidden">
+
+    <!-- Нижняя лента карточек-вкладок (#bottomDock) -->
+    <div id="bottomDock" class="ui-element">
+        <div class="dock-strip" id="dockTiles">
+            <!-- Динамические плитки карточек генерируются в app.js -->
+        </div>
+        <div class="dock-add-tile" id="dockBtnAdd" title="Добавить новое фото">
+            <svg class="svg-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span data-i18n="dockNewTab">Новое</span>
+        </div>
+    </div>
+
+    <!-- Кнопка скрытия/показа ленты карточек -->
+    <div id="dockToggleWrap">
+        <button id="btnToggleDock" class="btn-widget btn-icon" style="border-radius: 50%; width: 30px; height: 30px;" title="Свернуть/развернуть ленту">
+            <svg class="svg-icon" id="dockToggleIcon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+    </div>
+
+    <!-- Всплывающие уведомления (Toast) -->
+    <div id="toastContainer"></div>
+
+    <!-- Выпадающая панель справки -->
+    <div id="help-panel" class="hidden modal-overlay ui-element">
+        <div class="modal-box" style="max-width: 480px;">
+            <div class="modal-header">
+                <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+                <span>Инженерная справка (v2.1.1)</span>
+            </div>
+            <div class="modal-desc" style="display: flex; flex-direction: column; gap: 10px;">
+                <div><b data-i18n="btnOpenLevels">Уровни (Levels):</b> <span>Нажмите кнопку «Уровни» или Ctrl+L для точной регулировки черного, белого и гаммы как в Photoshop.</span></div>
+                <div><b data-i18n="helpTitle4">Орто-режим:</b> <span data-i18n="helpDesc4">Зажмите Shift — линия выровняется строго горизонтально или вертикально.</span></div>
+                <div><b data-i18n="helpTitle6">Цепь размеров:</b> <span data-i18n="helpDesc6">Инструмент «Цепь» считает каждый отрезок и суммарную длину ступенчатой ломаной.</span></div>
+                <div><b data-i18n="helpTitle5">Точность:</b> <span data-i18n="helpDesc5">Стрелки ← ↑ → ↓ сдвигают выбранную точку ровно на 1 пиксель (с Shift — на 10 px).</span></div>
+                <div><b data-i18n="helpTitle7">Копирование:</b> <span data-i18n="helpDesc7">Кнопка «Копировать» отправляет чертеж с размерами прямо в буфер обмена.</span></div>
+                <div><b data-i18n="helpTitle1">Выделение:</b> <span data-i18n="helpDesc1">Нажмите на линию или узел, чтобы подправить их.</span></div>
+                <div><b data-i18n="helpTitle2">Движение:</b> <span data-i18n="helpDesc2">1 палец или средняя кнопка мыши (колесико) — двигать фото.</span></div>
+                <div><b data-i18n="helpTitle3">Масштаб:</b> <span data-i18n="helpDesc3">2 пальца или колесико — зум.</span></div>
+            </div>
+            <button id="btnCloseHelp" class="btn-main" style="width: 100%; justify-content: center; height: 36px;" data-i18n="btnCloseHelp">Понятно</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно подтверждения сброса фото -->
+    <div id="modalRestoreWarning" class="hidden modal-overlay ui-element">
+        <div class="modal-box">
+            <div class="modal-header" style="color: #fb923c;" data-i18n="restoreTitle">Вернуть оригинал?</div>
+            <p class="modal-desc" data-i18n="restoreDesc">Выравнивание объекта и все измерения будут удалены. Вернуть исходное фото?</p>
+            <div class="modal-actions">
+                <button id="btnCancelRestore" class="btn-widget" style="flex: 1; justify-content: center;" data-i18n="btnCancelRestore">ОТМЕНА</button>
+                <button id="btnConfirmRestore" class="btn-main" style="flex: 1; justify-content: center; background: #ea580c;" data-i18n="btnConfirmRestore">ДА, ВЕРНУТЬ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно подтверждения очистки -->
+    <div id="modalClearWarning" class="hidden modal-overlay ui-element">
+        <div class="modal-box">
+            <div class="modal-header" style="color: #ef4444;" data-i18n="clearTitle">Удалить всё?</div>
+            <p class="modal-desc" data-i18n="clearDesc">Все нанесенные линии, цепи, углы и настройки масштаба исчезнут. Это нельзя будет отменить.</p>
+            <div class="modal-actions">
+                <button id="btnCancelClear" class="btn-widget" style="flex: 1; justify-content: center;" data-i18n="btnCancelClear">ОТМЕНА</button>
+                <button id="btnConfirmClear" class="btn-main" style="flex: 1; justify-content: center; background: #dc2626;" data-i18n="btnConfirmClear">ДА, ОЧИСТИТЬ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Информационное окно перед началом выравнивания с дисклеймером -->
+    <div id="modalPerspWarning" class="hidden modal-overlay ui-element">
+        <div class="modal-box" style="max-width: 460px;">
+            <div class="modal-header" style="color: var(--bl-accent);">
+                <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="3 17 6 7 18 4 21 17 3 17"/></svg>
+                <span data-i18n="perspWarnTitle">Выравнивание перспективы (ракурса)</span>
+            </div>
+            <p class="modal-desc" data-i18n="perspWarnDesc">Поставьте 4 точки по углам прямоугольного плоского объекта (проем, окно, фасад, лист). Алгоритм развернет его строго фронтально.</p>
+            
+            <!-- Дисклеймер о точности -->
+            <div class="persp-disclaimer">
+                <svg class="svg-icon" style="color: var(--bl-accent); min-width: 18px; margin-top: 1px;" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <div data-i18n="perspDisclaimer">Внимание: математическое выравнивание является приближенным и не гарантирует 100% точности. Чтобы минимизировать погрешность, расставляйте 4 точки максимально точно по реальным углам объекта (используйте колесико для зума и стрелки клавиатуры для микро-доводки).</div>
+            </div>
+
+            <button id="btnConfirmPerspMode" class="btn-main" style="width: 100%; height: 38px; justify-content: center;" data-i18n="btnConfirmPerspMode">ПОНЯТНО, РАССТАВИТЬ ТОЧКИ</button>
+        </div>
+    </div>
+
+    <!-- Ввод реальных размеров после выравнивания -->
+    <div id="modalDimensions" class="hidden modal-overlay ui-element">
+        <div class="modal-box">
+            <div class="modal-header" data-i18n="dimTitle">Настоящие размеры</div>
+            <p class="modal-desc" data-i18n="dimHint">Введите реальные размеры объекта или оставьте поля пустыми — мы сохраним пропорции автоматически.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <span style="font-size: 11.5px; color: var(--bl-text-muted);" data-i18n="dimWLabel">Ширина объекта</span>
+                    <input type="number" id="inpTrueW" class="stepper-wrap" style="width: 100%; height: 36px; padding: 0 8px; font-size: 13px;" placeholder="напр. 800" data-i18n-placeholder="dimW">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <span style="font-size: 11.5px; color: var(--bl-text-muted);" data-i18n="dimHLabel">Высота объекта</span>
+                    <input type="number" id="inpTrueH" class="stepper-wrap" style="width: 100%; height: 36px; padding: 0 8px; font-size: 13px;" placeholder="напр. 2000" data-i18n-placeholder="dimH">
+                </div>
+            </div>
+            <button id="btnFinalApply" class="btn-main" style="width: 100%; height: 38px; justify-content: center;" data-i18n="dimApply">Выровнять и применить</button>
+        </div>
+    </div>
+
+    <!-- Ввод эталонного размера калибровки (без "мм") -->
+    <div id="modalCalibInput" class="hidden modal-overlay ui-element">
+        <div class="modal-box">
+            <div class="modal-header" style="color: var(--bl-accent);" data-i18n="calibModalTitle">Известный размер</div>
+            <p class="modal-desc" data-i18n="calibModalDesc">Укажите настоящую длину этого отрезка для калибровки масштаба.</p>
+            <div style="display: flex; gap: 8px;">
+                <input type="number" id="inpCalibVal" class="stepper-wrap" style="flex: 1; height: 42px; font-size: 17px; text-align: center;" placeholder="100">
+            </div>
+            <button id="btnSaveCalib" class="btn-main" style="width: 100%; height: 38px; justify-content: center;" data-i18n="calibSave">Сохранить</button>
+        </div>
+    </div>
+
+    <!-- Плавающее окно «Уровни (Levels)» в стиле Photoshop -->
+    <div id="winAdjustments" class="hidden ps-levels-window ui-element" role="dialog" aria-labelledby="psLevelsTitle">
+        <!-- Шапка окна в стиле Photoshop -->
+        <div class="ps-window-header" id="winAdjustmentsHeader">
+            <span class="ps-window-title" id="psLevelsTitle" data-i18n="levelsTitle">Levels</span>
+            <div style="display: flex; align-items: center; gap: 4px;">
+                <button id="btnFoldAdjustments" class="ps-win-btn" title="Свернуть / Развернуть">−</button>
+                <button id="btnCloseAdjustments" class="ps-win-btn" title="Закрыть (Esc)">✕</button>
+            </div>
+        </div>
+
+        <!-- Основная область окна: Двухколоночная компоновка как в Photoshop -->
+        <div class="ps-window-content">
+            <!-- ЛЕВАЯ КОЛОНКА -->
+            <div class="ps-left-col">
+                <!-- Панель Уровней (Photoshop Levels) -->
+                <div id="paneLevels" class="ps-pane">
+                    <!-- Верхняя строка: Channel: RGB + Auto -->
+                    <div class="ps-channel-row">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <span class="ps-label" data-i18n="levelsChannel">Channel:</span>
+                            <div class="ps-channel-badge">RGB</div>
+                        </div>
+                        <button id="btnLevelsAuto" class="ps-btn ps-btn-auto" data-i18n="levelsAuto">Auto</button>
+                    </div>
+
+                    <!-- Гистограмма входных уровней -->
+                    <div class="ps-hist-container">
+                        <canvas id="levelsHistCanvas" width="256" height="96"></canvas>
+                    </div>
+
+                    <!-- Дорожка под гистограммой с 3 треугольными маркерами (Черный, Серый, Белый) -->
+                    <div class="ps-track-wrap" id="trackInLevels">
+                        <div class="ps-track-line"></div>
+                        <!-- Черный треугольник (Тени) -->
+                        <div id="markerInBlack" class="ps-marker" title="Черная точка (Тени)">
+                            <svg viewBox="0 0 12 14" width="12" height="14"><polygon points="6,0 0,14 12,14" fill="#000000" stroke="#ffffff" stroke-width="1.2"/></svg>
+                        </div>
+                        <!-- Серый треугольник (Гамма) -->
+                        <div id="markerInGamma" class="ps-marker" title="Гамма / Средние тона">
+                            <svg viewBox="0 0 12 14" width="12" height="14"><polygon points="6,0 0,14 12,14" fill="#808080" stroke="#ffffff" stroke-width="1.2"/></svg>
+                        </div>
+                        <!-- Белый треугольник (Света) -->
+                        <div id="markerInWhite" class="ps-marker" title="Белая точка (Света)">
+                            <svg viewBox="0 0 12 14" width="12" height="14"><polygon points="6,0 0,14 12,14" fill="#ffffff" stroke="#000000" stroke-width="1.2"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- 3 числовых поля ввода под треугольниками: [ 0 ] [ 1.00 ] [ 255 ] -->
+                    <div class="ps-num-row">
+                        <input type="number" id="inpInBlack" min="0" max="253" value="0" class="ps-num-input" title="Input Shadow">
+                        <input type="number" id="inpInGamma" min="0.10" max="3.00" step="0.05" value="1.00" class="ps-num-input" title="Input Gamma">
+                        <input type="number" id="inpInWhite" min="2" max="255" value="255" class="ps-num-input" title="Input Highlight">
+                    </div>
+
+                    <!-- Градиентная шкала выходных уровней -->
+                    <div class="ps-output-section">
+                        <div class="ps-gradient-bar"></div>
+
+                        <!-- Дорожка под градиентом с 2 треугольными маркерами (Черный, Белый) -->
+                        <div class="ps-track-wrap" id="trackOutLevels">
+                            <div class="ps-track-line"></div>
+                            <!-- Черный треугольник (Выходной черный) -->
+                            <div id="markerOutBlack" class="ps-marker" title="Выходной черный">
+                                <svg viewBox="0 0 12 14" width="12" height="14"><polygon points="6,0 0,14 12,14" fill="#000000" stroke="#ffffff" stroke-width="1.2"/></svg>
+                            </div>
+                            <!-- Белый треугольник (Выходной белый) -->
+                            <div id="markerOutWhite" class="ps-marker" title="Выходной белый">
+                                <svg viewBox="0 0 12 14" width="12" height="14"><polygon points="6,0 0,14 12,14" fill="#ffffff" stroke="#000000" stroke-width="1.2"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- 2 числовых поля под выходными маркерами: [ 0 ] [ 255 ] -->
+                        <div class="ps-num-row">
+                            <input type="number" id="inpOutBlack" min="0" max="254" value="0" class="ps-num-input" title="Output Shadow">
+                            <div style="flex: 1;"></div>
+                            <input type="number" id="inpOutWhite" min="1" max="255" value="255" class="ps-num-input" title="Output Highlight">
+                        </div>
+                    </div>
+
+                    <!-- Строка пипеток (Sample from image) -->
+                    <div class="ps-pipettes-row">
+                        <span class="ps-label" data-i18n="sampleFromImage">Sample from image:</span>
+                        <div style="display: flex; gap: 4px;">
+                            <button id="btnPipetteBlack" class="ps-pipette-swatch" title="Черная точка (клик по чертежу)">
+                                <span class="ps-swatch-box" style="background: #000000;"></span>
+                            </button>
+                            <button id="btnPipetteGray" class="ps-pipette-swatch" title="Точка серого / гамма (клик по чертежу)">
+                                <span class="ps-swatch-box" style="background: #808080;"></span>
+                            </button>
+                            <button id="btnPipetteWhite" class="ps-pipette-swatch" title="Белая точка / фон (клик по чертежу)">
+                                <span class="ps-swatch-box" style="background: #ffffff; border-color: #888;"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Панель Яркости и Контрастности (когда выбран этот взаимоисключающий режим) -->
+                <div id="paneExposure" class="ps-pane hidden">
+                    <div style="font-size: 12px; font-weight: 700; color: var(--bl-text); margin-bottom: 12px;" data-i18n="tabExposureTitle">Яркость и Контраст</div>
+                    
+                    <div class="ps-exp-group">
+                        <div style="display: flex; justify-content: space-between; font-size: 11.5px; color: var(--bl-text-muted);">
+                            <span data-i18n="expBrightness">Яркость</span>
+                            <span id="valBrightnessWin" style="font-weight: 700; color: var(--bl-text);">100%</span>
+                        </div>
+                        <input type="range" id="rngBrightnessWin" min="30" max="250" value="100" class="levels-range">
+                    </div>
+
+                    <div class="ps-exp-group" style="margin-top: 12px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 11.5px; color: var(--bl-text-muted);">
+                            <span data-i18n="expContrast">Контраст</span>
+                            <span id="valContrastWin" style="font-weight: 700; color: var(--bl-text);">100%</span>
+                        </div>
+                        <input type="range" id="rngContrastWin" min="30" max="250" value="100" class="levels-range">
+                    </div>
+
+                    <div style="display: flex; gap: 8px; margin-top: 20px;">
+                        <button id="btnExpAutoWin" class="ps-btn" style="flex: 1;" data-i18n="expAuto">Авто</button>
+                        <button id="btnExpResetWin" class="ps-btn" style="flex: 1;" data-i18n="expReset">Сброс</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ПРАВАЯ КОЛОНКА (Кнопки как в Photoshop) -->
+            <div class="ps-right-col">
+                <button id="btnAdjClose" class="ps-btn ps-btn-ok" data-i18n="levelsOk">OK</button>
+                <button id="btnLevelsReset" class="ps-btn" data-i18n="levelsReset">Reset</button>
+                <label class="ps-preview-check">
+                    <input type="checkbox" id="chkLevelsPreview" checked>
+                    <span data-i18n="levelsPreview">Preview</span>
+                </label>
+
+                <!-- Взаимоисключающий переключатель режимов -->
+                <div style="margin-top: auto; padding-top: 10px; border-top: 1px solid rgba(128, 128, 128, 0.25);">
+                    <button id="btnToggleMode" class="ps-btn ps-btn-mode" style="width: 100%; font-size: 10.5px; padding: 4px 6px;" title="Переключить режим">
+                        <span id="txtModeToggle">Яркость/Контр.</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Аппаратный SVG-фильтр уровней (Photoshop Levels через feComponentTransfer) -->
+    <svg style="position: absolute; width: 1px; height: 1px; left: -9999px; pointer-events: none; overflow: hidden;" aria-hidden="true">
+        <filter id="svgLevelsFilter" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+            <feComponentTransfer>
+                <feFuncR id="levelsFilterR" type="table" tableValues="0 1"/>
+                <feFuncG id="levelsFilterG" type="table" tableValues="0 1"/>
+                <feFuncB id="levelsFilterB" type="table" tableValues="0 1"/>
+            </feComponentTransfer>
+        </filter>
+    </svg>
+
+    <!-- Безопасный перехватчик загрузки OpenCV.js до инициализации app.js -->
+    <script>
+        function cvReady() { window.__cvReadyPending = true; }
+    </script>
+    <!-- OpenCV.js -->
+    <script async src="https://docs.opencv.org/4.8.0/opencv.js" onload="cvReady();"></script>
+
+    <!-- Скрипты приложения -->
+    <script>
+/* === Embedded js/i18n.js === */
+/**
+ * PhotoDimGen - Internationalization (i18n)
+ * Поддержка русского и английского языков интерфейса.
+ */
+
+const i18n = {
+    ru: {
+        loadBtn: "Открыть",
+        copyBtn: "Копировать",
+        copiedToast: "Чертеж скопирован в буфер обмена!",
+        copiedFail: "Не удалось скопировать, сохранено как файл",
+        modeDist: "Линейка",
+        modeChain: "Цепь",
+        modeAngle: "Угол",
+        calibLabel: "Масштаб:",
+        btnDelete: "Удалить",
+        btnClear: "Очистить всё",
+        perspLabel: "Форма:",
+        btnTogglePerspective: "Выровнять ракурс",
+        btnTogglePerspectiveTitle: "Исправление ракурса и выравнивание фото по 4 углам объекта",
+        btnApplyGrid: "Готово",
+        btnRestoreOriginal: "Сбросить фото",
+        statusEmpty: "Откройте фото (кнопка «Открыть») или вставьте из буфера (Ctrl+V)",
+        statusPersp: "Отметьте углы: {n} из 4",
+        statusSelected: "Объект выбран. Тяните за узлы или двигайте стрелками клавиатуры.",
+        statusIdle: "Чертите зажав Shift для строгого угла (орто).",
+        statusChainDrawing: "Узлов цепи: {n}. Кликните для следующей точки (Enter или двойной клик — завершить)",
+        statusChainIdle: "Ступенчатая линейка: кликайте точки для цепи размеров (Shift — орто)",
+        chainDoneToast: "Цепь размеров создана",
+        emptyState: "Нажмите кнопку «Открыть» в панели или вставьте фото (Ctrl+V)",
+        processingOverlay: "Магия выравнивания...",
+        helpTitle1: "Выделение:",
+        helpDesc1: "Нажмите на линию или узел, чтобы подправить их.",
+        helpTitle2: "Движение:",
+        helpDesc2: "1 палец или средняя кнопка мыши (колесико) — двигать фото.",
+        helpTitle3: "Масштаб:",
+        helpDesc3: "2 пальца или колесико — зум.",
+        helpTitle4: "Орто-режим:",
+        helpDesc4: "Зажмите Shift — линия выровняется строго горизонтально или вертикально.",
+        helpTitle5: "Точность:",
+        helpDesc5: "Стрелки ← ↑ → ↓ сдвигают выбранную точку ровно на 1 пиксель (с Shift — на 10 px).",
+        helpTitle6: "Цепь размеров:",
+        helpDesc6: "Инструмент «Цепь» считает каждый отрезок и суммарную длину ступенчатой ломаной.",
+        helpTitle7: "Копирование:",
+        helpDesc7: "Кнопка «Копировать» отправляет чертеж с размерами прямо в буфер обмена.",
+        btnCloseHelp: "Понятно",
+        restoreTitle: "Вернуть оригинал?",
+        restoreDesc: "Выравнивание объекта и все измерения будут удалены. Вернуть исходное фото?",
+        btnCancelRestore: "ОТМЕНА",
+        btnConfirmRestore: "ДА, ВЕРНУТЬ",
+        perspWarnTitle: "Выравнивание перспективы (ракурса)",
+        perspWarnDesc: "Поставьте 4 точки по углам прямоугольного плоского объекта (проем, окно, фасад, лист). Алгоритм развернет его строго фронтально.",
+        perspDisclaimer: "Внимание: математическое выравнивание является приближенным и не гарантирует 100% точности. Чтобы минимизировать погрешность, расставляйте 4 точки максимально точно по реальным углам объекта (используйте колесико для зума и стрелки клавиатуры для микро-доводки).",
+        btnConfirmPerspMode: "ПОНЯТНО, РАССТАВИТЬ ТОЧКИ",
+        dimTitle: "Настоящие размеры",
+        dimW: "например, 800",
+        dimH: "например, 2000",
+        dimWLabel: "Ширина объекта",
+        dimHLabel: "Высота объекта",
+        dimHint: "Введите реальные размеры объекта или оставьте поля пустыми — мы сохраним пропорции автоматически.",
+        dimApply: "Выровнять и применить",
+        calibModalTitle: "Известный размер",
+        calibModalDesc: "Укажите настоящую длину этого отрезка для калибровки масштаба.",
+        calibSave: "Сохранить",
+        clearTitle: "Удалить всё?",
+        clearDesc: "Все нанесенные линии, цепи, углы и настройки масштаба исчезнут. Это нельзя будет отменить.",
+        btnCancelClear: "ОТМЕНА",
+        btnConfirmClear: "ДА, ОЧИСТИТЬ",
+        cvReady: "CV Ready",
+        cvStarting: "Запуск CV",
+        dockNewTab: "Новое фото",
+        dockClose: "Закрыть",
+        dockHide: "Свернуть ленту",
+        dockShow: "Показать ленту",
+        expTitle: "Экспозиция",
+        expBrightness: "Яркость",
+        expContrast: "Контраст",
+        expReset: "Сброс",
+        expAuto: "Авто",
+        themeToggle: "Сменить тему: Дневная / Тёмная",
+        btnAdjustments: "Коррекция",
+        btnAdjustmentsTitle: "Коррекция изображения: яркость, контраст, уровни (Ctrl+L)",
+        adjWinTitle: "Коррекция растра",
+        tabExposureTitle: "Яркость / Контраст",
+        tabLevelsTitle: "Уровни (Levels)",
+        sampleFromImage: "Пипетки:",
+        pipetteBlack: "Черная",
+        pipetteGray: "Серая",
+        pipetteWhite: "Белая",
+        pipetteBlackHint: "Кликните в самую темную точку на чертеже (черная точка)",
+        pipetteGrayHint: "Кликните в нейтрально-серый тон чертежа (гамма)",
+        pipetteWhiteHint: "Кликните в самый светлый фон бумаги (белая точка)",
+        adjResetAll: "Сбросить всё",
+        adjClose: "Закрыть",
+        btnOpenLevels: "Уровни",
+        btnOpenLevelsTitle: "Уровни как в Photoshop (Ctrl+L)",
+        levelsTitle: "Уровни (Levels)",
+        levelsChannel: "Канал:",
+        levelsInput: "Входные значения:",
+        levelsOutput: "Выходные значения:",
+        levelsAuto: "Авто",
+        levelsReset: "Сброс",
+        levelsPreview: "Просмотр",
+        levelsOk: "ОК",
+        levelsCancel: "Отмена"
+    },
+    en: {
+        loadBtn: "Open",
+        copyBtn: "Copy",
+        copiedToast: "Drawing copied to clipboard!",
+        copiedFail: "Could not copy, saved as image file",
+        modeDist: "Ruler",
+        modeChain: "Chain",
+        modeAngle: "Angle",
+        calibLabel: "Scale:",
+        btnDelete: "Delete",
+        btnClear: "Clear all",
+        perspLabel: "Shape:",
+        btnTogglePerspective: "Straighten view",
+        btnTogglePerspectiveTitle: "Straighten perspective distortion by 4 corner points",
+        btnApplyGrid: "Done",
+        btnRestoreOriginal: "Reset photo",
+        statusEmpty: "Open a photo (toolbar button) or paste from clipboard (Ctrl+V)",
+        statusPersp: "Mark corners: {n} of 4",
+        statusSelected: "Object selected. Drag nodes or nudge with arrow keys.",
+        statusIdle: "Hold Shift while drawing for ortho constraint.",
+        statusChainDrawing: "Chain nodes: {n}. Click next point (Enter or double-click to finish)",
+        statusChainIdle: "Stepped chain ruler: click points to build a chain (Shift for ortho)",
+        chainDoneToast: "Chain dimension created",
+        emptyState: "Click the «Open» button in the toolbar or paste photo (Ctrl+V)",
+        processingOverlay: "Alignment magic...",
+        helpTitle1: "Selection:",
+        helpDesc1: "Click on a line or node to adjust them.",
+        helpTitle2: "Movement:",
+        helpDesc2: "1 finger or Middle Mouse Button (wheel) — pan photo.",
+        helpTitle3: "Zoom:",
+        helpDesc3: "2 fingers or mouse wheel — zoom.",
+        helpTitle4: "Ortho Mode:",
+        helpDesc4: "Hold Shift to snap lines strictly horizontal or vertical.",
+        helpTitle5: "Precision:",
+        helpDesc5: "Arrow keys ← ↑ → ↓ nudge selected point by 1 px (with Shift by 10 px).",
+        helpTitle6: "Chain ruler:",
+        helpDesc6: "Chain tool measures each segment and sums up the total stepped length.",
+        helpTitle7: "Copy:",
+        helpDesc7: "«Copy» button places annotated drawing straight into your clipboard.",
+        btnCloseHelp: "Got it",
+        restoreTitle: "Reset photo?",
+        restoreDesc: "Alignment and all measurements will be deleted. Restore the original photo?",
+        btnCancelRestore: "CANCEL",
+        btnConfirmRestore: "YES, RESET",
+        perspWarnTitle: "Straighten Perspective",
+        perspWarnDesc: "Mark 4 corners of a rectangular flat object (door, window, sheet, facade). The algorithm will rectify it into a frontal view.",
+        perspDisclaimer: "Notice: Perspective rectification is a mathematical approximation. For best accuracy, place corner points as precisely as possible (zoom in with mouse wheel and nudge with arrow keys).",
+        btnConfirmPerspMode: "GOT IT, PLACE CORNERS",
+        dimTitle: "Real Dimensions",
+        dimW: "e.g., 800",
+        dimH: "e.g., 2000",
+        dimWLabel: "Width",
+        dimHLabel: "Height",
+        dimHint: "Enter real dimensions or leave blank — we will keep proportions automatically.",
+        dimApply: "Align and Apply",
+        calibModalTitle: "Known Size",
+        calibModalDesc: "Enter the real length of this segment to calibrate scale.",
+        calibSave: "Save",
+        clearTitle: "Clear all?",
+        clearDesc: "All lines, chains, angles and scale settings will be permanently removed.",
+        btnCancelClear: "CANCEL",
+        btnConfirmClear: "YES, CLEAR",
+        cvReady: "CV Ready",
+        cvStarting: "Initializing CV",
+        dockNewTab: "New photo",
+        dockClose: "Close",
+        dockHide: "Hide dock",
+        dockShow: "Show dock",
+        expTitle: "Exposure",
+        expBrightness: "Brightness",
+        expContrast: "Contrast",
+        expReset: "Reset",
+        expAuto: "Auto",
+        themeToggle: "Toggle theme: Light / Dark",
+        btnAdjustments: "Adjust",
+        btnAdjustmentsTitle: "Image adjustment: brightness, contrast, levels (Ctrl+L)",
+        adjWinTitle: "Image Adjustments",
+        tabExposureTitle: "Brightness / Contrast",
+        tabLevelsTitle: "Levels",
+        sampleFromImage: "Sample from image:",
+        pipetteBlack: "Black",
+        pipetteGray: "Gray",
+        pipetteWhite: "White",
+        pipetteBlackHint: "Click the darkest point on the image (black point)",
+        pipetteGrayHint: "Click a neutral gray tone on the image (gamma)",
+        pipetteWhiteHint: "Click the brightest paper background (white point)",
+        adjResetAll: "Reset All",
+        adjClose: "Close",
+        btnOpenLevels: "Levels",
+        btnOpenLevelsTitle: "Photoshop-style Levels adjustment (Ctrl+L)",
+        levelsTitle: "Levels",
+        levelsChannel: "Channel:",
+        levelsInput: "Input Levels:",
+        levelsOutput: "Output Levels:",
+        levelsAuto: "Auto",
+        levelsReset: "Reset",
+        levelsPreview: "Preview",
+        levelsOk: "OK",
+        levelsCancel: "Cancel"
+    }
+};
+
+/**
+ * Обновление всех переводов на странице
+ * @param {string} lang - 'ru' или 'en'
+ */
+function applyTranslations(lang) {
+    const currentLang = lang || (window.appState ? window.appState.lang : 'ru');
+    const strings = i18n[currentLang] || i18n.ru;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (strings[key]) {
+            el.innerHTML = strings[key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (strings[key]) {
+            el.placeholder = strings[key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (strings[key]) {
+            el.title = strings[key];
+        }
+    });
+
+    const langToggleBtn = document.getElementById('btnLangToggle');
+    if (langToggleBtn) {
+        langToggleBtn.innerText = currentLang === 'ru' ? 'EN' : 'RU';
+    }
+
+    if (window.updateStatus) {
+        window.updateStatus();
+    }
+}
+
+// Экспорт для глобальной области видимости
+window.i18n = i18n;
+window.applyTranslations = applyTranslations;
+
+
+/* === Embedded js/app.js === */
+/**
+ * ============================================================================
+ * PhotoDimGen - Core Application Logic
+ * Blender 4.x Solid CAD Architecture + Day/Light Mode + Stepped Chain Ruler + Levels
+ * ============================================================================
+ */
+
+// Версия приложения (см. AGENTS.md раздел 8)
+const APP_VERSION = '2.1.5';
+window.APP_VERSION = APP_VERSION;
+
+// Глобальное состояние приложения
+const state = {
+    version: APP_VERSION,
+    lang: 'ru',
+    theme: localStorage.getItem('photodimgen_theme') || 'dark',
+    dpr: window.devicePixelRatio || 1,
+    isCvLoaded: false,
+    isShiftDown: false,
+    activeTabId: null,
+    tabs: [], // Array of Tab objects
+    selectedPoint: null, // { obj, idx } или { type: 'persp', idx }
+    activePipette: null // null | 'black' | 'gray' | 'white'
+};
+
+window.appState = state;
+
+// Применяем сохраненную тему сразу к корневому элементу
+document.documentElement.setAttribute('data-theme', state.theme);
+
+// Цветовая палитра CAD-разметки (Blender Solid / CAD standard)
+const COLORS = {
+    calib: '#f59e0b',     // Янтарный (эталонный масштаб)
+    line: '#38bdf8',      // Небесно-голубой (линейные размеры)
+    chain: '#06b6d4',     // Бирюзовый / циан (цепные ступенчатые размеры)
+    angle: '#f43f5e',     // Розово-красный (углы)
+    persp: '#10b981',     // Изумрудный (перспектива)
+    selected: '#22c55e',  // Зеленый (выделенный объект)
+    strokeOutline: '#000000' // Черный кант для двухслойной обводки
+};
+
+const HIT_RADIUS = 30; // Радиус захвата точек (в экранных пикселях, масштабирован под UI +30%)
+
+// Инициализация Canvas
+const canvas = document.getElementById('mainCanvas');
+const ctx = canvas.getContext('2d', { alpha: false });
+
+let fId = null; // ID анимационного кадра
+
+// Состояние указателя (панорамирование, перетаскивание, зум)
+let interact = {
+    active: false,
+    type: null,
+    moved: false,
+    startX: 0,
+    startY: 0,
+    lastX: 0,
+    lastY: 0,
+    lastDist: 0,
+    lastMid: null,
+    target: null,
+    isMMB: false,
+    currentW: null // Текущие мировые координаты курсора (для rubberband-линий)
+};
+
+/* ==========================================================================
+   Управление темами (Dark Graphite / Light Day CAD)
+   ========================================================================== */
+
+function updateThemeUI() {
+    document.documentElement.setAttribute('data-theme', state.theme);
+    localStorage.setItem('photodimgen_theme', state.theme);
+
+    const themeIcon = document.getElementById('themeIcon');
+    if (themeIcon) {
+        if (state.theme === 'light') {
+            themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+        } else {
+            themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+        }
+    }
+    requestDraw();
+}
+
+function toggleTheme() {
+    state.theme = state.theme === 'light' ? 'dark' : 'light';
+    updateThemeUI();
+    showToast(state.theme === 'light' ? 'Дневной режим активирован' : 'Тёмный режим активирован');
+}
+
+/* ==========================================================================
+   Управление вкладками (Multi-Tab Model)
+   ========================================================================== */
+
+/**
+ * Создание структуры новой вкладки
+ */
+function createNewTabModel(id, title) {
+    return {
+        id: id || 'tab_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+        title: title || 'Чертеж',
+        image: null,
+        rawImage: null,
+        thumbDataUrl: null,
+        objects: [],
+        drawingObj: null,
+        perspectivePts: [],
+        calibLength: 100,
+        calibUnit: '', // Без "мм" — чистый инженерный стандарт
+        transform: { x: 0, y: 0, scale: 1 },
+        mode: 'distance', // 'distance' | 'chain' | 'angle'
+        isPerspectiveMode: false,
+        selectedId: null,
+        filterMode: 'levels', // 'levels' | 'exposure' (взаимоисключающие режимы)
+        brightness: 100,
+        contrast: 100,
+        levels: {
+            inBlack: 0,
+            gamma: 1.0,
+            inWhite: 255,
+            outBlack: 0,
+            outWhite: 255
+        },
+        undoStack: []
+    };
+}
+
+/**
+ * Получение активной вкладки
+ */
+function getActiveTab() {
+    let tab = state.tabs.find(t => t.id === state.activeTabId);
+    if (!tab && state.tabs.length > 0) {
+        tab = state.tabs[0];
+        state.activeTabId = tab.id;
+    }
+    return tab;
+}
+
+/**
+ * Получение активного фильтра для Canvas и Экспорта (взаимоисключающие режимы)
+ */
+function getActiveFilter(tab) {
+    if (!tab || !tab.image) return 'none';
+    const previewChecked = document.getElementById('chkLevelsPreview')?.checked ?? true;
+    if (!previewChecked) return 'none';
+
+    // Взаимоисключающие режимы коррекции:
+    if (tab.filterMode === 'levels') {
+        const l = tab.levels;
+        if (!l || (l.inBlack === 0 && Math.abs(l.gamma - 1.0) < 0.01 && l.inWhite === 255 && l.outBlack === 0 && l.outWhite === 255)) {
+            return 'none';
+        }
+        return 'url(#svgLevelsFilter)';
+    } else {
+        const b = typeof tab.brightness === 'number' ? tab.brightness : 100;
+        const c = typeof tab.contrast === 'number' ? tab.contrast : 100;
+        if (b === 100 && c === 100) return 'none';
+        return `brightness(${b}%) contrast(${c}%)`;
+    }
+}
+
+/**
+ * Синхронизация регуляторов экспозиции
+ */
+function syncExposureUI(brightness, contrast) {
+    const b = brightness ?? 100;
+    const c = contrast ?? 100;
+    const elB = document.getElementById('rngBrightnessWin');
+    const valB = document.getElementById('valBrightnessWin');
+    if (elB) elB.value = b;
+    if (valB) valB.innerText = b + '%';
+
+    const elC = document.getElementById('rngContrastWin');
+    const valC = document.getElementById('valContrastWin');
+    if (elC) elC.value = c;
+    if (valC) valC.innerText = c + '%';
+}
+
+/**
+ * Генерация значений таблицы для SVG-фильтра feComponentTransfer (Photoshop Levels)
+ */
+function generateLevelsTableValues(inBlack, gamma, inWhite, outBlack, outWhite) {
+    const vals = [];
+    const invGamma = 1 / Math.max(0.01, gamma);
+    const inRange = Math.max(1, inWhite - inBlack);
+    const outRange = (outWhite - outBlack) / 255;
+    const outMin = outBlack / 255;
+
+    for (let i = 0; i < 256; i++) {
+        let v = (i - inBlack) / inRange;
+        v = Math.max(0, Math.min(1, v));
+        v = Math.pow(v, invGamma);
+        let out = outMin + v * outRange;
+        out = Math.max(0, Math.min(1, out));
+        vals.push(out.toFixed(4));
+    }
+    return vals.join(' ');
+}
+
+/**
+ * Обновление параметров аппаратного SVG-фильтра уровней
+ */
+function updateLevelsFilter() {
+    const tab = getActiveTab();
+    if (tab) tab._levelsDirty = true;
+    const l = tab?.levels || { inBlack: 0, gamma: 1.0, inWhite: 255, outBlack: 0, outWhite: 255 };
+    const str = generateLevelsTableValues(l.inBlack, l.gamma, l.inWhite, l.outBlack, l.outWhite);
+
+    const r = document.getElementById('levelsFilterR');
+    const g = document.getElementById('levelsFilterG');
+    const b = document.getElementById('levelsFilterB');
+    if (r) r.setAttribute('tableValues', str);
+    if (g) g.setAttribute('tableValues', str);
+    if (b) b.setAttribute('tableValues', str);
+}
+
+/**
+ * Переключение на вкладку (с поддержкой force)
+ */
+function switchTab(id, force = false) {
+    if (!force && state.activeTabId === id) return;
+    state.activeTabId = id;
+    state.selectedPoint = null;
+
+    const tab = getActiveTab();
+    if (!tab) return;
+
+    // Синхронизация инпута масштаба
+    const inpLen = document.getElementById('calibLength');
+    if (inpLen) inpLen.value = tab.calibLength || 100;
+
+    // Режим инструментов
+    setToolMode(tab.mode, false);
+
+    // Экспозиция и уровни
+    syncExposureUI(tab.brightness, tab.contrast);
+    updateLevelsFilter();
+
+    // Скрытие/показ пустых экранов
+    const emptySt = document.getElementById('emptyState');
+    if (emptySt) emptySt.classList.toggle('hidden', !!tab.image);
+
+    const btnRestore = document.getElementById('btnRestoreOriginal');
+    if (btnRestore) btnRestore.classList.toggle('hidden', !tab.rawImage || tab.image === tab.rawImage);
+
+    renderDock();
+    updateStatus();
+    requestDraw();
+}
+
+/**
+ * Закрытие вкладки
+ */
+function closeTab(id, e) {
+    if (e) e.stopPropagation();
+
+    const idx = state.tabs.findIndex(t => t.id === id);
+    if (idx === -1) return;
+
+    // Удаление из базы данных
+    dbDeleteTab(id);
+
+    state.tabs.splice(idx, 1);
+
+    if (state.tabs.length === 0) {
+        // Если закрыли последнюю — создаем пустую
+        const emptyTab = createNewTabModel();
+        state.tabs.push(emptyTab);
+        state.activeTabId = emptyTab.id;
+    } else if (state.activeTabId === id) {
+        const nextIdx = Math.max(0, idx - 1);
+        state.activeTabId = state.tabs[nextIdx].id;
+    }
+
+    switchTab(state.activeTabId, true);
+    saveSession();
+}
+
+/**
+ * Отрисовка нижней ленты миниатюр
+ */
+function renderDock() {
+    const container = document.getElementById('dockTiles');
+    if (!container) return;
+
+    container.innerHTML = '';
+    const activeTab = getActiveTab();
+
+    state.tabs.forEach((tab, index) => {
+        const tile = document.createElement('div');
+        tile.className = 'dock-tile' + (tab.id === activeTab?.id ? ' active' : '');
+        tile.title = tab.title;
+
+        if (tab.thumbDataUrl) {
+            const img = document.createElement('img');
+            img.src = tab.thumbDataUrl;
+            img.alt = tab.title;
+            tile.appendChild(img);
+        } else {
+            tile.innerHTML = `<span style="font-size: 12px; color: var(--bl-text-muted); font-family: var(--font-mono); font-weight: 700;">#${index + 1}</span>`;
+        }
+
+        // Счетчик нанесенных линий/замеров
+        if (tab.objects.length > 0) {
+            const count = document.createElement('span');
+            count.className = 'dock-count';
+            count.innerText = tab.objects.length;
+            tile.appendChild(count);
+        }
+
+        // Кнопка быстрого закрытия
+        if (state.tabs.length > 1 || tab.image) {
+            const closeBtn = document.createElement('div');
+            closeBtn.className = 'dock-close';
+            closeBtn.innerHTML = '✕';
+            closeBtn.title = window.i18n?.[state.lang]?.dockClose || 'Закрыть';
+            closeBtn.onclick = (ev) => closeTab(tab.id, ev);
+            tile.appendChild(closeBtn);
+        }
+
+        tile.onclick = () => switchTab(tab.id);
+        container.appendChild(tile);
+    });
+}
+
+/**
+ * Генерация DataURL миниатюры для карточки вьюпорта
+ */
+function generateThumbnail(img) {
+    if (!img) return null;
+    const maxDim = 160;
+    const canvasT = document.createElement('canvas');
+    let w = img.width, h = img.height;
+    if (w > h) {
+        if (w > maxDim) { h = Math.round(h * maxDim / w); w = maxDim; }
+    } else {
+        if (h > maxDim) { w = Math.round(w * maxDim / h); h = maxDim; }
+    }
+    canvasT.width = Math.max(1, w);
+    canvasT.height = Math.max(1, h);
+    const cT = canvasT.getContext('2d');
+    cT.drawImage(img, 0, 0, w, h);
+    return canvasT.toDataURL('image/jpeg', 0.7);
+}
+
+/* ==========================================================================
+   Локальная база данных IndexedDB (Сохранение сессии)
+   ========================================================================== */
+
+const DB_NAME = 'PhotoRulerProDB_v1';
+const STORE_NAME = 'tabs_store';
+let dbInstance = null;
+
+function initDb(callback) {
+    if (!window.indexedDB) {
+        if (callback) callback();
+        return;
+    }
+    const request = indexedDB.open(DB_NAME, 1);
+    request.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains(STORE_NAME)) {
+            db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+        }
+    };
+    request.onsuccess = (e) => {
+        dbInstance = e.target.result;
+        if (callback) callback();
+    };
+    request.onerror = () => {
+        if (callback) callback();
+    };
+}
+
+function dbSaveTab(tab) {
+    if (!dbInstance) return;
+    try {
+        const tx = dbInstance.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+
+        const record = {
+            id: tab.id,
+            title: tab.title,
+            thumbDataUrl: tab.thumbDataUrl,
+            imageDataUrl: tab.image ? tab.image.src : null,
+            rawImageDataUrl: tab.rawImage ? tab.rawImage.src : null,
+            objects: tab.objects,
+            calibLength: tab.calibLength,
+            calibUnit: tab.calibUnit || '',
+            transform: tab.transform,
+            mode: tab.mode,
+            filterMode: tab.filterMode || 'levels',
+            brightness: tab.brightness,
+            contrast: tab.contrast,
+            levels: tab.levels,
+            updatedAt: Date.now()
+        };
+        store.put(record);
+    } catch (err) {
+        console.warn('Ошибка сохранения в IndexedDB:', err);
+    }
+}
+
+function dbDeleteTab(id) {
+    if (!dbInstance) return;
+    try {
+        const tx = dbInstance.transaction(STORE_NAME, 'readwrite');
+        tx.objectStore(STORE_NAME).delete(id);
+    } catch (err) {
+        console.warn('Ошибка удаления из IndexedDB:', err);
+    }
+}
+
+let saveDebounceTimer = null;
+function saveSession() {
+    clearTimeout(saveDebounceTimer);
+    saveDebounceTimer = setTimeout(() => {
+        const tab = getActiveTab();
+        if (tab) dbSaveTab(tab);
+    }, 400);
+}
+
+function loadSessionFromDb() {
+    if (!dbInstance) {
+        if (state.tabs.length === 0) {
+            const initTab = createNewTabModel();
+            state.tabs = [initTab];
+            switchTab(initTab.id, true);
+        }
+        return;
+    }
+    try {
+        const tx = dbInstance.transaction(STORE_NAME, 'readonly');
+        const store = tx.objectStore(STORE_NAME);
+        const req = store.getAll();
+
+        req.onsuccess = () => {
+            const records = req.result;
+            if (records && records.length > 0) {
+                state.tabs = [];
+                records.sort((a, b) => (a.updatedAt || 0) - (b.updatedAt || 0));
+
+                records.forEach(rec => {
+                    const tab = createNewTabModel(rec.id, rec.title);
+                    tab.thumbDataUrl = rec.thumbDataUrl;
+                    tab.objects = rec.objects || [];
+
+                    const parsedLen = parseFloat(rec.calibLength);
+                    tab.calibLength = (!isNaN(parsedLen) && parsedLen > 0) ? parsedLen : 100;
+                    tab.calibUnit = rec.calibUnit || '';
+
+                    tab.transform = rec.transform || { x: 0, y: 0, scale: 1 };
+                    tab.mode = rec.mode || 'distance';
+                    tab.filterMode = rec.filterMode || 'levels';
+                    tab.brightness = typeof rec.brightness === 'number' ? rec.brightness : 100;
+                    tab.contrast = typeof rec.contrast === 'number' ? rec.contrast : 100;
+                    tab.levels = rec.levels || { inBlack: 0, gamma: 1.0, inWhite: 255, outBlack: 0, outWhite: 255 };
+
+                    if (rec.imageDataUrl) {
+                        const img = new Image();
+                        img.onload = () => {
+                            tab.image = img;
+                            if (tab.id === state.activeTabId) {
+                                document.getElementById('emptyState')?.classList.add('hidden');
+                                updateLevelsFilter();
+                                requestDraw();
+                            }
+                            renderDock();
+                        };
+                        img.onerror = () => {
+                            console.warn('Не удалось загрузить изображение вкладки:', tab.id);
+                        };
+                        img.src = rec.imageDataUrl;
+                    }
+
+                    if (rec.rawImageDataUrl) {
+                        const raw = new Image();
+                        raw.onload = () => { tab.rawImage = raw; };
+                        raw.src = rec.rawImageDataUrl;
+                    }
+
+                    state.tabs.push(tab);
+                });
+
+                const targetId = state.tabs[state.tabs.length - 1].id;
+                state.activeTabId = null;
+                switchTab(targetId, true);
+            } else {
+                const initTab = createNewTabModel();
+                state.tabs = [initTab];
+                state.activeTabId = null;
+                switchTab(initTab.id, true);
+            }
+        };
+        req.onerror = () => {
+            if (state.tabs.length === 0) {
+                const initTab = createNewTabModel();
+                state.tabs = [initTab];
+                state.activeTabId = null;
+                switchTab(initTab.id, true);
+            }
+        };
+    } catch (e) {
+        console.warn('Ошибка загрузки IndexedDB:', e);
+        if (state.tabs.length === 0) {
+            const initTab = createNewTabModel();
+            state.tabs = [initTab];
+            state.activeTabId = null;
+            switchTab(initTab.id, true);
+        }
+    }
+}
+
+/* ==========================================================================
+   Преобразования систем координат (World <-> Screen)
+   ========================================================================== */
+
+const toW = (p) => {
+    const tab = getActiveTab();
+    if (!tab) return { x: p.x, y: p.y };
+    return {
+        x: (p.x - tab.transform.x) / tab.transform.scale,
+        y: (p.y - tab.transform.y) / tab.transform.scale
+    };
+};
+
+const toS = (p) => {
+    const tab = getActiveTab();
+    if (!tab) return { x: p.x, y: p.y };
+    return {
+        x: p.x * tab.transform.scale + tab.transform.x,
+        y: p.y * tab.transform.scale + tab.transform.y
+    };
+};
+
+const getDist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+
+function distToSegment(p, v, w) {
+    const l2 = getDist(v, w) ** 2;
+    if (l2 === 0) return getDist(p, v);
+    let t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
+    t = Math.max(0, Math.min(1, t));
+    return getDist(p, { x: v.x + t * (w.x - v.x), y: v.y + t * (w.y - v.y) });
+}
+
+/**
+ * Проверка клика/захвата точек и линий
+ */
+function hitTest(sX, sY) {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return null;
+    const wP = toW({ x: sX, y: sY });
+    const r = HIT_RADIUS / tab.transform.scale;
+
+    // В режиме выравнивания перспективы
+    if (tab.isPerspectiveMode) {
+        for (let i = 0; i < tab.perspectivePts.length; i++) {
+            if (getDist(wP, tab.perspectivePts[i]) < r) {
+                return { type: 'persp', idx: i };
+            }
+        }
+        return null;
+    }
+
+    // Проверка узлов/точек выделенного объекта
+    if (tab.selectedId) {
+        const sel = tab.objects.find(o => o.id === tab.selectedId);
+        if (sel) {
+            for (let i = 0; i < sel.pts.length; i++) {
+                if (getDist(wP, sel.pts[i]) < r) {
+                    return { type: 'pt', obj: sel, idx: i };
+                }
+            }
+        }
+    }
+
+    // Проверка линий всех объектов
+    for (const obj of tab.objects) {
+        if (obj.pts.length < 2) continue;
+        if (obj.type === 'angle') {
+            if (distToSegment(wP, obj.pts[0], obj.pts[1]) < r) return { type: 'obj', obj };
+            if (obj.pts.length > 2 && distToSegment(wP, obj.pts[0], obj.pts[2]) < r) return { type: 'obj', obj };
+        } else if (obj.type === 'chain') {
+            for (let i = 0; i < obj.pts.length - 1; i++) {
+                if (distToSegment(wP, obj.pts[i], obj.pts[i + 1]) < r) return { type: 'obj', obj };
+            }
+        } else {
+            if (distToSegment(wP, obj.pts[0], obj.pts[1]) < r) return { type: 'obj', obj };
+        }
+    }
+    return null;
+}
+
+/**
+ * Коэффициент масштабирования (ед./пиксель)
+ */
+function getCalibRatio() {
+    const tab = getActiveTab();
+    if (!tab) return 1;
+    const c = tab.objects.find(o => o.type === 'calib');
+    if (c && c.pts.length >= 2) {
+        const lengthVal = parseFloat(tab.calibLength) || 100;
+        return lengthVal / getDist(c.pts[0], c.pts[1]);
+    }
+    return 1;
+}
+
+/**
+ * Ортогональное выравнивание точки p относительно базы p0 при зажатом Shift
+ */
+function applyOrtho(p, p0) {
+    if (!state.isShiftDown || !p0) return p;
+    const dx = Math.abs(p.x - p0.x);
+    const dy = Math.abs(p.y - p0.y);
+    if (dx >= dy) {
+        return { x: p.x, y: p0.y }; // строго горизонтально
+    } else {
+        return { x: p.x, y: p.y }; // строго вертикально
+    }
+}
+
+/* ==========================================================================
+   История действий (Undo)
+   ========================================================================== */
+
+function pushUndo() {
+    const tab = getActiveTab();
+    if (!tab) return;
+    if (tab.undoStack.length >= 25) {
+        tab.undoStack.shift();
+    }
+    tab.undoStack.push(JSON.stringify(tab.objects));
+}
+
+function performUndo() {
+    const tab = getActiveTab();
+    if (!tab || tab.undoStack.length === 0) {
+        showToast('Нет действий для отмены');
+        return;
+    }
+    const snapshot = tab.undoStack.pop();
+    tab.objects = JSON.parse(snapshot);
+    tab.selectedId = null;
+    tab.drawingObj = null;
+    state.selectedPoint = null;
+    requestDraw();
+    updateStatus();
+    renderDock();
+    saveSession();
+    showToast('Действие отменено');
+}
+
+/* ==========================================================================
+   Отрисовка на Canvas (Blender CAD Style + Double-Stroke + Levels + Light/Dark)
+   ========================================================================== */
+
+function requestDraw() {
+    if (!fId) fId = requestAnimationFrame(draw);
+}
+
+
+/**
+ * Быстрый программный LUT-рендерер Уровней (fallback для браузеров без поддержки SVG-фильтров в ctx.filter)
+ */
+function getLevelsFilteredImage(tab) {
+    if (!tab || !tab.image) return tab?.image;
+    const l = tab.levels;
+    if (!l) return tab.image;
+
+    // Дефолтные уровни — возвращаем исходник без обработки
+    if (l.inBlack === 0 && Math.abs(l.gamma - 1.0) < 0.01 && l.inWhite === 255 && l.outBlack === 0 && l.outWhite === 255) {
+        return tab.image;
+    }
+
+    if (!tab._levelsCanvas) {
+        tab._levelsCanvas = document.createElement('canvas');
+        tab._levelsDirty = true;
+    }
+
+    const cvs = tab._levelsCanvas;
+    if (cvs.width !== tab.image.width || cvs.height !== tab.image.height) {
+        cvs.width = tab.image.width;
+        cvs.height = tab.image.height;
+        tab._levelsDirty = true;
+    }
+
+    if (tab._levelsDirty) {
+        const lCtx = cvs.getContext('2d', { willReadFrequently: true });
+        lCtx.drawImage(tab.image, 0, 0);
+        const imgData = lCtx.getImageData(0, 0, cvs.width, cvs.height);
+        const data = imgData.data;
+        const len = data.length;
+
+        const lut = new Uint8Array(256);
+        const invGamma = 1 / Math.max(0.01, l.gamma);
+        const inRange = Math.max(1, l.inWhite - l.inBlack);
+        const outRange = l.outWhite - l.outBlack;
+        const outMin = l.outBlack;
+
+        for (let i = 0; i < 256; i++) {
+            let v = (i - l.inBlack) / inRange;
+            v = Math.max(0, Math.min(1, v));
+            v = Math.pow(v, invGamma);
+            let out = outMin + v * outRange;
+            lut[i] = Math.max(0, Math.min(255, Math.round(out)));
+        }
+
+        for (let i = 0; i < len; i += 4) {
+            data[i] = lut[data[i]];
+            data[i+1] = lut[data[i+1]];
+            data[i+2] = lut[data[i+2]];
+        }
+        lCtx.putImageData(imgData, 0, 0);
+        tab._levelsDirty = false;
+    }
+
+    return cvs;
+}
+
+function draw() {
+    fId = null;
+    const tab = getActiveTab();
+
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    ctx.fillStyle = isLight ? '#e2e8f0' : '#18191f';
+    ctx.fillRect(0, 0, canvas.width / state.dpr, canvas.height / state.dpr);
+
+    if (!tab || !tab.image) return;
+
+    // Отрисовка изображения с трансформацией, уровнями и фильтром экспозиции
+    ctx.save();
+    ctx.translate(tab.transform.x, tab.transform.y);
+    ctx.scale(tab.transform.scale, tab.transform.scale);
+
+    // Применение взаимоисключающего фильтра (Яркость/Контраст или Уровни)
+    const previewChecked = document.getElementById('chkLevelsPreview')?.checked ?? true;
+    if (previewChecked && tab.filterMode === 'levels') {
+        const imgToDraw = getLevelsFilteredImage(tab);
+        ctx.drawImage(imgToDraw, 0, 0);
+    } else if (previewChecked && tab.filterMode === 'exposure') {
+        const b = typeof tab.brightness === 'number' ? tab.brightness : 100;
+        const c = typeof tab.contrast === 'number' ? tab.contrast : 100;
+        if (b !== 100 || c !== 100) {
+            ctx.filter = `brightness(${b}%) contrast(${c}%)`;
+        }
+        ctx.drawImage(tab.image, 0, 0);
+        ctx.filter = 'none';
+    } else {
+        ctx.drawImage(tab.image, 0, 0);
+    }
+    ctx.restore();
+
+    // Отрисовка готовых объектов
+    tab.objects.forEach(o => drawObj(o));
+
+    // Отрисовка рисуемого объекта
+    if (tab.drawingObj) {
+        drawObj(tab.drawingObj, true);
+    }
+
+    // Отрисовка сетки перспективы
+    if (tab.isPerspectiveMode && tab.perspectivePts.length > 0) {
+        drawPerspGrid();
+    }
+}
+
+/**
+ * Отрисовка двухслойной линии (Double-stroke для 100% видимости на любом фоне)
+ */
+function drawDoubleStrokeLine(p1, p2, color, isDashed = false) {
+    ctx.save();
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.9)';
+    if (isDashed) ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    ctx.moveTo(p1.x, p1.y);
+    ctx.lineTo(p2.x, p2.y);
+    ctx.stroke();
+
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = color;
+    ctx.stroke();
+    ctx.restore();
+}
+
+/**
+ * Отрисовка вертекса / узла (Blender CAD Square Grip)
+ */
+function drawCadGrip(p, isSelected, isPointSelected, color) {
+    const size = isPointSelected ? 11 : (isSelected ? 10 : 8);
+    const half = size / 2;
+
+    ctx.save();
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.85)';
+    ctx.lineWidth = 3.5;
+    ctx.strokeRect(p.x - half, p.y - half, size, size);
+
+    ctx.fillStyle = isPointSelected ? '#f57921' : '#ffffff';
+    ctx.fillRect(p.x - half, p.y - half, size, size);
+
+    ctx.strokeStyle = isPointSelected ? '#ffffff' : color;
+    ctx.lineWidth = 2;
+    ctx.strokeRect(p.x - half, p.y - half, size, size);
+
+    ctx.fillStyle = isPointSelected ? '#ffffff' : color;
+    ctx.fillRect(p.x - 1, p.y - 1, 2, 2);
+
+    if (isPointSelected) {
+        ctx.strokeStyle = '#f57921';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(p.x - half - 4, p.y - half - 4, size + 8, size + 8);
+    }
+    ctx.restore();
+}
+
+/**
+ * Отрисовка плашки размера в стиле Blender 4.x Solid Card (без "мм")
+ */
+function drawDimensionBadge(x, y, text, color, isCalib = false, isSummary = false) {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    ctx.font = isSummary ? "800 13px var(--font-mono), monospace" : "700 12.5px var(--font-mono), monospace";
+    const prefix = isCalib ? "БАЗА: " : "";
+    const fullText = prefix + text;
+    const tw = ctx.measureText(fullText).width + 16;
+    const h = isSummary ? 24 : 22;
+    const r = 4;
+
+    ctx.save();
+    ctx.shadowColor = isLight ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.65)";
+    ctx.shadowBlur = 6;
+    ctx.shadowOffsetY = 2;
+
+    ctx.beginPath();
+    ctx.roundRect(x - tw / 2, y - h / 2, tw, h, r);
+    ctx.fillStyle = isLight ? "#ffffff" : "#1e1e1e";
+    ctx.fill();
+
+    ctx.shadowColor = "transparent";
+    ctx.strokeStyle = isCalib ? "#f57921" : (isSummary ? "#06b6d4" : (color || (isLight ? "#94a3b8" : "#404040")));
+    ctx.lineWidth = (isCalib || isSummary) ? 1.75 : 1;
+    ctx.stroke();
+
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    if (isCalib) {
+        ctx.fillStyle = "#f57921";
+        const prefW = ctx.measureText("БАЗА: ").width;
+        ctx.textAlign = "left";
+        ctx.fillText("БАЗА: ", x - tw / 2 + 8, y);
+        ctx.fillStyle = isLight ? "#0f172a" : "#ffffff";
+        ctx.fillText(text, x - tw / 2 + 8 + prefW, y);
+    } else {
+        ctx.fillStyle = isLight ? "#0f172a" : "#ffffff";
+        ctx.fillText(fullText, x, y);
+    }
+    ctx.restore();
+}
+
+/**
+ * Отрисовка измерительного объекта
+ */
+function drawObj(obj, isDrawing = false) {
+    const tab = getActiveTab();
+    const isSelected = obj.id === tab?.selectedId;
+    const isCalib = obj.type === 'calib';
+    const color = isSelected ? COLORS.selected : (isCalib ? COLORS.calib : (COLORS[obj.type] || COLORS.line));
+    const pts = obj.pts.map(toS);
+    const ratio = getCalibRatio();
+
+    if (obj.type === 'angle') {
+        if (pts.length > 1) drawDoubleStrokeLine(pts[0], pts[1], color, isDrawing);
+        if (pts.length > 2) drawDoubleStrokeLine(pts[0], pts[2], color, isDrawing);
+
+        // Дуга угла
+        if (pts.length > 2) {
+            const a1 = Math.atan2(pts[1].y - pts[0].y, pts[1].x - pts[0].x);
+            const a2 = Math.atan2(pts[2].y - pts[0].y, pts[2].x - pts[0].x);
+            let diff = a2 - a1;
+            while (diff < -Math.PI) diff += Math.PI * 2;
+            while (diff > Math.PI) diff -= Math.PI * 2;
+
+            ctx.save();
+            ctx.globalAlpha = 0.25;
+            ctx.beginPath();
+            ctx.moveTo(pts[0].x, pts[0].y);
+            ctx.arc(pts[0].x, pts[0].y, 38, a1, a1 + diff, diff < 0);
+            ctx.closePath();
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.restore();
+
+            const deg = "∠ " + Math.abs(diff * 180 / Math.PI).toFixed(1) + "°";
+            const midA = a1 + diff / 2;
+            const lx = pts[0].x + Math.cos(midA) * 50;
+            const ly = pts[0].y + Math.sin(midA) * 50;
+            drawDimensionBadge(lx, ly, deg, color, false, false);
+        }
+    } else if (obj.type === 'chain') {
+        let totalDist = 0;
+
+        for (let i = 0; i < pts.length - 1; i++) {
+            drawDoubleStrokeLine(pts[i], pts[i + 1], color, isDrawing);
+
+            const segDist = getDist(obj.pts[i], obj.pts[i + 1]) * ratio;
+            totalDist += segDist;
+
+            const mx = (pts[i].x + pts[i + 1].x) / 2;
+            const my = (pts[i].y + pts[i + 1].y) / 2 - 16;
+            drawDimensionBadge(mx, my, segDist.toFixed(1), color, false, false);
+        }
+
+        if (isDrawing && interact.currentW && pts.length > 0) {
+            const lastW = obj.pts[obj.pts.length - 1];
+            const guideW = applyOrtho(interact.currentW, lastW);
+            const guideS = toS(guideW);
+            drawDoubleStrokeLine(pts[pts.length - 1], guideS, color, true);
+
+            const guideDist = (getDist(lastW, guideW) * ratio).toFixed(1);
+            const gmx = (pts[pts.length - 1].x + guideS.x) / 2;
+            const gmy = (pts[pts.length - 1].y + guideS.y) / 2 - 16;
+            drawDimensionBadge(gmx, gmy, guideDist, color, false, false);
+        }
+
+        if (obj.pts.length >= 2) {
+            const lastS = pts[pts.length - 1];
+            const sumText = "∑ " + totalDist.toFixed(1);
+            drawDimensionBadge(lastS.x, lastS.y - 30, sumText, color, false, true);
+        }
+    } else {
+        if (pts.length > 1) {
+            drawDoubleStrokeLine(pts[0], pts[1], color, isDrawing);
+
+            const val = (getDist(obj.pts[0], obj.pts[1]) * ratio).toFixed(1);
+            const lx = (pts[0].x + pts[1].x) / 2;
+            const ly = (pts[0].y + pts[1].y) / 2 - 16;
+            drawDimensionBadge(lx, ly, val, color, isCalib, false);
+        } else if (isDrawing && interact.currentW && pts.length === 1) {
+            const guideW = applyOrtho(interact.currentW, obj.pts[0]);
+            const guideS = toS(guideW);
+            drawDoubleStrokeLine(pts[0], guideS, color, true);
+
+            const guideDist = (getDist(obj.pts[0], guideW) * ratio).toFixed(1);
+            const gmx = (pts[0].x + guideS.x) / 2;
+            const gmy = (pts[0].y + guideS.y) / 2 - 16;
+            drawDimensionBadge(gmx, gmy, guideDist, color, false, false);
+        }
+    }
+
+    pts.forEach((p, idx) => {
+        const isPointSelected = isSelected && state.selectedPoint?.obj?.id === obj.id && state.selectedPoint?.idx === idx;
+        drawCadGrip(p, isSelected, isPointSelected, color);
+    });
+}
+
+/**
+ * Отрисовка сетки 4-точечного выравнивания (Blender Emerald Chips)
+ */
+function drawPerspGrid() {
+    const tab = getActiveTab();
+    if (!tab) return;
+    const pts = tab.perspectivePts.map(toS);
+
+    ctx.save();
+    ctx.strokeStyle = COLORS.persp;
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    pts.forEach((p, i) => (i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)));
+    if (pts.length === 4) {
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.18)';
+        ctx.fill();
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    pts.forEach((p, i) => {
+        const isPointSelected = state.selectedPoint?.type === 'persp' && state.selectedPoint?.idx === i;
+        const chipSize = 22;
+
+        ctx.save();
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(p.x - chipSize / 2 - 1, p.y - chipSize / 2 - 1, chipSize + 2, chipSize + 2);
+
+        ctx.fillStyle = isPointSelected ? '#f57921' : '#1e1e1e';
+        ctx.beginPath();
+        ctx.roundRect(p.x - chipSize / 2, p.y - chipSize / 2, chipSize, chipSize, 4);
+        ctx.fill();
+
+        ctx.strokeStyle = isPointSelected ? '#ffffff' : COLORS.persp;
+        ctx.lineWidth = 1.75;
+        ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = "bold 11px var(--font-mono), monospace";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(i + 1, p.x, p.y + 0.5);
+        ctx.restore();
+    });
+    ctx.restore();
+}
+
+/* ==========================================================================
+   Управление окном отображения (View) и Canvas Resize
+   ========================================================================== */
+
+function fitView() {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+
+    const rect = canvas.parentElement.getBoundingClientRect();
+    const pad = 24;
+    const availW = Math.max(50, rect.width - pad * 2);
+    const availH = Math.max(50, rect.height - pad * 2);
+
+    tab.transform.scale = Math.min(availW / tab.image.width, availH / tab.image.height);
+    tab.transform.x = (rect.width - tab.image.width * tab.transform.scale) / 2;
+    tab.transform.y = (rect.height - tab.image.height * tab.transform.scale) / 2;
+    requestDraw();
+}
+
+const resize = () => {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * state.dpr;
+    canvas.height = rect.height * state.dpr;
+    ctx.scale(state.dpr, state.dpr);
+    requestDraw();
+};
+new ResizeObserver(resize).observe(canvas.parentElement);
+
+/* ==========================================================================
+   Статус-бар и индикация
+   ========================================================================== */
+
+function updateStatus() {
+    const el = document.getElementById('statusMessage');
+    const tab = getActiveTab();
+    const strings = window.i18n ? window.i18n[state.lang] : {};
+
+    if (!tab || !tab.image) {
+        if (el) el.innerText = strings.statusEmpty || "Откройте фото (кнопка «Открыть») или вставьте из буфера (Ctrl+V)";
+        return;
+    }
+
+    const btnPersp = document.getElementById('btnTogglePerspective');
+    const btnApply = document.getElementById('btnApplyGrid');
+
+    if (tab.isPerspectiveMode) {
+        if (el) el.innerText = (strings.statusPersp || "Отметьте углы: {n} из 4").replace('{n}', tab.perspectivePts.length);
+        if (btnApply) btnApply.classList.toggle('hidden', tab.perspectivePts.length !== 4);
+        if (btnPersp) btnPersp.classList.add('active');
+    } else {
+        if (el) {
+            if (tab.drawingObj && tab.drawingObj.type === 'chain') {
+                el.innerText = (strings.statusChainDrawing || "Узлов цепи: {n}. Кликните для следующей точки (Enter или двойной клик — завершить)")
+                    .replace('{n}', tab.drawingObj.pts.length);
+            } else if (tab.mode === 'chain') {
+                el.innerText = strings.statusChainIdle || "Ступенчатая линейка: кликайте точки для цепи размеров (Shift — орто)";
+            } else if (tab.selectedId) {
+                el.innerText = strings.statusSelected || "Объект выбран. Тяните за узлы или двигайте стрелками клавиатуры.";
+            } else {
+                el.innerText = state.isShiftDown ? "Орто-режим активен (строго 0° / 90°)" : (strings.statusIdle || "Чертите зажав Shift для строгого угла (орто).");
+            }
+        }
+        if (btnApply) btnApply.classList.add('hidden');
+        if (btnPersp) btnPersp.classList.remove('active');
+    }
+
+    const cvText = document.getElementById('cvText');
+    if (cvText) {
+        cvText.innerText = state.isCvLoaded ? (strings.cvReady || 'CV Ready') : (strings.cvStarting || 'Запуск CV');
+    }
+}
+window.updateStatus = updateStatus;
+
+function showToast(msg) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `<svg class="svg-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>${msg}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => toast.classList.add('toast-show'), 10);
+    setTimeout(() => {
+        toast.classList.remove('toast-show');
+        setTimeout(() => toast.remove(), 250);
+    }, 2400);
+}
+
+/* ==========================================================================
+   Инструмент «Уровни» (Photoshop Levels)
+   ========================================================================== */
+
+let currentHistogram = null;
+let levelsBackup = null;
+
+function computeHistogram(img) {
+    if (!img) return null;
+    const sampleDim = 200;
+    const c = document.createElement('canvas');
+    c.width = sampleDim;
+    c.height = sampleDim;
+    const sCtx = c.getContext('2d');
+    sCtx.drawImage(img, 0, 0, sampleDim, sampleDim);
+    const data = sCtx.getImageData(0, 0, sampleDim, sampleDim).data;
+
+    const hist = new Uint32Array(256);
+    for (let i = 0; i < data.length; i += 4) {
+        const lum = Math.round(0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]);
+        hist[lum]++;
+    }
+    return hist;
+}
+
+function renderHistogramCanvas(hist, inBlack, gamma, inWhite) {
+    const cvs = document.getElementById('levelsHistCanvas');
+    if (!cvs) return;
+    const hCtx = cvs.getContext('2d');
+    const w = cvs.width;
+    const h = cvs.height;
+
+    // Фон как в оригинальном окне Photoshop Levels
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    hCtx.fillStyle = isLight ? '#e2e8f0' : '#c5c5c5';
+    hCtx.fillRect(0, 0, w, h);
+
+    if (!hist) return;
+
+    let maxVal = 1;
+    for (let i = 2; i < 254; i++) {
+        if (hist[i] > maxVal) maxVal = hist[i];
+    }
+
+    // Тело гистограммы (тёмно-серый цвет как в Photoshop)
+    hCtx.fillStyle = '#262626';
+    hCtx.beginPath();
+    hCtx.moveTo(0, h);
+    for (let i = 0; i < 256; i++) {
+        const barH = Math.min(h - 2, (hist[i] / maxVal) * (h - 4));
+        const x = (i / 255) * w;
+        hCtx.lineTo(x, h - barH);
+    }
+    hCtx.lineTo(w, h);
+    hCtx.closePath();
+    hCtx.fill();
+}
+
+const TRACK_USABLE_PX = 244; // 256px трек за вычетом 12px ширины маркера
+
+function syncLevelsDialogUI() {
+    const tab = getActiveTab();
+    if (!tab) return;
+    const l = tab.levels;
+
+    // Числовые поля ввода (не перезаписываем активный инпут во время ввода пользователем)
+    const inpIB = document.getElementById('inpInBlack');
+    if (inpIB && document.activeElement !== inpIB) inpIB.value = l.inBlack;
+
+    const inpIG = document.getElementById('inpInGamma');
+    if (inpIG && document.activeElement !== inpIG) inpIG.value = l.gamma.toFixed(2);
+
+    const inpIW = document.getElementById('inpInWhite');
+    if (inpIW && document.activeElement !== inpIW) inpIW.value = l.inWhite;
+
+    const inpOB = document.getElementById('inpOutBlack');
+    if (inpOB && document.activeElement !== inpOB) inpOB.value = l.outBlack;
+
+    const inpOW = document.getElementById('inpOutWhite');
+    if (inpOW && document.activeElement !== inpOW) inpOW.value = l.outWhite;
+
+    // Маркеры входных уровней (черный, серый, белый)
+    const posIB = (l.inBlack / 255) * TRACK_USABLE_PX;
+    const posIW = (l.inWhite / 255) * TRACK_USABLE_PX;
+    const t = Math.pow(0.5, l.gamma);
+    const posIG = posIB + t * (posIW - posIB);
+
+    const mIB = document.getElementById('markerInBlack');
+    if (mIB) mIB.style.left = posIB.toFixed(1) + 'px';
+
+    const mIW = document.getElementById('markerInWhite');
+    if (mIW) mIW.style.left = posIW.toFixed(1) + 'px';
+
+    const mIG = document.getElementById('markerInGamma');
+    if (mIG) mIG.style.left = posIG.toFixed(1) + 'px';
+
+    // Маркеры выходных уровней (черный, белый)
+    const posOB = (l.outBlack / 255) * TRACK_USABLE_PX;
+    const posOW = (l.outWhite / 255) * TRACK_USABLE_PX;
+
+    const mOB = document.getElementById('markerOutBlack');
+    if (mOB) mOB.style.left = posOB.toFixed(1) + 'px';
+
+    const mOW = document.getElementById('markerOutWhite');
+    if (mOW) mOW.style.left = posOW.toFixed(1) + 'px';
+
+    renderHistogramCanvas(currentHistogram, l.inBlack, l.gamma, l.inWhite);
+}
+
+function initLevelsMarkers() {
+    const trackIn = document.getElementById('trackInLevels');
+    const trackOut = document.getElementById('trackOutLevels');
+    if (!trackIn || !trackOut) return;
+
+    let activeDrag = null; // { markerId, isInput, pointerId }
+
+    function updateFromClientX(clientX) {
+        if (!activeDrag) return;
+        const tab = getActiveTab();
+        if (!tab) return;
+        tab.filterMode = 'levels';
+        tab._levelsDirty = true;
+
+        const track = activeDrag.isInput ? trackIn : trackOut;
+        const rect = track.getBoundingClientRect();
+        const trackW = TRACK_USABLE_PX; // 244
+        const relX = Math.max(0, Math.min(trackW, clientX - rect.left - 6));
+        const val255 = Math.round((relX / trackW) * 255);
+
+        if (activeDrag.markerId === 'markerInBlack') {
+            tab.levels.inBlack = Math.max(0, Math.min(tab.levels.inWhite - 1, val255));
+        } else if (activeDrag.markerId === 'markerInWhite') {
+            tab.levels.inWhite = Math.max(tab.levels.inBlack + 1, Math.min(255, val255));
+        } else if (activeDrag.markerId === 'markerInGamma') {
+            const posB = (tab.levels.inBlack / 255) * trackW;
+            const posW = (tab.levels.inWhite / 255) * trackW;
+            const clampedPos = Math.max(posB + 1, Math.min(posW - 1, relX));
+            const range = posW - posB;
+            if (range > 2) {
+                const t = (clampedPos - posB) / range;
+                const safeT = Math.max(0.01, Math.min(0.99, t));
+                const gamma = Math.log(safeT) / Math.log(0.5);
+                tab.levels.gamma = parseFloat(Math.max(0.10, Math.min(3.00, gamma)).toFixed(2));
+            }
+        } else if (activeDrag.markerId === 'markerOutBlack') {
+            tab.levels.outBlack = Math.max(0, Math.min(tab.levels.outWhite - 1, val255));
+        } else if (activeDrag.markerId === 'markerOutWhite') {
+            tab.levels.outWhite = Math.max(tab.levels.outBlack + 1, Math.min(255, val255));
+        }
+
+        syncLevelsDialogUI();
+        const previewChecked = document.getElementById('chkLevelsPreview')?.checked ?? true;
+        if (previewChecked) {
+            updateLevelsFilter();
+            requestDraw();
+        }
+    }
+
+    function onPointerMove(e) {
+        if (!activeDrag) return;
+        updateFromClientX(e.clientX);
+    }
+
+    function onPointerUp(e) {
+        if (activeDrag) {
+            const el = document.getElementById(activeDrag.markerId);
+            if (el) {
+                el.classList.remove('dragging');
+                if (activeDrag.pointerId !== undefined && el.releasePointerCapture) {
+                    try { el.releasePointerCapture(activeDrag.pointerId); } catch (_) {}
+                }
+            }
+            activeDrag = null;
+            saveSession();
+        }
+        window.removeEventListener('pointermove', onPointerMove);
+        window.removeEventListener('pointerup', onPointerUp);
+        window.removeEventListener('pointercancel', onPointerUp);
+        window.removeEventListener('mousemove', onPointerMove);
+        window.removeEventListener('mouseup', onPointerUp);
+    }
+
+    function startDrag(markerId, isInput, e) {
+        activeDrag = { markerId, isInput, pointerId: e.pointerId };
+        const markerEl = document.getElementById(markerId);
+        if (markerEl) {
+            markerEl.classList.add('dragging');
+            if (e.pointerId !== undefined && markerEl.setPointerCapture) {
+                try { markerEl.setPointerCapture(e.pointerId); } catch (_) {}
+            }
+        }
+        window.addEventListener('pointermove', onPointerMove, { passive: false });
+        window.addEventListener('pointerup', onPointerUp);
+        window.addEventListener('pointercancel', onPointerUp);
+        window.addEventListener('mousemove', onPointerMove);
+        window.addEventListener('mouseup', onPointerUp);
+        updateFromClientX(e.clientX);
+    }
+
+    // Захват клика/тапа по маркерам
+    ['markerInBlack', 'markerInGamma', 'markerInWhite'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('pointerdown', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                startDrag(id, true, e);
+            });
+            el.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                startDrag(id, true, e);
+            });
+        }
+    });
+
+    ['markerOutBlack', 'markerOutWhite'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('pointerdown', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                startDrag(id, false, e);
+            });
+            el.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                startDrag(id, false, e);
+            });
+        }
+    });
+
+    // Захват клика/тача по всей дорожке (подхватывает ближайший маркер и мгновенно начинает drag)
+    function onTrackPointerDown(track, isInput, e) {
+        if (e.target.closest('.ps-marker')) return;
+        e.preventDefault();
+        e.stopPropagation();
+
+        const tab = getActiveTab();
+        if (!tab) return;
+        const rect = track.getBoundingClientRect();
+        const trackW = TRACK_USABLE_PX;
+        const relX = Math.max(0, Math.min(trackW, e.clientX - rect.left - 6));
+
+        let markerId;
+        if (isInput) {
+            const posB = (tab.levels.inBlack / 255) * trackW;
+            const posW = (tab.levels.inWhite / 255) * trackW;
+            const t = Math.pow(0.5, tab.levels.gamma);
+            const posG = posB + t * (posW - posB);
+
+            const dB = Math.abs(relX - posB);
+            const dG = Math.abs(relX - posG);
+            const dW = Math.abs(relX - posW);
+
+            if (dB <= dG && dB <= dW) markerId = 'markerInBlack';
+            else if (dW <= dB && dW <= dG) markerId = 'markerInWhite';
+            else markerId = 'markerInGamma';
+        } else {
+            const posB = (tab.levels.outBlack / 255) * trackW;
+            const posW = (tab.levels.outWhite / 255) * trackW;
+            markerId = (Math.abs(relX - posB) <= Math.abs(relX - posW)) ? 'markerOutBlack' : 'markerOutWhite';
+        }
+
+        startDrag(markerId, isInput, e);
+    }
+
+    trackIn.addEventListener('pointerdown', (e) => onTrackPointerDown(trackIn, true, e));
+    trackOut.addEventListener('pointerdown', (e) => onTrackPointerDown(trackOut, false, e));
+    trackIn.addEventListener('mousedown', (e) => onTrackPointerDown(trackIn, true, e));
+    trackOut.addEventListener('mousedown', (e) => onTrackPointerDown(trackOut, false, e));
+}
+
+/* ==========================================================================
+   Инструмент «Коррекция изображения и Уровни» (Floating Window)
+   Взаимоисключающие режимы: Яркость/Контраст vs Уровни (Photoshop Levels)
+   ========================================================================== */
+
+let sampleCanvas = null;
+let sampleCtx = null;
+
+function samplePixelLuminance(img, x, y) {
+    if (!img) return null;
+    const ix = Math.floor(x);
+    const iy = Math.floor(y);
+    if (ix < 0 || iy < 0 || ix >= img.width || iy >= img.height) return null;
+
+    if (!sampleCanvas) {
+        sampleCanvas = document.createElement('canvas');
+        sampleCanvas.width = 1;
+        sampleCanvas.height = 1;
+        sampleCtx = sampleCanvas.getContext('2d', { willReadFrequently: true });
+    }
+    sampleCtx.clearRect(0, 0, 1, 1);
+    sampleCtx.drawImage(img, ix, iy, 1, 1, 0, 0, 1, 1);
+    const p = sampleCtx.getImageData(0, 0, 1, 1).data;
+    const lum = Math.round(0.299 * p[0] + 0.587 * p[1] + 0.114 * p[2]);
+    return { r: p[0], g: p[1], b: p[2], lum };
+}
+
+function handlePipetteTap(sX, sY) {
+    const tab = getActiveTab();
+    if (!tab || !tab.image || !state.activePipette) return;
+
+    const wP = toW({ x: sX, y: sY });
+    const sample = samplePixelLuminance(tab.image, wP.x, wP.y);
+    if (!sample) {
+        showToast('Кликните внутри границ изображения');
+        return;
+    }
+
+    // Автоматически активируем режим Уровней (взаимоисключающий режим)
+    tab.filterMode = 'levels';
+
+    if (state.activePipette === 'black') {
+        const newB = Math.min(253, Math.min(tab.levels.inWhite - 1, sample.lum));
+        tab.levels.inBlack = newB;
+        showToast(`Черная точка: ${newB} (L=${sample.lum}, RGB ${sample.r},${sample.g},${sample.b})`);
+    } else if (state.activePipette === 'white') {
+        const newW = Math.max(2, Math.max(tab.levels.inBlack + 1, sample.lum));
+        tab.levels.inWhite = newW;
+        showToast(`Белая точка: ${newW} (L=${sample.lum}, RGB ${sample.r},${sample.g},${sample.b})`);
+    } else if (state.activePipette === 'gray') {
+        const range = Math.max(1, tab.levels.inWhite - tab.levels.inBlack);
+        const norm = (sample.lum - tab.levels.inBlack) / range;
+        if (norm > 0.02 && norm < 0.98) {
+            const g = Math.log(0.5) / Math.log(norm);
+            tab.levels.gamma = parseFloat(Math.min(3.0, Math.max(0.1, g)).toFixed(2));
+            showToast(`Точка серого (гамма ${tab.levels.gamma})`);
+        } else {
+            showToast(`Точка серого слишком близка к теням или светам`);
+        }
+    }
+
+    state.activePipette = null;
+    syncPipetteButtons();
+    syncAdjustmentWindowUI();
+    updateLevelsFilter();
+    requestDraw();
+    saveSession();
+}
+
+function togglePipette(kind) {
+    if (state.activePipette === kind) {
+        state.activePipette = null;
+    } else {
+        state.activePipette = kind;
+        const hints = {
+            black: window.i18n?.[state.lang]?.pipetteBlackHint || 'Кликните в самую тёмную точку на чертеже (черная точка)',
+            gray: window.i18n?.[state.lang]?.pipetteGrayHint || 'Кликните в нейтрально-серый тон чертежа (гамма)',
+            white: window.i18n?.[state.lang]?.pipetteWhiteHint || 'Кликните в самый светлый фон бумаги (белая точка)'
+        };
+        showToast(hints[kind]);
+    }
+    syncPipetteButtons();
+}
+
+function syncPipetteButtons() {
+    ['btnPipetteBlack', 'btnPipetteGray', 'btnPipetteWhite'].forEach(id => {
+        document.getElementById(id)?.classList.remove('active');
+    });
+
+    const canvas = document.getElementById('mainCanvas');
+    if (state.activePipette === 'black') {
+        document.getElementById('btnPipetteBlack')?.classList.add('active');
+        if (canvas) canvas.style.cursor = 'crosshair';
+    } else if (state.activePipette === 'gray') {
+        document.getElementById('btnPipetteGray')?.classList.add('active');
+        if (canvas) canvas.style.cursor = 'crosshair';
+    } else if (state.activePipette === 'white') {
+        document.getElementById('btnPipetteWhite')?.classList.add('active');
+        if (canvas) canvas.style.cursor = 'crosshair';
+    } else {
+        if (canvas) canvas.style.cursor = 'crosshair';
+    }
+}
+
+function syncAdjustmentWindowUI() {
+    const tab = getActiveTab();
+    if (!tab) return;
+    const mode = tab.filterMode || 'levels';
+
+    const paneExp = document.getElementById('paneExposure');
+    const paneLev = document.getElementById('paneLevels');
+    const txtToggle = document.getElementById('txtModeToggle');
+    const titleEl = document.getElementById('psLevelsTitle');
+
+    if (mode === 'levels') {
+        paneExp?.classList.add('hidden');
+        paneLev?.classList.remove('hidden');
+        if (txtToggle) txtToggle.textContent = (state.lang === 'ru') ? '☀️ Яркость/Контр.' : '☀️ Brightness/Contr.';
+        if (titleEl) titleEl.textContent = (state.lang === 'ru') ? 'Уровни (Levels)' : 'Levels';
+    } else {
+        paneExp?.classList.remove('hidden');
+        paneLev?.classList.add('hidden');
+        if (txtToggle) txtToggle.textContent = (state.lang === 'ru') ? '📊 Уровни (Levels)' : '📊 Levels';
+        if (titleEl) titleEl.textContent = (state.lang === 'ru') ? 'Яркость и Контраст' : 'Brightness / Contrast';
+    }
+
+    // Синхронизация регуляторов экспозиции
+    syncExposureUI(tab.brightness, tab.contrast);
+
+    // Синхронизация регуляторов уровней
+    syncLevelsDialogUI();
+
+    // Синхронизация кнопок пипеток
+    syncPipetteButtons();
+}
+
+function setFilterMode(mode) {
+    const tab = getActiveTab();
+    if (!tab) return;
+    tab.filterMode = mode; // 'exposure' | 'levels'
+    syncAdjustmentWindowUI();
+    if (mode === 'levels') {
+        updateLevelsFilter();
+        if (tab.image && !currentHistogram) {
+            currentHistogram = computeHistogram(tab.image);
+        }
+        renderHistogramCanvas(currentHistogram, tab.levels.inBlack, tab.levels.gamma, tab.levels.inWhite);
+    } else {
+        // В режиме экспозиции сбрасываем аппаратный feComponentTransfer фильтр в identity
+        const r = document.getElementById('levelsFilterR');
+        const g = document.getElementById('levelsFilterG');
+        const b = document.getElementById('levelsFilterB');
+        if (r) r.setAttribute('tableValues', '0 1');
+        if (g) g.setAttribute('tableValues', '0 1');
+        if (b) b.setAttribute('tableValues', '0 1');
+    }
+    requestDraw();
+    saveSession();
+}
+
+function openAdjustmentsWindow() {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) {
+        showToast('Сначала откройте изображение');
+        return;
+    }
+
+    const win = document.getElementById('winAdjustments');
+    if (!win) return;
+    win.classList.remove('hidden');
+    document.getElementById('btnOpenAdjustments')?.classList.add('active');
+
+    currentHistogram = computeHistogram(tab.image);
+    syncAdjustmentWindowUI();
+    updateLevelsFilter();
+    requestDraw();
+}
+
+function closeAdjustmentsWindow() {
+    const win = document.getElementById('winAdjustments');
+    if (!win) return;
+    win.classList.add('hidden');
+    document.getElementById('btnOpenAdjustments')?.classList.remove('active');
+    state.activePipette = null;
+    syncPipetteButtons();
+}
+
+function toggleAdjustmentsWindow() {
+    const win = document.getElementById('winAdjustments');
+    if (!win) return;
+    if (win.classList.contains('hidden')) {
+        openAdjustmentsWindow();
+    } else {
+        closeAdjustmentsWindow();
+    }
+}
+
+function resetExposure() {
+    const tab = getActiveTab();
+    if (!tab) return;
+    tab.brightness = 100;
+    tab.contrast = 100;
+    tab.filterMode = 'exposure';
+    syncAdjustmentWindowUI();
+    requestDraw();
+    saveSession();
+}
+
+function resetAllAdjustments() {
+    const tab = getActiveTab();
+    if (!tab) return;
+    tab.brightness = 100;
+    tab.contrast = 100;
+    tab.levels = { inBlack: 0, gamma: 1.0, inWhite: 255, outBlack: 0, outWhite: 255 };
+    syncAdjustmentWindowUI();
+    updateLevelsFilter();
+    requestDraw();
+    saveSession();
+    showToast('Все коррекции сброшены');
+}
+
+function performAutoLevels() {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+    if (!currentHistogram) {
+        currentHistogram = computeHistogram(tab.image);
+    }
+    if (!currentHistogram) return;
+    tab._levelsDirty = true;
+
+    tab.filterMode = 'levels'; // Взаимоисключающий режим
+
+    let totalPixels = 0;
+    for (let i = 0; i < 256; i++) totalPixels += currentHistogram[i];
+
+    const shadowThreshold = totalPixels * 0.006;
+    const highlightThreshold = totalPixels * 0.994;
+
+    let accum = 0;
+    let autoBlack = 0;
+    let autoWhite = 255;
+
+    for (let i = 0; i < 256; i++) {
+        accum += currentHistogram[i];
+        if (accum >= shadowThreshold && autoBlack === 0) {
+            autoBlack = i;
+        }
+        if (accum >= highlightThreshold) {
+            autoWhite = i;
+            break;
+        }
+    }
+
+    if (autoWhite <= autoBlack + 10) autoWhite = Math.min(255, autoBlack + 20);
+
+    tab.levels.inBlack = autoBlack;
+    tab.levels.gamma = 1.0;
+    tab.levels.inWhite = autoWhite;
+    tab.levels.outBlack = 0;
+    tab.levels.outWhite = 255;
+
+    syncAdjustmentWindowUI();
+    updateLevelsFilter();
+    requestDraw();
+    saveSession();
+    showToast('Авто-уровни применены');
+}
+
+function resetLevels() {
+    const tab = getActiveTab();
+    if (!tab) return;
+    tab.filterMode = 'levels';
+    tab._levelsDirty = true;
+    tab.levels.inBlack = 0;
+    tab.levels.gamma = 1.0;
+    tab.levels.inWhite = 255;
+    tab.levels.outBlack = 0;
+    tab.levels.outWhite = 255;
+
+    syncAdjustmentWindowUI();
+    updateLevelsFilter();
+    requestDraw();
+    saveSession();
+}
+
+function initDraggableWindow() {
+    const win = document.getElementById('winAdjustments');
+    const header = document.getElementById('winAdjustmentsHeader');
+    if (!win || !header) return;
+
+    let isDragging = false;
+    let startX = 0, startY = 0;
+    let initialLeft = 0, initialTop = 0;
+
+    header.addEventListener('mousedown', (e) => {
+        if (e.target.closest('button')) return;
+        isDragging = true;
+        const rect = win.getBoundingClientRect();
+        startX = e.clientX;
+        startY = e.clientY;
+        initialLeft = rect.left;
+        initialTop = rect.top;
+        win.style.right = 'auto';
+        win.style.left = initialLeft + 'px';
+        win.style.top = initialTop + 'px';
+        document.body.style.userSelect = 'none';
+        e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        const maxL = Math.max(10, window.innerWidth - win.offsetWidth - 10);
+        const maxT = Math.max(46, window.innerHeight - 80);
+        const newLeft = Math.max(10, Math.min(maxL, initialLeft + dx));
+        const newTop = Math.max(46, Math.min(maxT, initialTop + dy));
+        win.style.left = newLeft + 'px';
+        win.style.top = newTop + 'px';
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (isDragging) {
+            isDragging = false;
+            document.body.style.userSelect = '';
+        }
+    });
+
+    header.addEventListener('touchstart', (e) => {
+        if (e.target.closest('button') || e.touches.length !== 1) return;
+        isDragging = true;
+        const t = e.touches[0];
+        const rect = win.getBoundingClientRect();
+        startX = t.clientX;
+        startY = t.clientY;
+        initialLeft = rect.left;
+        initialTop = rect.top;
+        win.style.right = 'auto';
+        win.style.left = initialLeft + 'px';
+        win.style.top = initialTop + 'px';
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+        if (!isDragging || e.touches.length !== 1) return;
+        const t = e.touches[0];
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+        const maxL = Math.max(4, window.innerWidth - win.offsetWidth - 4);
+        const maxT = Math.max(46, window.innerHeight - 80);
+        win.style.left = Math.max(4, Math.min(maxL, initialLeft + dx)) + 'px';
+        win.style.top = Math.max(46, Math.min(maxT, initialTop + dy)) + 'px';
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+        isDragging = false;
+    });
+}
+
+/* ==========================================================================
+   Пользовательские взаимодействия (Pointer, Mouse, Touch)
+   ========================================================================== */
+
+/**
+ * Завершение построения цепной линейки
+ */
+function finishChainDrawing() {
+    const tab = getActiveTab();
+    if (!tab || !tab.drawingObj || tab.drawingObj.type !== 'chain') return;
+
+    if (tab.drawingObj.pts.length >= 2) {
+        pushUndo();
+        tab.objects.push(tab.drawingObj);
+        tab.selectedId = tab.drawingObj.id;
+        state.selectedPoint = { obj: tab.drawingObj, idx: tab.drawingObj.pts.length - 1 };
+        tab.drawingObj = null;
+        renderDock();
+        saveSession();
+        showToast(window.i18n?.[state.lang]?.chainDoneToast || 'Цепь размеров создана');
+    } else {
+        tab.drawingObj = null;
+    }
+    updateStatus();
+    requestDraw();
+}
+
+function handleTap(sX, sY) {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+
+    // Пипетка с чертежа (Sample from image)
+    if (state.activePipette) {
+        handlePipetteTap(sX, sY);
+        return;
+    }
+
+    const hit = hitTest(sX, sY);
+    let wP = toW({ x: sX, y: sY });
+
+    if (tab.isPerspectiveMode) {
+        if (!hit && tab.perspectivePts.length < 4) {
+            tab.perspectivePts.push(wP);
+        }
+        updateStatus();
+        return;
+    }
+
+    if (hit && hit.type === 'obj') {
+        tab.selectedId = hit.obj.id;
+        state.selectedPoint = null;
+        updateStatus();
+        return;
+    }
+    if (hit && hit.type === 'pt') {
+        tab.selectedId = hit.obj.id;
+        state.selectedPoint = { obj: hit.obj, idx: hit.idx };
+        updateStatus();
+        return;
+    }
+
+    if (tab.selectedId) {
+        tab.selectedId = null;
+        state.selectedPoint = null;
+        updateStatus();
+        return;
+    }
+
+    pushUndo();
+
+    if (tab.mode === 'distance') {
+        if (!tab.drawingObj) {
+            const hasCalib = tab.objects.some(o => o.type === 'calib');
+            tab.drawingObj = { id: Date.now(), type: hasCalib ? 'line' : 'calib', pts: [wP] };
+        } else {
+            wP = applyOrtho(wP, tab.drawingObj.pts[0]);
+            tab.drawingObj.pts.push(wP);
+            tab.objects.push(tab.drawingObj);
+            tab.selectedId = tab.drawingObj.id;
+            state.selectedPoint = { obj: tab.drawingObj, idx: 1 };
+
+            if (tab.drawingObj.type === 'calib') {
+                showCalibModal();
+            }
+            tab.drawingObj = null;
+            renderDock();
+            saveSession();
+        }
+    } else if (tab.mode === 'chain') {
+        if (!tab.drawingObj) {
+            tab.drawingObj = { id: Date.now(), type: 'chain', pts: [wP] };
+        } else {
+            const lastPt = tab.drawingObj.pts[tab.drawingObj.pts.length - 1];
+            wP = applyOrtho(wP, lastPt);
+            if (getDist(wP, lastPt) > 3 / tab.transform.scale) {
+                tab.drawingObj.pts.push(wP);
+            }
+        }
+    } else if (tab.mode === 'angle') {
+        if (!tab.drawingObj) {
+            tab.drawingObj = { id: Date.now(), type: 'angle', pts: [wP] };
+        } else {
+            const basePt = tab.drawingObj.pts[0];
+            wP = applyOrtho(wP, basePt);
+            tab.drawingObj.pts.push(wP);
+
+            if (tab.drawingObj.pts.length === 3) {
+                tab.objects.push(tab.drawingObj);
+                tab.selectedId = tab.drawingObj.id;
+                state.selectedPoint = { obj: tab.drawingObj, idx: 2 };
+                tab.drawingObj = null;
+                renderDock();
+                saveSession();
+            }
+        }
+    }
+    updateStatus();
+}
+
+function showCalibModal() {
+    const tab = getActiveTab();
+    if (!tab) return;
+    const inp = document.getElementById('inpCalibVal');
+    if (inp) inp.value = tab.calibLength;
+    const modal = document.getElementById('modalCalibInput');
+    if (modal) modal.classList.remove('hidden');
+    setTimeout(() => {
+        if (inp) inp.focus();
+    }, 100);
+}
+
+// Защита от кликов сквозь панели и модальные окна
+['toolbar', 'help-panel', 'modalPerspWarning', 'modalDimensions', 'modalRestoreWarning', 'modalCalibInput', 'modalClearWarning', 'winAdjustments', 'bottomDock'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const stop = (e) => e.stopPropagation();
+    el.addEventListener('mousedown', stop);
+    el.addEventListener('touchstart', stop, { passive: true });
+    el.addEventListener('pointerdown', stop);
+});
+
+// Pointer события
+canvas.addEventListener('pointerdown', e => {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const sX = e.clientX - rect.left;
+    const sY = e.clientY - rect.top;
+
+    interact.active = true;
+    interact.moved = false;
+    interact.startX = sX;
+    interact.startY = sY;
+    interact.lastX = sX;
+    interact.lastY = sY;
+
+    if (e.button === 1) {
+        e.preventDefault();
+        interact.type = 'pan';
+        interact.isMMB = true;
+        return;
+    }
+
+    if (!e.isPrimary) return;
+
+    const hit = hitTest(sX, sY);
+    if (hit && (hit.type === 'pt' || hit.type === 'persp')) {
+        pushUndo();
+        interact.type = 'drag';
+        interact.target = hit;
+        if (hit.type === 'pt') {
+            tab.selectedId = hit.obj.id;
+            state.selectedPoint = { obj: hit.obj, idx: hit.idx };
+        }
+    } else {
+        interact.type = 'maybe_pan';
+    }
+});
+
+window.addEventListener('pointermove', e => {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const sX = e.clientX - rect.left;
+    const sY = e.clientY - rect.top;
+
+    interact.currentW = toW({ x: sX, y: sY });
+
+    if (tab.drawingObj) {
+        requestDraw();
+    }
+
+    if (!interact.active || interact.type === 'zoom') return;
+
+    if (Math.hypot(sX - interact.startX, sY - interact.startY) > 4) {
+        interact.moved = true;
+    }
+
+    if (interact.type === 'maybe_pan' && interact.moved) {
+        interact.type = 'pan';
+    }
+
+    if (interact.type === 'pan') {
+        tab.transform.x += sX - interact.lastX;
+        tab.transform.y += sY - interact.lastY;
+    } else if (interact.type === 'drag') {
+        let wP = toW({ x: sX, y: sY });
+        if (interact.target.type === 'pt') {
+            const obj = interact.target.obj;
+            if (obj.type === 'chain') {
+                const idx = interact.target.idx;
+                const neighbor = idx > 0 ? obj.pts[idx - 1] : obj.pts[idx + 1];
+                if (neighbor) {
+                    wP = applyOrtho(wP, neighbor);
+                }
+                obj.pts[idx] = wP;
+            } else {
+                const otherIdx = interact.target.idx === 0 ? 1 : 0;
+                if (obj.pts[otherIdx]) {
+                    wP = applyOrtho(wP, obj.pts[otherIdx]);
+                }
+                obj.pts[interact.target.idx] = wP;
+            }
+        } else {
+            tab.perspectivePts[interact.target.idx] = wP;
+        }
+    }
+
+    interact.lastX = sX;
+    interact.lastY = sY;
+    requestDraw();
+});
+
+window.addEventListener('pointerup', e => {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+
+    if (interact.type === 'zoom') {
+        interact.active = false;
+        interact.type = null;
+        return;
+    }
+    if (interact.active && !interact.moved && !interact.isMMB) {
+        handleTap(interact.startX, interact.startY);
+    }
+    if (interact.type === 'drag') {
+        saveSession();
+    }
+
+    interact.active = false;
+    interact.type = null;
+    interact.isMMB = false;
+    requestDraw();
+});
+
+canvas.addEventListener('dblclick', () => {
+    finishChainDrawing();
+});
+
+// Сенсорный зум (Pinch-to-zoom)
+canvas.addEventListener('touchstart', e => {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+    if (e.touches.length === 2) {
+        e.preventDefault();
+        interact.type = 'zoom';
+        interact.active = true;
+        const rect = canvas.getBoundingClientRect();
+        const x1 = e.touches[0].clientX - rect.left, y1 = e.touches[0].clientY - rect.top;
+        const x2 = e.touches[1].clientX - rect.left, y2 = e.touches[1].clientY - rect.top;
+        interact.lastDist = Math.hypot(x2 - x1, y2 - y1);
+        interact.lastMid = { x: (x1 + x2) / 2, y: (y1 + y2) / 2 };
+    }
+}, { passive: false });
+
+canvas.addEventListener('touchmove', e => {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+    if (e.touches.length === 2 && interact.type === 'zoom') {
+        e.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const x1 = e.touches[0].clientX - rect.left, y1 = e.touches[0].clientY - rect.top;
+        const x2 = e.touches[1].clientX - rect.left, y2 = e.touches[1].clientY - rect.top;
+        const dist = Math.hypot(x2 - x1, y2 - y1);
+        const mid = { x: (x1 + x2) / 2, y: (y1 + y2) / 2 };
+
+        if (interact.lastDist > 0) {
+            const factor = dist / interact.lastDist;
+            const wP = toW(mid);
+            tab.transform.scale *= factor;
+            tab.transform.x = mid.x - wP.x * tab.transform.scale;
+            tab.transform.y = mid.y - wP.y * tab.transform.scale;
+            requestDraw();
+        }
+        interact.lastDist = dist;
+        interact.lastMid = mid;
+    }
+}, { passive: false });
+
+// Зум колесиком мыши
+canvas.addEventListener('wheel', e => {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+    e.preventDefault();
+
+    const rect = canvas.getBoundingClientRect();
+    const sX = e.clientX - rect.left;
+    const sY = e.clientY - rect.top;
+    const wP = toW({ x: sX, y: sY });
+
+    const zoomFactor = e.deltaY < 0 ? 1.15 : 0.87;
+    tab.transform.scale *= zoomFactor;
+    tab.transform.x = sX - wP.x * tab.transform.scale;
+    tab.transform.y = sY - wP.y * tab.transform.scale;
+
+    requestDraw();
+}, { passive: false });
+
+/* ==========================================================================
+   Горячие клавиши (Keyboard Navigation)
+   ========================================================================== */
+
+window.addEventListener('keydown', e => {
+    const tab = getActiveTab();
+
+    // Открытие Коррекции и Уровней (Ctrl + L / Cmd + L)
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'l') {
+        e.preventDefault();
+        toggleAdjustmentsWindow();
+        return;
+    }
+
+    // Орто-режим (Shift)
+    if (e.key === 'Shift') {
+        state.isShiftDown = true;
+        updateStatus();
+        requestDraw();
+    }
+
+    // Завершение рисования цепи (Enter или Space)
+    if ((e.key === 'Enter' || e.key === ' ') && tab?.drawingObj?.type === 'chain') {
+        e.preventDefault();
+        finishChainDrawing();
+        return;
+    }
+
+    // Escape — сброс выделения или отмена рисования
+    if (e.key === 'Escape') {
+        if (state.activePipette) {
+            state.activePipette = null;
+            syncPipetteButtons();
+            return;
+        }
+
+        const winAdj = document.getElementById('winAdjustments');
+        if (winAdj && !winAdj.classList.contains('hidden')) {
+            closeAdjustmentsWindow();
+            return;
+        }
+
+        if (tab && tab.drawingObj) {
+            if (tab.drawingObj.type === 'chain' && tab.drawingObj.pts.length >= 2) {
+                finishChainDrawing();
+            } else {
+                tab.drawingObj = null;
+                updateStatus();
+                requestDraw();
+            }
+        } else if (tab && tab.selectedId) {
+            tab.selectedId = null;
+            state.selectedPoint = null;
+            updateStatus();
+            requestDraw();
+        }
+    }
+
+    // Удаление выбранного объекта (Delete / Backspace)
+    if (e.key === 'Delete' || e.key === 'Backspace') {
+        if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+        if (tab && tab.selectedId) {
+            e.preventDefault();
+            pushUndo();
+            tab.objects = tab.objects.filter(o => o.id !== tab.selectedId);
+            tab.selectedId = null;
+            state.selectedPoint = null;
+            renderDock();
+            requestDraw();
+            updateStatus();
+            saveSession();
+        }
+    }
+
+    // Отмена (Ctrl + Z / Cmd + Z)
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+        e.preventDefault();
+        performUndo();
+    }
+
+    // Копирование чертежа в буфер (Ctrl + C / Cmd + C)
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') {
+        e.preventDefault();
+        copyAnnotatedImageToClipboard();
+    }
+
+    // Микро-доводка стрелками (Nudge 1px / 10px с Shift)
+    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+        if (tab && state.selectedPoint) {
+            e.preventDefault();
+            const stepPx = e.shiftKey ? 10 : 1;
+            const deltaW = stepPx / tab.transform.scale;
+
+            let dx = 0, dy = 0;
+            if (e.key === 'ArrowLeft') dx = -deltaW;
+            if (e.key === 'ArrowRight') dx = deltaW;
+            if (e.key === 'ArrowUp') dy = -deltaW;
+            if (e.key === 'ArrowDown') dy = deltaW;
+
+            if (state.selectedPoint.type === 'persp') {
+                tab.perspectivePts[state.selectedPoint.idx].x += dx;
+                tab.perspectivePts[state.selectedPoint.idx].y += dy;
+            } else if (state.selectedPoint.obj) {
+                state.selectedPoint.obj.pts[state.selectedPoint.idx].x += dx;
+                state.selectedPoint.obj.pts[state.selectedPoint.idx].y += dy;
+            }
+
+            requestDraw();
+            saveSession();
+        }
+    }
+});
+
+window.addEventListener('keyup', e => {
+    if (e.key === 'Shift') {
+        state.isShiftDown = false;
+        updateStatus();
+        requestDraw();
+    }
+});
+
+/* ==========================================================================
+   Копирование чертежа в буфер обмена (Copy Annotated Drawing)
+   ========================================================================== */
+
+function copyAnnotatedImageToClipboard() {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+
+    try {
+        const outCanvas = document.createElement('canvas');
+        outCanvas.width = tab.image.width;
+        outCanvas.height = tab.image.height;
+        const outCtx = outCanvas.getContext('2d');
+
+        // Отрисовка фото с взаимоисключающим фильтром коррекции
+        const previewChecked = document.getElementById('chkLevelsPreview')?.checked ?? true;
+        if (previewChecked && tab.filterMode === 'levels') {
+            outCtx.drawImage(getLevelsFilteredImage(tab), 0, 0);
+        } else if (previewChecked && tab.filterMode === 'exposure') {
+            const b = typeof tab.brightness === 'number' ? tab.brightness : 100;
+            const c = typeof tab.contrast === 'number' ? tab.contrast : 100;
+            if (b !== 100 || c !== 100) {
+                outCtx.filter = `brightness(${b}%) contrast(${c}%)`;
+            }
+            outCtx.drawImage(tab.image, 0, 0);
+            outCtx.filter = 'none';
+        } else {
+            outCtx.drawImage(tab.image, 0, 0);
+        }
+
+        const scaleFactor = Math.max(1, tab.image.width / 1200);
+        const ratio = getCalibRatio();
+
+        tab.objects.forEach(obj => {
+            const color = COLORS[obj.type] || COLORS.line;
+            const pts = obj.pts;
+
+            if (obj.type === 'angle' && pts.length >= 2) {
+                outCtx.lineWidth = 3.5 * scaleFactor;
+                outCtx.strokeStyle = color;
+                outCtx.beginPath();
+                outCtx.moveTo(pts[0].x, pts[0].y);
+                outCtx.lineTo(pts[1].x, pts[1].y);
+                if (pts.length > 2) outCtx.lineTo(pts[2].x, pts[2].y);
+                outCtx.stroke();
+            } else if (obj.type === 'chain' && pts.length >= 2) {
+                let totalChainDist = 0;
+                outCtx.lineWidth = 3.5 * scaleFactor;
+                outCtx.strokeStyle = color;
+                outCtx.beginPath();
+                pts.forEach((p, idx) => (idx === 0 ? outCtx.moveTo(p.x, p.y) : outCtx.lineTo(p.x, p.y)));
+                outCtx.stroke();
+
+                outCtx.font = `bold ${Math.round(18 * scaleFactor)}px monospace`;
+                outCtx.fillStyle = "#ffffff";
+                outCtx.strokeStyle = "#000000";
+                outCtx.lineWidth = 4 * scaleFactor;
+                outCtx.textAlign = "center";
+
+                for (let i = 0; i < pts.length - 1; i++) {
+                    const segDist = getDist(pts[i], pts[i + 1]) * ratio;
+                    totalChainDist += segDist;
+                    const val = segDist.toFixed(1);
+                    const lx = (pts[i].x + pts[i + 1].x) / 2;
+                    const ly = (pts[i].y + pts[i + 1].y) / 2 - 20 * scaleFactor;
+                    outCtx.strokeText(val, lx, ly);
+                    outCtx.fillText(val, lx, ly);
+                }
+
+                const lastPt = pts[pts.length - 1];
+                const sumVal = "∑ " + totalChainDist.toFixed(1);
+                outCtx.strokeText(sumVal, lastPt.x, lastPt.y - 32 * scaleFactor);
+                outCtx.fillText(sumVal, lastPt.x, lastPt.y - 32 * scaleFactor);
+            } else if (pts.length >= 2) {
+                outCtx.lineWidth = 3.5 * scaleFactor;
+                outCtx.strokeStyle = color;
+                outCtx.beginPath();
+                outCtx.moveTo(pts[0].x, pts[0].y);
+                outCtx.lineTo(pts[1].x, pts[1].y);
+                outCtx.stroke();
+
+                const val = (getDist(pts[0], pts[1]) * ratio).toFixed(1);
+                const lx = (pts[0].x + pts[1].x) / 2;
+                const ly = (pts[0].y + pts[1].y) / 2 - 20 * scaleFactor;
+
+                outCtx.font = `bold ${Math.round(18 * scaleFactor)}px monospace`;
+                outCtx.fillStyle = "#ffffff";
+                outCtx.strokeStyle = "#000000";
+                outCtx.lineWidth = 4 * scaleFactor;
+                outCtx.textAlign = "center";
+                outCtx.strokeText(val, lx, ly);
+                outCtx.fillText(val, lx, ly);
+            }
+        });
+
+        outCanvas.toBlob(blob => {
+            if (blob && navigator.clipboard && navigator.clipboard.write) {
+                navigator.clipboard.write([
+                    new ClipboardItem({ 'image/png': blob })
+                ]).then(() => {
+                    showToast(window.i18n?.[state.lang]?.copiedToast || 'Чертеж скопирован в буфер обмена!');
+                }).catch(() => fallbackDownload(outCanvas));
+            } else {
+                fallbackDownload(outCanvas);
+            }
+        }, 'image/png');
+    } catch (e) {
+        console.error('Ошибка копирования:', e);
+    }
+}
+
+function fallbackDownload(canvasEl) {
+    const a = document.createElement('a');
+    a.download = `photo-ruler-${Date.now()}.png`;
+    a.href = canvasEl.toDataURL('image/png');
+    a.click();
+    showToast(window.i18n?.[state.lang]?.copiedFail || 'Сохранено как PNG-файл');
+}
+
+/* ==========================================================================
+   Авто-растяжение гистограммы (Локальный контраст области зума)
+   ========================================================================== */
+
+function autoStretchViewportContrast() {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+
+    try {
+        const sampleSize = 100;
+        const sCanvas = document.createElement('canvas');
+        sCanvas.width = sampleSize;
+        sCanvas.height = sampleSize;
+        const sCtx = sCanvas.getContext('2d');
+
+        const rect = canvas.parentElement.getBoundingClientRect();
+        const centerW = toW({ x: rect.width / 2, y: rect.height / 2 });
+        const spanW = (rect.width / tab.transform.scale) * 0.7;
+        const spanH = (rect.height / tab.transform.scale) * 0.7;
+
+        const srcX = Math.max(0, centerW.x - spanW / 2);
+        const srcY = Math.max(0, centerW.y - spanH / 2);
+        const srcW = Math.min(tab.image.width - srcX, spanW);
+        const srcH = Math.min(tab.image.height - srcY, spanH);
+
+        sCtx.drawImage(tab.image, srcX, srcY, srcW, srcH, 0, 0, sampleSize, sampleSize);
+        const imgData = sCtx.getImageData(0, 0, sampleSize, sampleSize).data;
+
+        const lums = [];
+        for (let i = 0; i < imgData.length; i += 4) {
+            const lum = 0.299 * imgData[i] + 0.587 * imgData[i + 1] + 0.114 * imgData[i + 2];
+            lums.push(lum);
+        }
+        lums.sort((a, b) => a - b);
+
+        const pLow = lums[Math.floor(lums.length * 0.04)] || 0;
+        const pHigh = lums[Math.floor(lums.length * 0.96)] || 255;
+        const range = Math.max(15, pHigh - pLow);
+
+        const calcContrast = Math.min(230, Math.max(110, Math.round((255 / range) * 105)));
+        const midPoint = (pLow + pHigh) / 2;
+        const calcBrightness = Math.min(180, Math.max(70, Math.round((128 / Math.max(30, midPoint)) * 95)));
+
+        tab.contrast = calcContrast;
+        tab.brightness = calcBrightness;
+
+        syncExposureUI(tab.brightness, tab.contrast);
+
+        requestDraw();
+        saveSession();
+        showToast('Контраст области оптимизирован');
+    } catch (e) {
+        console.warn('Ошибка авто-контраста:', e);
+    }
+}
+
+/* ==========================================================================
+   Загрузка изображений и буфер обмена (Paste)
+   ========================================================================== */
+
+window.addEventListener('paste', e => {
+    const items = (e.clipboardData || e.originalEvent?.clipboardData)?.items;
+    if (!items) return;
+
+    for (const item of items) {
+        if (item.type.indexOf('image') !== -1) {
+            const blob = item.getAsFile();
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    handleNewImageLoaded(img, 'Снимок ' + (state.tabs.length + 1));
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(blob);
+            break;
+        }
+    }
+});
+
+function handleNewImageLoaded(img, title = 'Чертеж') {
+    let tab = getActiveTab();
+    if (tab && tab.image) {
+        tab = createNewTabModel(null, title);
+        state.tabs.push(tab);
+        state.activeTabId = tab.id;
+    }
+
+    tab.image = img;
+    tab.rawImage = img;
+    tab.title = title;
+    tab._levelsCanvas = null;
+    tab._levelsDirty = true;
+    tab.objects = [];
+    tab.drawingObj = null;
+    tab.perspectivePts = [];
+    tab.selectedId = null;
+    tab.thumbDataUrl = generateThumbnail(img);
+
+    document.getElementById('emptyState')?.classList.add('hidden');
+    document.getElementById('btnRestoreOriginal')?.classList.add('hidden');
+
+    updateLevelsFilter();
+    fitView();
+    renderDock();
+    updateStatus();
+    saveSession();
+}
+
+/* ==========================================================================
+   Интеграция OpenCV.js (Выравнивание перспективы)
+   ========================================================================== */
+
+function cvReady() {
+    state.isCvLoaded = true;
+    const indicator = document.getElementById('cvIndicator');
+    const cvText = document.getElementById('cvText');
+    if (indicator) indicator.style.background = '#10b981';
+    if (cvText) {
+        const strings = window.i18n ? window.i18n[state.lang] : {};
+        cvText.innerText = strings.cvReady || 'CV Ready';
+    }
+}
+window.cvReady = cvReady;
+
+if ((typeof cv !== 'undefined' && cv.Mat) || window.__cvReadyPending) {
+    cvReady();
+}
+
+function processPerspective() {
+    const tab = getActiveTab();
+    if (!tab || !tab.image || tab.perspectivePts.length !== 4) return;
+
+    try {
+        let pts = [...tab.perspectivePts].sort((a, b) => a.y - b.y);
+        let top = pts.slice(0, 2).sort((a, b) => a.x - b.x);
+        let bot = pts.slice(2, 4).sort((a, b) => a.x - b.x);
+
+        let srcCoords = cv.matFromArray(4, 1, cv.CV_32FC2, [
+            top[0].x, top[0].y,
+            top[1].x, top[1].y,
+            bot[1].x, bot[1].y,
+            bot[0].x, bot[0].y
+        ]);
+
+        const userW = parseFloat(document.getElementById('inpTrueW').value);
+        const userH = parseFloat(document.getElementById('inpTrueH').value);
+        const pxW = getDist(top[0], top[1]);
+        const pxH = getDist(top[0], bot[0]);
+
+        let dstPxW = pxW;
+        let dstPxH = pxH;
+        if (userW && userH) {
+            const aspect = userW / userH;
+            if (aspect >= 1) {
+                dstPxH = dstPxW / aspect;
+            } else {
+                dstPxW = dstPxH * aspect;
+            }
+        }
+
+        dstPxW = Math.max(50, Math.round(dstPxW));
+        dstPxH = Math.max(50, Math.round(dstPxH));
+
+        let dstCoords = cv.matFromArray(4, 1, cv.CV_32FC2, [
+            0, 0,
+            dstPxW, 0,
+            dstPxW, dstPxH,
+            0, dstPxH
+        ]);
+
+        let M = cv.getPerspectiveTransform(srcCoords, dstCoords);
+        let src = cv.imread(tab.image);
+        let dst = new cv.Mat();
+        let dsize = new cv.Size(dstPxW, dstPxH);
+
+        cv.warpPerspective(src, dst, M, dsize, cv.INTER_LINEAR, cv.BORDER_CONSTANT, new cv.Scalar());
+
+        const outCanvas = document.createElement('canvas');
+        cv.imshow(outCanvas, dst);
+
+        const newImg = new Image();
+        newImg.onload = () => {
+            pushUndo();
+            if (!tab.rawImage) tab.rawImage = tab.image;
+            tab.image = newImg;
+            tab.objects = [];
+            tab.perspectivePts = [];
+            tab.isPerspectiveMode = false;
+            tab.thumbDataUrl = generateThumbnail(newImg);
+
+            updateLevelsFilter();
+            fitView();
+            renderDock();
+            updateStatus();
+            saveSession();
+
+            const p = document.getElementById('processingOverlay');
+            if (p) p.classList.add('hidden');
+            const btnRestore = document.getElementById('btnRestoreOriginal');
+            if (btnRestore) btnRestore.classList.remove('hidden');
+
+            showToast('Ракурс успешно выровнен');
+        };
+        newImg.src = outCanvas.toDataURL('image/png');
+
+        // Освобождение памяти WASM
+        src.delete();
+        dst.delete();
+        M.delete();
+        srcCoords.delete();
+        dstCoords.delete();
+    } catch (err) {
+        console.error('Ошибка выравнивания:', err);
+        const p = document.getElementById('processingOverlay');
+        if (p) p.classList.add('hidden');
+        showToast('Ошибка выравнивания OpenCV');
+    }
+}
+
+/* ==========================================================================
+   Привязка к тулбару и обработчики UI
+   ========================================================================== */
+
+function setToolMode(mode, doSave = true) {
+    const tab = getActiveTab();
+    if (tab) {
+        tab.mode = mode;
+        tab.drawingObj = null;
+        tab.isPerspectiveMode = false;
+    }
+    document.getElementById('modeDistTab')?.classList.toggle('active', mode === 'distance');
+    document.getElementById('modeChainTab')?.classList.toggle('active', mode === 'chain');
+    document.getElementById('modeAngleTab')?.classList.toggle('active', mode === 'angle');
+    updateStatus();
+    requestDraw();
+    if (doSave) saveSession();
+}
+
+// Вспомогательные обработчики
+function safeClick(id, fn) {
+    const el = document.getElementById(id);
+    if (el) el.onclick = fn;
+    return el;
+}
+function safeInput(id, fn) {
+    const el = document.getElementById(id);
+    if (el) el.oninput = fn;
+    return el;
+}
+
+// Режимы инструментов: Линейка, Цепь, Угол
+safeClick('modeDistTab', () => setToolMode('distance'));
+safeClick('modeChainTab', () => setToolMode('chain'));
+safeClick('modeAngleTab', () => setToolMode('angle'));
+
+// Кнопка «Копировать»
+safeClick('btnCopy', copyAnnotatedImageToClipboard);
+
+// Переключатель темы (Дневной / Тёмный режим)
+safeClick('btnThemeToggle', toggleTheme);
+
+// Отмена (Undo)
+safeClick('btnUndo', performUndo);
+
+// Инструмент «Коррекция изображения и Уровни»
+safeClick('btnOpenAdjustments', toggleAdjustmentsWindow);
+safeClick('btnExposure', toggleAdjustmentsWindow);
+safeClick('btnCloseAdjustments', closeAdjustmentsWindow);
+safeClick('btnAdjClose', closeAdjustmentsWindow);
+safeClick('btnAdjResetAll', resetAllAdjustments);
+safeClick('btnFoldAdjustments', () => {
+    document.getElementById('winAdjustments')?.classList.toggle('collapsed');
+});
+
+// Переключатель взаимоисключающих режимов
+safeClick('btnToggleMode', () => {
+    const tab = getActiveTab();
+    if (!tab) return;
+    const nextMode = (tab.filterMode === 'levels') ? 'exposure' : 'levels';
+    setFilterMode(nextMode);
+});
+
+// Действия на панели Уровней
+safeClick('btnLevelsAuto', performAutoLevels);
+safeClick('btnLevelsReset', () => {
+    const tab = getActiveTab();
+    if (tab?.filterMode === 'exposure') {
+        resetExposure();
+    } else {
+        resetLevels();
+    }
+});
+
+// Действия на панели Экспозиции
+safeClick('btnExpAutoWin', autoStretchViewportContrast);
+safeClick('btnExpResetWin', resetExposure);
+
+// Пипетки с чертежа
+safeClick('btnPipetteBlack', () => togglePipette('black'));
+safeClick('btnPipetteGray', () => togglePipette('gray'));
+safeClick('btnPipetteWhite', () => togglePipette('white'));
+
+// Обработчики числовых полей уровней
+// Обработчики числовых полей уровней (поддержка input и change)
+const bindLevelInput = (id, setter) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const handler = (e) => {
+        const tab = getActiveTab();
+        if (!tab) return;
+        tab.filterMode = 'levels';
+        tab._levelsDirty = true;
+        setter(tab, e.target.value);
+        syncLevelsDialogUI();
+        const previewChecked = document.getElementById('chkLevelsPreview')?.checked ?? true;
+        if (previewChecked) {
+            updateLevelsFilter();
+            requestDraw();
+        }
+        saveSession();
+    };
+    el.oninput = handler;
+    el.onchange = handler;
+};
+
+bindLevelInput('inpInBlack', (tab, val) => {
+    let v = parseInt(val, 10);
+    if (isNaN(v)) return;
+    tab.levels.inBlack = Math.max(0, Math.min(tab.levels.inWhite - 1, v));
+});
+
+bindLevelInput('inpInGamma', (tab, val) => {
+    let v = parseFloat(val);
+    if (isNaN(v)) return;
+    tab.levels.gamma = parseFloat(Math.max(0.10, Math.min(3.00, v)).toFixed(2));
+});
+
+bindLevelInput('inpInWhite', (tab, val) => {
+    let v = parseInt(val, 10);
+    if (isNaN(v)) return;
+    tab.levels.inWhite = Math.max(tab.levels.inBlack + 1, Math.min(255, v));
+});
+
+bindLevelInput('inpOutBlack', (tab, val) => {
+    let v = parseInt(val, 10);
+    if (isNaN(v)) return;
+    tab.levels.outBlack = Math.max(0, Math.min(tab.levels.outWhite - 1, v));
+});
+
+bindLevelInput('inpOutWhite', (tab, val) => {
+    let v = parseInt(val, 10);
+    if (isNaN(v)) return;
+    tab.levels.outWhite = Math.max(tab.levels.outBlack + 1, Math.min(255, v));
+});
+
+// Чекбокс предпросмотра
+const chkPrev = document.getElementById('chkLevelsPreview');
+if (chkPrev) {
+    chkPrev.onchange = (e) => {
+        if (e.target.checked) {
+            updateLevelsFilter();
+        } else {
+            const r = document.getElementById('levelsFilterR');
+            const g = document.getElementById('levelsFilterG');
+            const b = document.getElementById('levelsFilterB');
+            if (r) r.setAttribute('tableValues', '0 1');
+            if (g) g.setAttribute('tableValues', '0 1');
+            if (b) b.setAttribute('tableValues', '0 1');
+        }
+        requestDraw();
+    };
+}
+
+// Выравнивание перспективы
+safeClick('btnTogglePerspective', () => {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+
+    tab.isPerspectiveMode = !tab.isPerspectiveMode;
+    if (tab.isPerspectiveMode) {
+        tab.selectedId = null;
+        tab.drawingObj = null;
+        if (tab.perspectivePts.length === 0) {
+            const m = document.getElementById('modalPerspWarning');
+            if (m) m.classList.remove('hidden');
+        }
+    }
+    updateStatus();
+    requestDraw();
+});
+
+safeClick('btnConfirmPerspMode', () => {
+    const m = document.getElementById('modalPerspWarning');
+    if (m) m.classList.add('hidden');
+});
+
+safeClick('btnApplyGrid', () => {
+    const m = document.getElementById('modalDimensions');
+    if (m) m.classList.remove('hidden');
+});
+
+safeClick('btnFinalApply', () => {
+    const m = document.getElementById('modalDimensions');
+    if (m) m.classList.add('hidden');
+    const p = document.getElementById('processingOverlay');
+    if (p) p.classList.remove('hidden');
+    setTimeout(processPerspective, 50);
+});
+
+// Сброс к исходному фото
+safeClick('btnRestoreOriginal', () => {
+    const m = document.getElementById('modalRestoreWarning');
+    if (m) m.classList.remove('hidden');
+});
+safeClick('btnCancelRestore', () => {
+    const m = document.getElementById('modalRestoreWarning');
+    if (m) m.classList.add('hidden');
+});
+safeClick('btnConfirmRestore', () => {
+    const tab = getActiveTab();
+    if (tab && tab.rawImage) {
+        pushUndo();
+        tab.image = tab.rawImage;
+        tab.objects = [];
+        tab.drawingObj = null;
+        tab.perspectivePts = [];
+        tab.selectedId = null;
+        tab.thumbDataUrl = generateThumbnail(tab.rawImage);
+        fitView();
+        renderDock();
+        updateStatus();
+        saveSession();
+    }
+    const m = document.getElementById('modalRestoreWarning');
+    if (m) m.classList.add('hidden');
+    const b = document.getElementById('btnRestoreOriginal');
+    if (b) b.classList.add('hidden');
+});
+
+// Удаление выбранного объекта
+safeClick('btnDelete', () => {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+
+    if (tab.isPerspectiveMode) {
+        if (tab.perspectivePts.length > 0) tab.perspectivePts.pop();
+    } else {
+        if (tab.selectedId) {
+            pushUndo();
+            tab.objects = tab.objects.filter(o => o.id !== tab.selectedId);
+            tab.selectedId = null;
+            state.selectedPoint = null;
+        } else if (tab.objects.length > 0) {
+            pushUndo();
+            tab.objects.pop();
+        }
+    }
+    renderDock();
+    requestDraw();
+    updateStatus();
+    saveSession();
+});
+
+// Очистить всё
+safeClick('btnClear', () => {
+    const tab = getActiveTab();
+    if (!tab || !tab.image) return;
+    const m = document.getElementById('modalClearWarning');
+    if (m) m.classList.remove('hidden');
+});
+safeClick('btnCancelClear', () => {
+    const m = document.getElementById('modalClearWarning');
+    if (m) m.classList.add('hidden');
+});
+safeClick('btnConfirmClear', () => {
+    const tab = getActiveTab();
+    if (tab) {
+        pushUndo();
+        tab.objects = [];
+        tab.perspectivePts = [];
+        tab.selectedId = null;
+        tab.drawingObj = null;
+        state.selectedPoint = null;
+    }
+    const m = document.getElementById('modalClearWarning');
+    if (m) m.classList.add('hidden');
+    renderDock();
+    requestDraw();
+    updateStatus();
+    saveSession();
+});
+
+// Справка
+safeClick('btnHelpToggle', () => {
+    const p = document.getElementById('help-panel');
+    if (p) p.classList.remove('hidden');
+});
+safeClick('btnCloseHelp', () => {
+    const p = document.getElementById('help-panel');
+    if (p) p.classList.add('hidden');
+});
+
+// Язык (RU / EN)
+safeClick('btnLangToggle', () => {
+    state.lang = state.lang === 'ru' ? 'en' : 'ru';
+    if (window.applyTranslations) window.applyTranslations(state.lang);
+});
+
+// Подогнать под экран
+safeClick('btnFitView', fitView);
+
+// Загрузка файла через явные кнопки
+const triggerFileSelect = () => {
+    const fi = document.getElementById('fileInput');
+    if (fi) fi.click();
+};
+safeClick('btnLoad', triggerFileSelect);
+safeClick('dockBtnAdd', triggerFileSelect);
+
+const fileInputEl = document.getElementById('fileInput');
+if (fileInputEl) {
+    fileInputEl.onchange = (e) => {
+        if (!e.target.files || !e.target.files[0]) return;
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            const img = new Image();
+            img.onload = () => {
+                handleNewImageLoaded(img, file.name || 'Снимок');
+            };
+            img.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+        e.target.value = '';
+    };
+}
+
+// Drag and drop загрузка изображений
+window.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+});
+window.addEventListener('drop', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        const file = e.dataTransfer.files[0];
+        if (!file.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            const img = new Image();
+            img.onload = () => {
+                handleNewImageLoaded(img, file.name || 'Снимок');
+            };
+            img.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// Сворачивание ленты карточек
+safeClick('btnToggleDock', () => {
+    const dock = document.getElementById('bottomDock');
+    if (!dock) return;
+    const isCollapsed = dock.classList.toggle('dock-collapsed');
+    const icon = document.getElementById('dockToggleIcon');
+    if (icon) {
+        icon.innerHTML = isCollapsed
+            ? '<polyline points="18 15 12 9 6 15"/>'
+            : '<polyline points="6 9 12 15 18 9"/>';
+    }
+});
+
+// Поповер экспозиции (для мобильных)
+const expPopover = document.getElementById('exposurePopover');
+safeClick('btnExposure', () => {
+    if (expPopover) expPopover.classList.toggle('hidden');
+});
+safeClick('btnExpClose', () => {
+    if (expPopover) expPopover.classList.add('hidden');
+});
+
+// Обработчики ползунков яркости и контраста
+safeInput('rngBrightnessWin', (e) => {
+    const tab = getActiveTab();
+    if (!tab) return;
+    tab.brightness = parseInt(e.target.value, 10);
+    tab.filterMode = 'exposure'; // Взаимоисключающий режим
+    const valB = document.getElementById('valBrightnessWin');
+    if (valB) valB.innerText = tab.brightness + '%';
+    requestDraw();
+    saveSession();
+});
+
+safeInput('rngContrastWin', (e) => {
+    const tab = getActiveTab();
+    if (!tab) return;
+    tab.contrast = parseInt(e.target.value, 10);
+    tab.filterMode = 'exposure'; // Взаимоисключающий режим
+    const valC = document.getElementById('valContrastWin');
+    if (valC) valC.innerText = tab.contrast + '%';
+    requestDraw();
+    saveSession();
+});
+
+// Степпер масштаба
+const inpCalibLength = document.getElementById('calibLength');
+safeInput('calibLength', (e) => {
+    const tab = getActiveTab();
+    if (tab) tab.calibLength = parseFloat(e.target.value) || 100;
+    requestDraw();
+    saveSession();
+});
+safeClick('stepCalibUp', () => {
+    if (inpCalibLength) {
+        inpCalibLength.stepUp();
+        inpCalibLength.dispatchEvent(new Event('input'));
+    }
+});
+safeClick('stepCalibDown', () => {
+    if (inpCalibLength) {
+        inpCalibLength.stepDown();
+        inpCalibLength.dispatchEvent(new Event('input'));
+    }
+});
+
+// Сохранение калибровки из модального окна
+safeClick('btnSaveCalib', () => {
+    const tab = getActiveTab();
+    const modalInp = document.getElementById('inpCalibVal');
+    const newVal = modalInp ? parseFloat(modalInp.value) : NaN;
+    if (tab && !isNaN(newVal) && newVal > 0) {
+        tab.calibLength = newVal;
+        if (inpCalibLength) inpCalibLength.value = newVal;
+    }
+    const mc = document.getElementById('modalCalibInput');
+    if (mc) mc.classList.add('hidden');
+    requestDraw();
+    saveSession();
+});
+
+/* ==========================================================================
+   Инициализация при старте приложения
+   ========================================================================== */
+
+updateThemeUI();
+initDraggableWindow();
+initLevelsMarkers();
+
+initDb(() => {
+    loadSessionFromDb();
+});
+
+if (window.applyTranslations) {
+    window.applyTranslations(state.lang);
+}
+
+</script>
+</body>
+</html>
